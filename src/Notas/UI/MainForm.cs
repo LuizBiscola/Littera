@@ -45,6 +45,7 @@ internal sealed partial class MainForm : ChromeForm
         _documents.Changed += UpdateStatus;
         _documents.ActiveChanged += BindActiveEditor;
         _documents.Saved += OnDocumentSaved;
+        _documents.Loaded += CaptureBaseline; // referência das barras de alteração
         _documents.LoadFailed += (document, error) =>
         {
             MessageBox.Show(this, error.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
