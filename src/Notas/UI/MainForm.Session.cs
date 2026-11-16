@@ -7,9 +7,8 @@ namespace Notas.UI;
 internal sealed partial class MainForm
 {
     /// <summary>Abas da última sessão entram sem carregar; só a ativa lê o arquivo agora.</summary>
-    private OpenDocument? RestoreSession()
+    private OpenDocument? RestoreSession(SessionState session)
     {
-        SessionState session = SettingsStore.LoadSession();
         OpenDocument? active = null;
         for (int i = 0; i < session.Documents.Count; i++)
         {

@@ -16,7 +16,7 @@ internal sealed partial class MainForm : ChromeForm
     private readonly ChromeButton _panelButton;
     private readonly Panel _editorHost;
 
-    public MainForm(AppSettings settings, string[] args)
+    public MainForm(AppSettings settings, string[] args, Task<SessionState>? session = null)
     {
         StartupMetrics.Mark("f_base");
         SuspendLayout(); // um layout só no fim, em vez de um a cada controle adicionado
@@ -62,7 +62,7 @@ internal sealed partial class MainForm : ChromeForm
 
         StartupMetrics.Mark("f_drop");
         RestoreWindowPlacement();
-        OpenDocument? restored = RestoreSession();
+        OpenDocument? restored = RestoreSession(session?.Result ?? SettingsStore.LoadSession());
         if ((initialFile ?? restored?.Path) is { } first)
             OpenMeasured(first);
         else
