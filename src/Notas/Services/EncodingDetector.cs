@@ -9,6 +9,25 @@ namespace Notas.Services;
 /// </summary>
 internal static class EncodingDetector
 {
+    /// <summary>Detecta e volta o stream para o início.</summary>
+    public static TextEncodingKind Detect(Stream stream)
+    {
+        Span<byte> head = stackalloc byte[3];
+        int n = stream.ReadAtLeast(head, 3, throwOnEndOfStream: false);
+        stream.Position = 0;
+
+        if (n >= 3 && head[0] == 0xEF && head[1] == 0xBB && head[2] == 0xBF)
+            return TextEncodingKind.Utf8Bom;
+        if (n >= 2 && head[0] == 0xFF && head[1] == 0xFE)
+            return TextEncodingKind.Utf16LE;
+        if (n >= 2 && head[0] == 0xFE && head[1] == 0xFF)
+            return TextEncodingKind.Utf16BE;
+
+        bool utf8 = IsUtf8(stream);
+        stream.Position = 0;
+        return utf8 ? TextEncodingKind.Utf8 : TextEncodingKind.Ansi;
+    }
+
     private static bool IsUtf8(Stream stream)
     {
         byte[] buffer = ArrayPool<byte>.Shared.Rent((1 << 20) + 4);
