@@ -13,6 +13,8 @@ internal sealed class SqlLanguage : Language
 
     public override string? Lexer => "mssql";
 
+    public override string? LineComment => "--";
+
     public override string[] Extensions => [".sql", ".ddl", ".dml", ".tsql", ".pgsql", ".prc", ".fnc", ".vw"];
 
     protected override void Configure(Scintilla editor)

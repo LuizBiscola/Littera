@@ -17,6 +17,9 @@ internal abstract class Language
     /// <summary>A Lexilla calcula os trechos recolhíveis (chaves, tags, recuo); SQL e texto o Notas calcula.</summary>
     public virtual bool LexerFolds => false;
 
+    /// <summary>Prefixo de comentário de linha (Ctrl+/); null = a linguagem não tem.</summary>
+    public virtual string? LineComment => null;
+
     /// <summary>O lexer é do documento e o StyleClearAll zera as cores: reaplicar ao carregar e ao mudar configurações.</summary>
     public void Apply(Scintilla editor)
     {

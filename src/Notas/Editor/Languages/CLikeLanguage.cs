@@ -8,6 +8,8 @@ internal abstract class CLikeLanguage : Language
 {
     public override string? Lexer => "cpp";
 
+    public override string? LineComment => "//";
+
     public override bool LexerFolds => true;
 
     protected abstract string Keywords { get; }
