@@ -2,7 +2,7 @@ using System.Drawing.Drawing2D;
 
 namespace Notas.Theme;
 
-/// <summary>Converte o atributo "d" de um caminho SVG para <see cref="GraphicsPath"/> (comandos M L H V C S Q Z).</summary>
+/// <summary>Converte o atributo "d" de um caminho SVG para <see cref="GraphicsPath"/> (comandos M L H V C S Q A Z).</summary>
 internal static partial class SvgPath
 {
     public static void AddTo(GraphicsPath path, string d)
@@ -55,6 +55,12 @@ internal static partial class SvgPath
                     PointF q = Next();
                     end = Next();
                     path.AddBezier(current, Lerp(current, q), Lerp(end, q), end);
+                    current = end;
+                    break;
+                case 'A':
+                    (float rx, float ry, float angle) = (reader.Number(), reader.Number(), reader.Number());
+                    (bool large, bool sweep) = (reader.Flag(), reader.Flag());
+                    Arc(path, current, rx, ry, angle, large, sweep, end = Next());
                     current = end;
                     break;
                 case 'Z':
