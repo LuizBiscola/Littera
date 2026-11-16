@@ -15,6 +15,8 @@
     <!-- Menos threads e memória ociosa: o editor não se beneficia de GC concorrente. -->
     <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
     <TieredPGO>true</TieredPGO>
+    <!-- Sem designer do WinForms: os controles são criados em código, a serialização dele não se aplica. -->
+    <NoWarn>$(NoWarn);WFO1000</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
