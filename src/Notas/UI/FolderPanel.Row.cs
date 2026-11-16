@@ -26,14 +26,14 @@ internal sealed partial class FolderPanel
             bool expanded = _expanded.Contains(entry.Path);
             Icons.Draw(g, expanded ? Icons.ChevronDownSmall : Icons.ChevronRightSmall,
                 new Rectangle(x + this.Px(6), row.Y + this.Px(8), this.Px(13), this.Px(13)), Palette.TextFaint, 9, dpi);
-            Icons.Draw(g, expanded ? Icons.FolderOpen : Icons.Folder,
-                new Rectangle(x + this.Px(25), row.Y + this.Px(6), this.Px(16), this.Px(16)), Palette.FolderIcon, 13, dpi);
+            (expanded ? FileIcons.FolderOpen : FileIcons.Folder).Draw(g,
+                new Rectangle(x + this.Px(25), row.Y + this.Px(7), this.Px(15), this.Px(15)), Palette.FolderIcon);
             TextRenderer.DrawText(g, entry.Name, font, text, Palette.Text, Line);
             return;
         }
 
-        Icons.Draw(g, Icons.Document, new Rectangle(x + this.Px(25), row.Y + this.Px(7), this.Px(14), this.Px(14)),
-            active ? Palette.Accent : Palette.TextFaint, 12, dpi);
+        FileKinds.For(entry.Path).Draw(g, new Rectangle(x + this.Px(25), row.Y + this.Px(7), this.Px(14), this.Px(14)),
+            active ? Palette.Accent : Palette.TextFaint);
         TextRenderer.DrawText(g, entry.Name, font, text, active ? Palette.Accent : Palette.TextSecondary, Line);
         if (Filtering)
             PaintLocation(g, entry, font, text, dpi);

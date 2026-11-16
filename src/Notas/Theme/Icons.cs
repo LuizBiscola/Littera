@@ -10,7 +10,6 @@ internal static class Icons
     public const char Settings = '';
     public const char Add = '';
     public const char Close = '';
-    public const char Document = '';
     public const char ChevronDown = '';
     public const char ChevronUp = '';
     public const char ChevronRight = '';
@@ -22,7 +21,6 @@ internal static class Icons
     public const char Refresh = '';
     public const char CollapseAll = '';
     public const char Folder = '';
-    public const char FolderOpen = '';
     public const char ChevronDownSmall = '';
     public const char View = '';
     public const char Copy = '';
