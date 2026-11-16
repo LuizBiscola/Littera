@@ -28,5 +28,10 @@ internal sealed partial class FindPanel
         Invalidate();
     }
 
-    private TextRange ScopeRange(Scintilla editor) => new(0, editor.TextLength);
+    private TextRange ScopeRange(Scintilla editor) => _scope switch
+    {
+        SearchScope.Selection when _selectionScope is { } selection => selection,
+        SearchScope.Block when BlockRange?.Invoke() is { } block => block,
+        _ => new TextRange(0, editor.TextLength),
+    };
 }
