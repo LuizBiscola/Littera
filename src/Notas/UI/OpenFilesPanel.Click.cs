@@ -9,7 +9,7 @@ internal sealed partial class OpenFilesPanel
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
-        if (EndDrag())
+        if (_sizer.MouseUp(e) || EndDrag())
             return;
         if (e.Button == MouseButtons.Left && NewButtonBounds.Contains(e.Location))
         {

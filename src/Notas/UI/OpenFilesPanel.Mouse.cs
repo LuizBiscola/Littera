@@ -13,7 +13,7 @@ internal sealed partial class OpenFilesPanel
     {
         base.OnMouseMove(e);
         _sizer.MouseMove(e);
-        if (UpdateDrag(e))
+        if (_sizer.Dragging || UpdateDrag(e))
             return;
         TabSlot? slot = SlotAt(e.Location);
         TabButton button = slot is { } over ? ButtonAt(over, e.Location) : TabButton.None;
@@ -41,6 +41,8 @@ internal sealed partial class OpenFilesPanel
     protected override void OnMouseDown(MouseEventArgs e)
     {
         base.OnMouseDown(e);
+        if (_sizer.MouseDown(e))
+            return;
         if (e.Button == MouseButtons.Left && SlotAt(e.Location) is { } slot && ButtonAt(slot, e.Location) == TabButton.None)
             BeginPress(slot.Document, e.Location);
     }
