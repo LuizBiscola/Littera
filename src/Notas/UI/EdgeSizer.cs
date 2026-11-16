@@ -6,7 +6,7 @@ namespace Notas.UI;
 /// Alça na borda entre um painel lateral e o editor: com o mouse em cima o cursor vira ↔ e a linha fica azul;
 /// arrastar muda a largura e o clique duplo volta à padrão. Larguras em px de 96 dpi, como no protótipo.
 /// </summary>
-internal sealed partial class EdgeSizer(Control panel, bool rightEdge)
+internal sealed partial class EdgeSizer(Control panel, bool rightEdge, int defaultWidth)
 {
     public bool Hot { get; private set; }
 

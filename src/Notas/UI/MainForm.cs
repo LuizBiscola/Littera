@@ -58,7 +58,8 @@ internal sealed partial class MainForm : ChromeForm
             _documents.Close(document);
         };
 
-        _openFiles = new OpenFilesPanel(_documents) { Visible = settings.Window.ShowOpenFiles };
+        _openFiles = new OpenFilesPanel(_documents) { Visible = settings.Window.ShowOpenFiles, ChosenWidth = settings.Window.OpenFilesWidth };
+        _openFiles.WidthChosen += width => _settings.Window.OpenFilesWidth = width;
         _openFiles.NewRequested += () => _documents.New();
         _openFiles.CloseRequested += document => _ = RequestCloseAsync(document);
         _openFiles.MenuRequested += ShowTabMenu;

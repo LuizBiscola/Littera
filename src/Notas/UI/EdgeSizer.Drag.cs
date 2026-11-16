@@ -4,8 +4,8 @@ namespace Notas.UI;
 
 internal sealed partial class EdgeSizer
 {
-    private const int MinWidth = 180;
-    private const int MaxWidth = 600;
+    public const int MinWidth = 180;
+    public const int MaxWidth = 600;
     private const int MinEditor = 320; // o editor nunca fica mais estreito que isso
 
     private int _startX;
@@ -13,10 +13,20 @@ internal sealed partial class EdgeSizer
 
     public bool Dragging { get; private set; }
 
+    /// <summary>Largura escolhida (px de 96 dpi), ao soltar ou no clique duplo.</summary>
+    public event Action<int>? Resized;
+
     public bool MouseDown(MouseEventArgs e)
     {
         if (e.Button != MouseButtons.Left || !Contains(e.Location))
             return false;
+        if (e.Clicks == 2)
+        {
+            Apply(panel.Px(defaultWidth));
+            Resized?.Invoke(defaultWidth);
+            return true;
+        }
+
         (Dragging, _startX, _startWidth) = (true, panel.PointToScreen(e.Location).X, panel.Width);
         panel.Capture = true;
         return true;
@@ -28,6 +38,7 @@ internal sealed partial class EdgeSizer
             return false;
         Dragging = false;
         panel.Capture = false;
+        Resized?.Invoke((int)Math.Round(panel.Width * 96.0 / panel.DeviceDpi));
         SetHot(Contains(e.Location));
         return true;
     }

@@ -66,6 +66,11 @@ internal sealed class WindowSettings
 
     public bool ShowOpenFiles { get; set; } = true;
 
+    /// <summary>Larguras dos painéis de abas e da pasta (px de 96 dpi), arrastadas na borda.</summary>
+    public int OpenFilesWidth { get; set; } = 250;
+
+    public int FolderWidth { get; set; } = 264;
+
     /// <summary>Abas comuns voltam ao reabrir; as fixadas (e as com alterações não salvas) voltam sempre.</summary>
     public bool ReopenSession { get; set; } = true;
 }

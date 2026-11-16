@@ -20,6 +20,7 @@ internal sealed partial class OpenFilesPanel : Control
 
     private readonly DocumentManager _documents;
     private readonly EdgeSizer _sizer;
+    private int _width = PanelWidth;
 
     public OpenFilesPanel(DocumentManager documents)
     {
@@ -29,7 +30,12 @@ internal sealed partial class OpenFilesPanel : Control
         _documents.Changed += Invalidate;
         Dock = DockStyle.Left;
         Width = this.Px(PanelWidth);
-        _sizer = new EdgeSizer(this, rightEdge: true);
+        _sizer = new EdgeSizer(this, rightEdge: true, PanelWidth);
+        _sizer.Resized += width =>
+        {
+            _width = width;
+            WidthChosen?.Invoke(width);
+        };
         _tipTimer.Tick += (_, _) => ShowTip();
         _flashTimer.Tick += (_, _) => OnFlashTick();
     }
@@ -45,6 +51,16 @@ internal sealed partial class OpenFilesPanel : Control
     /// <summary>Atalho configurado de um comando, para as dicas ("Fixar aba · Ctrl+Alt+P").</summary>
     public Func<string, string?>? ShortcutText { get; set; }
 
+    /// <summary>Largura arrastada na borda (px de 96 dpi), para guardar nas configurações.</summary>
+    public event Action<int>? WidthChosen;
+
+    /// <summary>Largura guardada (px de 96 dpi); valores fora da faixa da alça são corrigidos.</summary>
+    public int ChosenWidth
+    {
+        get => _width;
+        set => Width = this.Px(_width = Math.Clamp(value, EdgeSizer.MinWidth, EdgeSizer.MaxWidth));
+    }
+
     /// <summary>Fixa ou desafixa, com a confirmação azul ao fixar.</summary>
     public void TogglePin(OpenDocument document)
     {
@@ -57,6 +73,6 @@ internal sealed partial class OpenFilesPanel : Control
     protected override void RescaleConstantsForDpi(int deviceDpiOld, int deviceDpiNew)
     {
         base.RescaleConstantsForDpi(deviceDpiOld, deviceDpiNew);
-        Width = this.Px(PanelWidth);
+        Width = this.Px(_width);
     }
 }
