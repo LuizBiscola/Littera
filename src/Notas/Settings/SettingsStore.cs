@@ -11,6 +11,23 @@ internal static class SettingsStore
         ? home
         : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Notas");
 
+    public static string SettingsPath => Path.Combine(Folder, "settings.json");
+
+    /// <summary>Releitura depois de editar o arquivo à mão: com erro, nada muda e a mensagem diz onde.</summary>
+    public static AppSettings? TryReloadSettings(out string? error)
+    {
+        try
+        {
+            error = null;
+            return JsonSerializer.Deserialize(File.ReadAllText(SettingsPath), NotasJsonContext.Default.AppSettings);
+        }
+        catch (JsonException ex)
+        {
+            error = ex.Message;
+            return null;
+        }
+    }
+
     public static AppSettings LoadSettings() =>
         Load("settings.json", NotasJsonContext.Default.AppSettings) ?? new AppSettings();
 
