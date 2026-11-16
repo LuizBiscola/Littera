@@ -9,6 +9,8 @@ internal sealed class XmlLanguage : Language
 
     public override string? Lexer => "xml";
 
+    public override bool LexerFolds => true;
+
     public override string[] Extensions =>
         [".xml", ".xsd", ".xsl", ".xslt", ".config", ".csproj", ".props", ".targets", ".svg", ".xaml", ".resx", ".html", ".htm"];
 

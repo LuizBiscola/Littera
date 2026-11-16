@@ -9,6 +9,8 @@ internal sealed class PythonLanguage : Language
 
     public override string? Lexer => "python";
 
+    public override bool LexerFolds => true;
+
     public override string[] Extensions => [".py", ".pyw", ".pyi"];
 
     protected override void Configure(Scintilla editor)

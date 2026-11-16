@@ -9,6 +9,8 @@ internal sealed class JsonLanguage : Language
 
     public override string? Lexer => "json";
 
+    public override bool LexerFolds => true;
+
     public override string[] Extensions => [".json", ".jsonc", ".geojson", ".har"];
 
     protected override void Configure(Scintilla editor)
