@@ -15,6 +15,11 @@ internal sealed partial class StatusBar
     {
         int x = this.Px(14);
         x = PaintText(g, _position, font, Palette.Text, x, limit);
+        if (_message is not null)
+        {
+            PaintText(g, _message, font, Palette.Text, x, limit);
+            return;
+        }
 
         if (_block is not null && x < limit)
         {
