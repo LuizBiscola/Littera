@@ -15,6 +15,7 @@ internal sealed partial class FindPanel : Control
 
     public FindPanel(Func<Scintilla?> activeEditor)
     {
+        SuspendLayout(); // Controls.Add dispararia o layout antes de os botões existirem
         SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         _activeEditor = activeEditor;
         Visible = false;
@@ -31,6 +32,7 @@ internal sealed partial class FindPanel : Control
         AddScopes();
         _find.TextChanged += (_, _) => Search(select: true);
         HandleKeys(_find);
+        ResumeLayout(false);
     }
 
     partial void Search(bool select);
