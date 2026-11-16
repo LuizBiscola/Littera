@@ -13,6 +13,7 @@ internal static class Icons
     public const char Document = '';
     public const char ChevronDown = '';
     public const char ChevronUp = '';
+    public const char ChevronRight = '';
     public const char ArrowUp = '';
     public const char ArrowDown = '';
     public const char Minimize = '';
