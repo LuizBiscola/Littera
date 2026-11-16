@@ -27,4 +27,12 @@ public class FolderScannerTests
         string root = CreateTree();
         Assert.Equal(["vendas_mes.sql", "vendas.sql"], FolderScanner.Search(root, "VENDAS").Select(e => e.Name));
     }
+
+    [Fact]
+    public void Conta_arquivos_e_subpastas_e_avisa_quando_para_no_limite()
+    {
+        string root = CreateTree();
+        Assert.Equal((4, 3, false), FolderScanner.Count(root));
+        Assert.True(FolderScanner.Count(root, limit: 2).Partial);
+    }
 }
