@@ -60,10 +60,12 @@ internal sealed partial class MainForm : ChromeForm
         foreach (Control area in new Control[] { _editorHost, _openFiles, _status, TitleBar })
             FileDrop.Attach(area, OpenFile);
 
-        if (initialFile is null)
-            _documents.New();
+        RestoreWindowPlacement();
+        OpenDocument? restored = RestoreSession();
+        if ((initialFile ?? restored?.Path) is { } first)
+            OpenMeasured(first);
         else
-            OpenMeasured(initialFile);
+            _documents.New();
     }
 
     private void ToggleOpenFiles()

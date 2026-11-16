@@ -37,7 +37,7 @@ internal sealed partial class MainForm
         if (e.Cancel || _closeConfirmed || !_documents.Documents.Any(d => d.IsDirty))
         {
             if (!e.Cancel)
-                SettingsStore.SaveSettings(_settings);
+                SaveState();
             return;
         }
 
@@ -50,5 +50,13 @@ internal sealed partial class MainForm
 
         _closeConfirmed = true;
         BeginInvoke(Close);
+    }
+
+    /// <summary>Configurações, posição da janela e abas abertas: tudo para a próxima abertura.</summary>
+    private void SaveState()
+    {
+        SaveWindowPlacement();
+        SaveSession();
+        SettingsStore.SaveSettings(_settings);
     }
 }
