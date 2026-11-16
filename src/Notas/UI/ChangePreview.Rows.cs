@@ -29,7 +29,7 @@ internal sealed partial class ChangePreview
             removed ? Palette.DiffRemovedNumber : Palette.DiffAddedNumber, Line | TextFormatFlags.Right);
         TextRenderer.DrawText(g, sign.ToString(), font, new Rectangle(row.X + this.Px(35), y, this.Px(12), row.Height),
             removed ? Palette.DiffRemovedSign : Palette.DiffAddedSign, Line);
-        TextRenderer.DrawText(g, text.Replace("\t", "    "), font, Rectangle.FromLTRB(row.X + this.Px(52), y, row.Right - this.Px(8), row.Bottom),
+        TextRenderer.DrawText(g, ShowSpaces(text), font,Rectangle.FromLTRB(row.X + this.Px(52), y, row.Right - this.Px(8), row.Bottom),
             removed ? Palette.DiffRemovedText : Palette.DiffAddedText, Line);
     }
 }
