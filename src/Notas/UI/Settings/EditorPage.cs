@@ -35,21 +35,13 @@ internal sealed partial class EditorPage : SettingsPage
 
     public override void Reset(AppSettings draft) => SettingsCopy.Into(new EditorSettings(), draft.Editor);
 
-    private static ComboBox FontPicker(EditorSettings editor)
+    private static FontBox FontPicker(EditorSettings editor)
     {
-        var picker = new ComboBox
-        {
-            DropDownStyle = ComboBoxStyle.DropDown,
-            FlatStyle = FlatStyle.Flat,
-            AutoCompleteMode = AutoCompleteMode.SuggestAppend,
-            AutoCompleteSource = AutoCompleteSource.ListItems,
-            Width = 220,
-        };
-        picker.Font = UiFonts.Get(13, picker.DeviceDpi);
+        string[] fonts;
         using (var installed = new InstalledFontCollection())
-            picker.Items.AddRange([.. installed.Families.Select(f => f.Name)]);
-        picker.Text = editor.FontFamily;
-        picker.TextChanged += (_, _) => editor.FontFamily = picker.Text;
+            fonts = [.. installed.Families.Select(f => f.Name)];
+        var picker = new FontBox(fonts) { Value = editor.FontFamily };
+        picker.ValueChanged += () => editor.FontFamily = picker.Value;
         return picker;
     }
 }
