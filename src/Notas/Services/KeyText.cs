@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 namespace Notas.Services;
 
 /// <summary>Converte atalhos do settings.json ("Ctrl+Shift+F", "F11", "Ctrl+Plus") em teclas do WinForms.</summary>
@@ -33,6 +35,7 @@ internal static class KeyText
                 _ when part.Length == 1 && char.IsDigit(part[0]) => Keys.D0 + (part[0] - '0'),
                 _ when Names.TryGetValue(part, out Keys named) => named,
                 _ when Enum.TryParse(part, ignoreCase: true, out Keys parsed) => parsed,
+                _ when part.Length == 1 => LayoutKey(part[0]),
                 _ => null,
             };
             if (key is null)
@@ -42,4 +45,14 @@ internal static class KeyText
 
         return (result & Keys.KeyCode) == Keys.None ? null : result; // só modificadores não é atalho
     }
+
+    /// <summary>Tecla que digita o caractere no layout atual: "[" e "]" ficam em teclas diferentes no ABNT2 e no americano.</summary>
+    private static Keys? LayoutKey(char c)
+    {
+        short scan = VkKeyScanW(c);
+        return scan == -1 ? null : (Keys)(scan & 0xFF);
+    }
+
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern short VkKeyScanW(char c);
 }
