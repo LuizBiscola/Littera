@@ -17,7 +17,11 @@ internal sealed partial class MainForm
     private void ScheduleHighlights(bool textChanged)
     {
         if (textChanged)
+        {
             _blocks = null;
+            _foldsStale = true;
+        }
+
         _highlightTimer.Stop();
         _highlightTimer.Start();
     }
@@ -29,13 +33,15 @@ internal sealed partial class MainForm
             return;
 
         bool small = editor.TextLength <= HighlightLimit;
+        string? text = null;
+        string Text() => text ??= editor.Text; // copia o texto uma vez só, para blocos e dobras
         string? block = null;
         if (small && _settings.Editor.HighlightCurrentBlock)
         {
             bool sql = document.Language is SqlLanguage;
             if (_blocksLanguage != document.Language)
                 _blocks = null;
-            _blocks ??= sql ? BlockScanner.SqlStatements(editor.Text) : BlockScanner.Paragraphs(editor.Text);
+            _blocks ??= sql ? BlockScanner.SqlStatements(Text()) : BlockScanner.Paragraphs(Text());
             _blocksLanguage = document.Language;
             block = BlockHighlighter.Update(editor, _blocks, sql ? "Instrução" : "Parágrafo");
         }
@@ -49,5 +55,6 @@ internal sealed partial class MainForm
             OccurrenceHighlighter.Clear(editor);
         _status.SetBlock(block);
         _status.SetOccurrences(occurrences);
+        RefreshFolds(editor, document, small, Text);
     }
 }
