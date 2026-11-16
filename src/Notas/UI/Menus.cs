@@ -9,7 +9,7 @@ internal static class Menus
     {
         var menu = new ContextMenuStrip
         {
-            Renderer = new ToolStripProfessionalRenderer(new MenuColors()) { RoundedEdges = false },
+            Renderer = Renderer(),
             Font = UiFonts.Get(12.5f, owner.DeviceDpi),
             ShowImageMargin = false,
             ShowCheckMargin = true,
@@ -17,6 +17,9 @@ internal static class Menus
         menu.Closed += (_, _) => owner.BeginInvoke(menu.Dispose); // menus são descartáveis: recriados a cada clique
         return menu;
     }
+
+    /// <summary>Cores do protótipo para menus e listas suspensas.</summary>
+    public static ToolStripRenderer Renderer() => new ToolStripProfessionalRenderer(new MenuColors()) { RoundedEdges = false };
 
     /// <summary>Lista de opções com a atual marcada.</summary>
     public static ContextMenuStrip Choices<T>(Control owner, string? title, IEnumerable<T> values, T current, Func<T, string> label, Action<T> pick)
