@@ -35,6 +35,7 @@ internal static class Palette
     public static readonly Color FoldedMarker = Hex(0xECEDF0);
     public static readonly Color FoldSummary = Hex(0xF0F1F3);
     public static readonly Color FoldSummaryActive = Hex(0xE4ECFD);
+    public static readonly Color CodePreview = Hex(0xFBFBFC);
     public static readonly Color Match = Hex(0xFCE7A6);
     public static readonly Color MatchBorder = Hex(0xE9C65A);
     public static readonly Color MatchCurrent = Hex(0xF8D774);

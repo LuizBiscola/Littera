@@ -24,6 +24,8 @@ internal static class Icons
     public const char Folder = '';
     public const char FolderOpen = '';
     public const char ChevronDownSmall = '';
+    public const char View = '';
+    public const char Copy = '';
     public const char ChevronRightSmall = '';
 
     public static void Draw(Graphics g, char glyph, Rectangle bounds, Color color, float px, int dpi)
