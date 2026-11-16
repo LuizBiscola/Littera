@@ -19,6 +19,7 @@ internal sealed partial class MainForm
         Add(menu.Items, "Fechar aba", "Ctrl+W", () => Shortcuts[Keys.Control | Keys.W]());
         menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Formatar SQL", "Ctrl+Shift+F", FormatSql);
+        Add(menu.Items, "Modo foco", "F11", ToggleFocusMode);
         menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Configurações…", "Ctrl+,", ShowSettings);
         Add(menu.Items, "Sair", "Alt+F4", Close);

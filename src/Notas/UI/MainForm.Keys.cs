@@ -15,6 +15,7 @@ internal sealed partial class MainForm
         [Keys.Control | Keys.Shift | Keys.S] = () => _ = SaveActiveAsync(askPath: true),
         [Keys.Control | Keys.W] = () => _ = _documents.Active is { } active ? RequestCloseAsync(active) : Task.CompletedTask,
         [Keys.Control | Keys.B] = ToggleOpenFiles,
+        [Keys.F11] = ToggleFocusMode,
         [Keys.Control | Keys.F] = () => FindPanel.Open(replace: false),
         [Keys.Control | Keys.H] = () => FindPanel.Open(replace: true),
         [Keys.Control | Keys.G] = ShowGoToLine,
