@@ -1,5 +1,6 @@
 using Notas.Settings;
 using Notas.Theme;
+using Notas.UI.Controls;
 
 namespace Notas.UI.Settings;
 
@@ -8,7 +9,7 @@ internal sealed partial class SettingsDialog : Form
 {
     private readonly IReadOnlyList<SettingsPage> _pages;
     private readonly SettingsHeader _header;
-    private readonly Panel _content = new() { Dock = DockStyle.Fill, AutoScroll = true, BackColor = Palette.Background };
+    private readonly ScrollPanel _content = new() { Dock = DockStyle.Fill, AutoScroll = true, BackColor = Palette.Background };
     private int _page;
 
     public SettingsDialog(AppSettings settings, IReadOnlyList<SettingsPage> pages)
