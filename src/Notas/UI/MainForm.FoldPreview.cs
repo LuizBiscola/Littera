@@ -50,6 +50,9 @@ internal sealed partial class MainForm
     private void HidePreviewIfAway()
     {
         _previewHide.Stop();
+        if (_changePreview is { Visible: true } change && !change.ClientRectangle.Contains(change.PointToClient(Cursor.Position))
+            && !(_boundEditor is { } current && current.PointToClient(Cursor.Position).X < current.Margins[Editor.EditorMargins.Changes].Width))
+            change.Dismiss(); // a prévia da alteração some quando o mouse sai dela
         if (_foldPreview is not { Visible: true } preview || preview.ClientRectangle.Contains(preview.PointToClient(Cursor.Position)))
             return;
         if (_boundEditor is { } editor && SummaryAt(editor, editor.PointToClient(Cursor.Position)) == preview.Header)

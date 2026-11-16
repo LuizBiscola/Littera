@@ -28,6 +28,12 @@ internal sealed partial class MainForm
             return true;
         }
 
+        if (_changePreview?.Visible == true)
+        {
+            _changePreview.Dismiss();
+            return true;
+        }
+
         if (_foldPreview?.Visible == true)
         {
             _foldPreview.Dismiss();
