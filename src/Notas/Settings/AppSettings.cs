@@ -9,6 +9,8 @@ internal sealed class AppSettings
 
     public SqlFormatSettings SqlFormat { get; set; } = new();
 
+    public FilesSettings Files { get; set; } = new();
+
     public List<string> RecentFiles { get; set; } = [];
 }
 
