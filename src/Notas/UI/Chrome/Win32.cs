@@ -51,6 +51,7 @@ internal static class Win32
     [StructLayout(LayoutKind.Sequential)]
     private struct TRACKMOUSEEVENT { public int cbSize; public uint dwFlags; public IntPtr hwndTrack; public uint dwHoverTime; }
 
+    [DllImport("user32.dll")] public static extern bool IsZoomed(IntPtr hwnd);
     [DllImport("user32.dll")] private static extern int GetSystemMetricsForDpi(int index, uint dpi);
     [DllImport("user32.dll")] private static extern bool TrackMouseEvent(ref TRACKMOUSEEVENT track);
     [DllImport("dwmapi.dll")] private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
