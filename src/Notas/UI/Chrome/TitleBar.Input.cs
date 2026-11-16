@@ -4,6 +4,21 @@ internal sealed partial class TitleBar
 {
     private ChromeButton? _hover;
     private ChromeButton? _pressed;
+    private ToolTip? _toolTip;
+    private bool _maximizeHot;
+
+    /// <summary>Hover do maximizar: vem do formulário, porque ali as mensagens são de área não cliente.</summary>
+    public bool MaximizeHot
+    {
+        get => _maximizeHot;
+        set
+        {
+            if (_maximizeHot == value)
+                return;
+            _maximizeHot = value;
+            Invalidate(_maximize.Bounds);
+        }
+    }
 
     protected override void OnMouseMove(MouseEventArgs e)
     {
@@ -13,6 +28,8 @@ internal sealed partial class TitleBar
             return;
 
         _hover = button;
+        _toolTip ??= new ToolTip(); // criado só no primeiro hover: nada a mais na inicialização
+        _toolTip.SetToolTip(this, button?.ToolTip);
         Invalidate();
     }
 
