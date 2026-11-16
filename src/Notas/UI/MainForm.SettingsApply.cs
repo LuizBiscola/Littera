@@ -23,6 +23,7 @@ internal sealed partial class MainForm
     /// <summary>settings.json salvo dentro do Notas: vale na hora (atalhos inclusive).</summary>
     private void OnDocumentSaved(OpenDocument document)
     {
+        document.Missing = false; // salvar recria o arquivo que tinha sumido
         if (document.Path is { } saved && _folderPanel?.Contains(saved) == true)
             _folderPanel.Reload(); // "Salvar como" pode ter criado um arquivo novo na pasta
         InvalidateChanges(); // salvar troca as barras laranja por verdes
