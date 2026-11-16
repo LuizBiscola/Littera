@@ -69,18 +69,4 @@ internal static class Menus
 
         return menu;
     }
-
-    private sealed class MenuColors : ProfessionalColorTable
-    {
-        public override Color ToolStripDropDownBackground => Palette.Background;
-        public override Color MenuBorder => Palette.Border;
-        public override Color MenuItemBorder => Palette.ItemActive;
-        public override Color MenuItemSelected => Palette.ItemActive;
-        public override Color ImageMarginGradientBegin => Palette.Background;
-        public override Color ImageMarginGradientMiddle => Palette.Background;
-        public override Color ImageMarginGradientEnd => Palette.Background;
-        public override Color SeparatorDark => Palette.Border;
-        public override Color CheckBackground => Palette.AccentSoft;
-        public override Color CheckSelectedBackground => Palette.AccentSoft;
-    }
 }
