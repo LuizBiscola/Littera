@@ -8,6 +8,7 @@ internal sealed class FindSession
 {
     private const int Indicator = 10;
     private List<TextRange> _matches = [];
+    private Scintilla? _editor;
 
     public int Count => _matches.Count;
 
@@ -29,6 +30,9 @@ internal sealed class FindSession
     /// <summary>Refaz a busca e escolhe a primeira ocorrência a partir de <paramref name="from"/>.</summary>
     public void Run(Scintilla editor, SearchQuery query, TextRange scope, int from)
     {
+        if (_editor is { IsDisposed: false } previous && previous != editor)
+            Clear(previous); // a busca passou para outra aba: o destaque não fica para trás
+        _editor = editor;
         Clear(editor);
         _matches = TextSearch.FindAll(editor, query, scope);
         editor.IndicatorCurrent = Indicator;
@@ -36,9 +40,13 @@ internal sealed class FindSession
             editor.IndicatorFillRange(match.Start, match.End - match.Start);
 
         Current = _matches.FindIndex(m => m.Start >= from);
+        AfterLast = Current < 0;
         if (Current < 0 && Count > 0)
             Current = 0;
     }
+
+    /// <summary>O cursor estava depois da última ocorrência (Current voltou para a primeira).</summary>
+    public bool AfterLast { get; private set; }
 
     /// <summary>Seleciona a ocorrência atual (ou a seguinte/anterior) e rola até ela.</summary>
     public void Select(Scintilla editor, int step = 0)

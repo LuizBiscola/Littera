@@ -20,7 +20,7 @@ internal static class TextSearch
     public static List<TextRange> FindAll(Scintilla editor, SearchQuery query, TextRange range)
     {
         var matches = new List<TextRange>();
-        if (query.Text.Length == 0)
+        if (query.Text.Length == 0 || range.End <= range.Start)
             return matches;
 
         editor.SearchFlags = query.Flags;
