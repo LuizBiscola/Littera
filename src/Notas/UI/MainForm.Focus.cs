@@ -21,6 +21,12 @@ internal sealed partial class MainForm
     /// <summary>Esc fecha primeiro a busca, depois sai do modo foco.</summary>
     private bool HandleEscape()
     {
+        if (_foldPreview?.Visible == true)
+        {
+            _foldPreview.Dismiss();
+            return true;
+        }
+
         if (_findPanel?.Visible == true)
         {
             _findPanel.Dismiss();

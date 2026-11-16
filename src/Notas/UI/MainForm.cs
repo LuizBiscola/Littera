@@ -69,6 +69,7 @@ internal sealed partial class MainForm : ChromeForm
             editor.Insert += (_, _) => ScheduleDrafts();
             editor.Delete += (_, _) => ScheduleDrafts();
             editor.MarginClick += (_, e) => OnFoldMarginClick(editor, e);
+            AttachFoldPreview(editor);
         };
 
         StartupMetrics.Mark("f_drop");
