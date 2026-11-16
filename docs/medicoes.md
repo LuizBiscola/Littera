@@ -22,6 +22,16 @@ a máquina tem bastante ruído (até ±150 ms entre execuções), então compare
 Arquivo de 50 MB (fd): abre em ~2,2 s com o texto aparecendo aos poucos; maior travamento da interface **~56 ms**;
 memória com o arquivo aberto ~169 MB.
 
+## Fase 2 — formatador, rascunhos, modo foco, atalhos, configurações (monitor em 150%)
+
+| | Abertura | Piso | Memória | Exe |
+|---|---|---|---|---|
+| fd | 590 ms (460–630) | 348 ms | 11,1 MB | 3,5 MB |
+| sc | 471 ms (353–499) | 348 ms | 12,4 MB | 118,7 MB |
+
+Arquivo de 50 MB (fd): maior travamento **~50 ms**, memória ~167 MB. As novidades da Fase 2 não entram na
+abertura (formatador, configurações e busca só carregam no primeiro uso; rascunhos gravam depois de uma pausa).
+
 O que pesa na abertura (marcas `-ShowMarks`): runtime até o `Main` (~100 ms, igual ao piso), construtor da
 janela com barra, painel, status e o primeiro editor (~150 ms), e a primeira pintura (~100 ms).
 Já otimizado: DLLs nativas carregadas em segundo plano, configurações e sessão lidas em paralelo,
