@@ -23,6 +23,8 @@ internal static class EditorStyle
         numbers.SizeF = settings.FontSize * 12f / 13f; // números 12 px para código de 13 px, como no protótipo
         numbers.ForeColor = Palette.LineNumber;
         numbers.BackColor = Palette.Background;
+        editor.Styles[Style.IndentGuide].ForeColor = Palette.IndentGuide;
+        editor.Styles[Style.IndentGuide].BackColor = Palette.Background;
 
         ApplyLineSpacing(editor, settings);
         editor.CaretForeColor = Palette.Text;

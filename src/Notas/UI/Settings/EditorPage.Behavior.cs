@@ -17,6 +17,8 @@ internal sealed partial class EditorPage
             editor.IndentSize = indent.SelectedIndex == 0 ? 2 : 4;
         };
         yield return new SettingRow("Indentação", "Usada ao pressionar Tab.", indent);
+        yield return Toggle("Mostrar guias de indentação", "Linhas verticais que mostram o nível de recuo de cada bloco.",
+            editor.ShowIndentGuides, v => editor.ShowIndentGuides = v);
 
         yield return Toggle("Quebra de linha automática", "Linhas longas continuam na linha de baixo.",
             editor.WordWrap, v => editor.WordWrap = v);

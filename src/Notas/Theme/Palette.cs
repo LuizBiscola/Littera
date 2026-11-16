@@ -31,6 +31,7 @@ internal static class Palette
     public static readonly Color StatementMarker = Hex(0xB9CDF7);
     public static readonly Color LineNumber = Hex(0xB4B8BF);
     public static readonly Color LineNumberInBlock = Hex(0x8794AD);
+    public static readonly Color IndentGuide = Hex(0xDCDFE4);
     public static readonly Color Match = Hex(0xFCE7A6);
     public static readonly Color MatchBorder = Hex(0xE9C65A);
     public static readonly Color MatchCurrent = Hex(0xF8D774);

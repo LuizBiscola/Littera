@@ -31,6 +31,9 @@ internal sealed class EditorSettings
 
     public bool UseTabs { get; set; }
 
+    /// <summary>Linhas verticais em cada nível de recuo.</summary>
+    public bool ShowIndentGuides { get; set; } = true;
+
     public bool WordWrap { get; set; }
 
     public bool ShowLineNumbers { get; set; } = true;
