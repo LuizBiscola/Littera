@@ -2,10 +2,10 @@ using System.Threading.Channels;
 
 namespace Notas.Services;
 
-/// <summary>Decodifica o arquivo numa thread de fundo e entrega o texto em blocos de ~512 mil caracteres.</summary>
+/// <summary>Decodifica o arquivo numa thread de fundo e entrega o texto em blocos de ~256 mil caracteres.</summary>
 internal static class TextChunkProducer
 {
-    public const int ChunkChars = 1 << 19;
+    public const int ChunkChars = 1 << 18;
 
     public static async Task ProduceAsync(Stream stream, TextEncodingKind kind, ChannelWriter<string> writer, CancellationToken ct)
     {
