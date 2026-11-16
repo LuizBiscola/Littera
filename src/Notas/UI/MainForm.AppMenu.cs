@@ -10,6 +10,8 @@ internal sealed partial class MainForm
     {
         ContextMenuStrip menu = Menus.Create(this);
         menu.ShowCheckMargin = false;
+        Add(menu.Items, "Paleta de comandos…", ShortcutText("paletaDeComandos"), ShowCommandPalette);
+        menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Novo", ShortcutText("novo"), () => _documents.New());
         Add(menu.Items, "Abrir…", ShortcutText("abrir"), ShowOpenDialog);
         Add(menu.Items, "Abrir pasta…", ShortcutText("abrirPasta"), ShowOpenFolderDialog);
