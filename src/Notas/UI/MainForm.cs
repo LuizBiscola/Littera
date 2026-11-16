@@ -14,6 +14,7 @@ internal sealed partial class MainForm : ChromeForm
     private readonly StatusBar _status = new();
     private readonly OpenFilesPanel _openFiles;
     private readonly ChromeButton _panelButton;
+    private readonly ChromeButton _folderButton;
     private readonly Panel _editorHost;
 
     public MainForm(AppSettings settings, string[] args, Task<SessionState>? session = null)
@@ -58,6 +59,7 @@ internal sealed partial class MainForm : ChromeForm
         _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
         _panelButton.Toggled = settings.Window.ShowOpenFiles; // Visible é falso até a janela aparecer
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => FindPanel.Open(replace: false));
+        _folderButton = TitleBar.AddAction(Icons.PanelRight, "Painel de pasta (Ctrl+Shift+E)", ToggleFolderPanel);
         TitleBar.AddAction(Icons.Settings, "Configurações (Ctrl+,)", ShowSettings);
 
         TitleBar.MenuRequested += ShowAppMenu;

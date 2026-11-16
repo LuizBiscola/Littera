@@ -13,6 +13,8 @@ internal sealed partial class MainForm
         ("proximaAba", "Ctrl+Tab", () => CycleTabs(+1)),
         ("abaAnterior", "Ctrl+Shift+Tab", () => CycleTabs(-1)),
         ("painelAbas", "Ctrl+B", ToggleOpenFiles),
+        ("abrirPasta", "Ctrl+Shift+O", ShowOpenFolderDialog),
+        ("painelPasta", "Ctrl+Shift+E", ToggleFolderPanel),
         ("modoFoco", "F11", ToggleFocusMode),
         ("buscar", "Ctrl+F", () => FindPanel.Open(replace: false)),
         ("substituir", "Ctrl+H", () => FindPanel.Open(replace: true)),

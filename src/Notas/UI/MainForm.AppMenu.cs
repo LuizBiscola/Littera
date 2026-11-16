@@ -12,6 +12,7 @@ internal sealed partial class MainForm
         menu.ShowCheckMargin = false;
         Add(menu.Items, "Novo", ShortcutText("novo"), () => _documents.New());
         Add(menu.Items, "Abrir…", ShortcutText("abrir"), ShowOpenDialog);
+        Add(menu.Items, "Abrir pasta…", ShortcutText("abrirPasta"), ShowOpenFolderDialog);
         menu.Items.Add(RecentMenu(menu));
         menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Salvar", ShortcutText("salvar"), () => _ = SaveActiveAsync(askPath: false));
