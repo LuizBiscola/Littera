@@ -11,6 +11,9 @@ internal sealed class AppSettings
 
     public FilesSettings Files { get; set; } = new();
 
+    /// <summary>Atalhos por comando ("formatarSql": "Ctrl+Shift+F"); vários separados por ";". Faltando, vale o padrão.</summary>
+    public Dictionary<string, string> Shortcuts { get; set; } = [];
+
     public List<string> RecentFiles { get; set; } = [];
 }
 
