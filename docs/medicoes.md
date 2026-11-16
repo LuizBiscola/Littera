@@ -42,6 +42,8 @@ Medido intercalando execuções (6 de cada), porque o ruído da máquina passa d
 | fd, com pasta restaurada (2 subpastas abertas) | ~545 ms | 9,0 MB |
 | piso (WinForms vazio, mesma hora) | 378 ms | 6,1 MB |
 
+Exe depois dos extras: fd 3,6 MB, sc 119,0 MB (sc com pasta restaurada: 488 ms, 10,3 MB).
+
 Sem pasta aberta o painel nem é criado. Com pasta, a árvore usa comparação ordinal: a ordenação por cultura
 carregava o ICU na abertura e custava 30–75 ms; agora a árvore leva 6–17 ms. A contagem do rodapé
 ("N arquivos · M pastas") só começa depois que a janela fica pronta.
