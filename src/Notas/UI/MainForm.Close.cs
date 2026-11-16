@@ -25,7 +25,7 @@ internal sealed partial class MainForm
         return answer switch
         {
             DialogResult.Yes => await SaveAsync(document),
-            DialogResult.No => true,
+            DialogResult.No => DiscardDraft(document),
             _ => false,
         };
     }
@@ -41,6 +41,13 @@ internal sealed partial class MainForm
             return;
         }
 
+        if (_settings.Files.KeepDraftsOnClose)
+        {
+            SaveDrafts(int.MaxValue); // nada se perde: as alterações voltam na próxima abertura
+            SaveState();
+            return;
+        }
+
         e.Cancel = true;
         foreach (OpenDocument document in _documents.Documents.ToList())
         {
@@ -50,6 +57,15 @@ internal sealed partial class MainForm
 
         _closeConfirmed = true;
         BeginInvoke(Close);
+    }
+
+    /// <summary>"Não salvar": o rascunho também vai embora, senão as alterações voltariam na próxima abertura.</summary>
+    private static bool DiscardDraft(OpenDocument document)
+    {
+        Services.DraftStore.Delete(document.DraftId);
+        document.DraftId = null;
+        document.HasUnsavedDraft = false;
+        return true;
     }
 
     /// <summary>Configurações, posição da janela e abas abertas: tudo para a próxima abertura.</summary>

@@ -36,6 +36,7 @@ internal sealed partial class MainForm : ChromeForm
         Controls.Add(_status);
         _status.SegmentClicked += OnStatusSegmentClicked;
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
+        _draftTimer.Tick += (_, _) => SaveDrafts(AutosaveLimit);
         _documents = new DocumentManager(_editorHost, settings.Editor);
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Changed += UpdateStatus;
@@ -59,12 +60,19 @@ internal sealed partial class MainForm : ChromeForm
         TitleBar.AddAction(Icons.Settings, "Configurações (Ctrl+,)", ShowSettings);
 
         TitleBar.MenuRequested += ShowAppMenu;
+        _documents.EditorCreated += editor =>
+        {
+            editor.Insert += (_, _) => ScheduleDrafts();
+            editor.Delete += (_, _) => ScheduleDrafts();
+        };
 
         StartupMetrics.Mark("f_drop");
         RestoreWindowPlacement();
         OpenDocument? restored = RestoreSession(session?.Result ?? SettingsStore.LoadSession());
-        if ((initialFile ?? restored?.Path) is { } first)
-            OpenMeasured(first);
+        if (initialFile is not null)
+            OpenMeasured(initialFile);
+        else if (restored is not null)
+            _documents.Activate(restored);
         else
             _documents.New();
         ResumeLayout(performLayout: true);
