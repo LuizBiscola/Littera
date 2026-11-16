@@ -12,6 +12,7 @@ internal sealed partial class DocumentManager
         _documents.Add(document);
         Activate(document);
         document.Editor!.EolMode = NewFileFormat.LineEnding.ToScintilla();
+        Changes.ChangeMarkers.Enable(document.Editor);
         return document;
     }
 

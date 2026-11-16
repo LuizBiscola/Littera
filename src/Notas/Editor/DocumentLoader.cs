@@ -43,6 +43,7 @@ internal static class DocumentLoader
             editor.DirectMessage(SCI_SETUNDOCOLLECTION, new IntPtr(1));
             editor.EmptyUndoBuffer();
             editor.SetSavePoint();
+            Changes.ChangeMarkers.Enable(editor); // histórico só a partir do texto carregado
         }
 
         return lineEnding ?? LineEnding.CrLf;
