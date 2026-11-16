@@ -32,6 +32,20 @@ memória com o arquivo aberto ~169 MB.
 Arquivo de 50 MB (fd): maior travamento **~50 ms**, memória ~167 MB. As novidades da Fase 2 não entram na
 abertura (formatador, configurações e busca só carregam no primeiro uso; rascunhos gravam depois de uma pausa).
 
+## Extras — painel "PASTA" e busca em abas/pasta (monitor em 150%)
+
+Medido intercalando execuções (6 de cada), porque o ruído da máquina passa de 100 ms entre rodadas:
+
+| | Abertura (mediana) | Memória |
+|---|---|---|
+| fd, sem pasta | ~500 ms | 8,7 MB |
+| fd, com pasta restaurada (2 subpastas abertas) | ~545 ms | 9,0 MB |
+| piso (WinForms vazio, mesma hora) | 378 ms | 6,1 MB |
+
+Sem pasta aberta o painel nem é criado. Com pasta, a árvore usa comparação ordinal: a ordenação por cultura
+carregava o ICU na abertura e custava 30–75 ms; agora a árvore leva 6–17 ms. A contagem do rodapé
+("N arquivos · M pastas") só começa depois que a janela fica pronta.
+
 O que pesa na abertura (marcas `-ShowMarks`): runtime até o `Main` (~100 ms, igual ao piso), construtor da
 janela com barra, painel, status e o primeiro editor (~150 ms), e a primeira pintura (~100 ms).
 Já otimizado: DLLs nativas carregadas em segundo plano, configurações e sessão lidas em paralelo,
