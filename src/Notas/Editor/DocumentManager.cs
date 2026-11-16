@@ -36,6 +36,9 @@ internal sealed partial class DocumentManager(Control host, EditorSettings setti
         editor.Focus();
         ActiveChanged?.Invoke();
         Changed?.Invoke();
+
+        if (!document.IsLoaded && !document.IsLoading && document.Path is not null)
+            _ = LoadAsync(document);
     }
 
     private Scintilla EnsureEditor(OpenDocument document)
