@@ -3,13 +3,20 @@ using Notas.Theme;
 
 namespace Notas.UI;
 
-/// <summary>Painel "ABERTOS" do protótipo: abas verticais com ponto de "não salvo" e botão de fechar.</summary>
+/// <summary>
+/// Painel de abas do protótipo: seção Fixadas (só quando há alguma) e Abertos, com alfinete, ×,
+/// bolinha de "não salvo", arrastar para reordenar e menu do clique direito.
+/// </summary>
 internal sealed partial class OpenFilesPanel : Control
 {
-    private const int HeaderHeight = 48;
+    private const int PanelWidth = 250;
+    private const int PinnedHeaderHeight = 36;
+    private const int SeparatorHeight = 11;
+    private const int OpenHeaderHeight = 42;
+    private const int SoloHeaderHeight = 48; // sem fixadas, o cabeçalho do protótipo original
     private const int FooterHeight = 35;
     private const int ItemHeight = 32;
-    private const int ItemGap = 2;
+    private const int ItemStep = 34;
 
     private readonly DocumentManager _documents;
 
@@ -20,25 +27,34 @@ internal sealed partial class OpenFilesPanel : Control
         _documents = documents;
         _documents.Changed += Invalidate;
         Dock = DockStyle.Left;
-        Width = this.Px(236);
+        Width = this.Px(PanelWidth);
+        _tipTimer.Tick += (_, _) => ShowTip();
+        _flashTimer.Tick += (_, _) => OnFlashTick();
     }
 
-    private Rectangle NewButtonBounds => new(Width - this.Px(34), this.Px(14), this.Px(24), this.Px(24));
+    /// <summary>Fechar pela aba (× ou botão do meio): quem trata pergunta se quer salvar.</summary>
+    public event Action<OpenDocument>? CloseRequested;
 
-    private Rectangle ItemBounds(int index)
+    public event Action? NewRequested;
+
+    /// <summary>Clique direito numa aba: o menu fica com a janela, que tem as ações (renomear, mostrar na pasta…).</summary>
+    public event Action<OpenDocument, Point>? MenuRequested;
+
+    /// <summary>Atalho configurado de um comando, para as dicas ("Fixar aba · Ctrl+Alt+P").</summary>
+    public Func<string, string?>? ShortcutText { get; set; }
+
+    /// <summary>Fixa ou desafixa, com a confirmação azul ao fixar.</summary>
+    public void TogglePin(OpenDocument document)
     {
-        int top = this.Px(HeaderHeight + 2) + index * this.Px(ItemHeight + ItemGap) - _scroll;
-        return new Rectangle(this.Px(8), top, Width - this.Px(16), this.Px(ItemHeight));
+        bool pin = !document.Pinned;
+        _documents.SetPinned(document, pin);
+        if (pin)
+            Flash(document);
     }
-
-    private Rectangle CloseBounds(Rectangle item) =>
-        new(item.Right - this.Px(26), item.Top + this.Px(6), this.Px(20), this.Px(20));
-
-    private Rectangle ListArea => Rectangle.FromLTRB(0, this.Px(HeaderHeight), Width, Height - this.Px(FooterHeight));
 
     protected override void RescaleConstantsForDpi(int deviceDpiOld, int deviceDpiNew)
     {
         base.RescaleConstantsForDpi(deviceDpiOld, deviceDpiNew);
-        Width = this.Px(236);
+        Width = this.Px(PanelWidth);
     }
 }
