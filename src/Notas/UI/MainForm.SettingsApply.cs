@@ -22,6 +22,9 @@ internal sealed partial class MainForm
     /// <summary>settings.json salvo dentro do Notas: vale na hora (atalhos inclusive).</summary>
     private void OnDocumentSaved(OpenDocument document)
     {
+        if (document.Path is { } saved && _folderPanel?.Contains(saved) == true)
+            _folderPanel.Reload(); // "Salvar como" pode ter criado um arquivo novo na pasta
+
         if (!string.Equals(document.Path, Path.GetFullPath(SettingsStore.SettingsPath), StringComparison.OrdinalIgnoreCase))
             return;
 

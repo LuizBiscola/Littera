@@ -12,6 +12,8 @@ internal sealed partial class MainForm
         TitleBar.Visible = !_focusMode;
         _status.Visible = !_focusMode;
         _openFiles.Visible = !_focusMode && _settings.Window.ShowOpenFiles;
+        if (_folderPanel is not null)
+            _folderPanel.Visible = !_focusMode && _folderShown;
         ResumeLayout(performLayout: true);
         _documents.Active?.Editor?.Focus();
     }

@@ -10,6 +10,12 @@ internal sealed partial class MainForm
     /// <summary>Abas da última sessão entram sem carregar; só a ativa lê o arquivo (ou o rascunho) agora.</summary>
     private OpenDocument? RestoreSession(SessionState session)
     {
+        if (session.Folder is { } folder && Directory.Exists(folder))
+        {
+            OpenFolder(folder, session.ExpandedFolders);
+            SetFolderShown(!session.FolderHidden);
+        }
+
         OpenDocument? active = null;
         for (int i = 0; i < session.Documents.Count; i++)
         {

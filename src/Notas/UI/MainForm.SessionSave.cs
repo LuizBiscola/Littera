@@ -9,7 +9,12 @@ internal sealed partial class MainForm
     /// <summary>Arquivos abertos e rascunhos (com o formato original); rascunhos que sobraram são apagados.</summary>
     private void SaveSession()
     {
-        var session = new SessionState();
+        var session = new SessionState
+        {
+            Folder = _folderPanel?.Folder,
+            FolderHidden = !_folderShown,
+            ExpandedFolders = [.. _folderPanel?.ExpandedFolders ?? []],
+        };
         foreach (OpenDocument document in _documents.Documents.Where(d => d.Path is not null || d.DraftId is not null))
         {
             if (document == _documents.Active)
