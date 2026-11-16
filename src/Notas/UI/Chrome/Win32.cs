@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 namespace Notas.UI.Chrome;
 
 /// <summary>Mensagens e funções do Windows usadas para desenhar a barra de título no lugar do sistema.</summary>
-internal static class Win32
+internal static partial class Win32
 {
     public const int WM_NCCALCSIZE = 0x0083;
     public const int WM_NCHITTEST = 0x0084;
