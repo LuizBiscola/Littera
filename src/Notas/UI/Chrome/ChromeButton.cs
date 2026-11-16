@@ -18,4 +18,7 @@ internal sealed class ChromeButton(char glyph, string toolTip, Action onClick)
     public bool IsWindowButton { get; init; }
 
     public bool IsClose { get; init; }
+
+    /// <summary>Texto ao lado do ícone (a marca "Notas", que abre o menu do app).</summary>
+    public string? Label { get; init; }
 }

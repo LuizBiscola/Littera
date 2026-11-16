@@ -24,6 +24,15 @@ internal sealed partial class TitleBar
         if (button.Toggled || hot)
             Shapes.FillRounded(g, button.Toggled ? Palette.AccentSoft : Palette.ItemHover, button.Bounds, this.Px(5));
 
+        if (button.Label is not null)
+        {
+            var glyph = new Rectangle(button.Bounds.X + this.Px(6), button.Bounds.Y + this.Px(5), this.Px(18), this.Px(18));
+            Icons.Draw(g, button.Glyph, glyph, Palette.Text, 15, dpi);
+            TextRenderer.DrawText(g, button.Label, UiFonts.Semibold(13, dpi), new Point(glyph.Right + this.Px(8), button.Bounds.Y + this.Px(6)),
+                Palette.Text, TextFormatFlags.NoPadding);
+            return;
+        }
+
         Icons.Draw(g, button.Glyph, button.Bounds, button.Toggled ? Palette.Accent : Palette.TextMuted, 14, dpi);
     }
 
