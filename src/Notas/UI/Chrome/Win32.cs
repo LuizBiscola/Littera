@@ -29,6 +29,13 @@ internal static class Win32
     public static int ResizeFrame(int dpi) =>
         GetSystemMetricsForDpi(SM_CYSIZEFRAME, (uint)dpi) + GetSystemMetricsForDpi(SM_CXPADDEDBORDER, (uint)dpi);
 
+    /// <summary>Coordenadas de tela empacotadas no lParam das mensagens de mouse (com sinal: monitores à esquerda).</summary>
+    public static Point PointFromLParam(IntPtr lParam)
+    {
+        int value = unchecked((int)(long)lParam);
+        return new Point((short)(value & 0xFFFF), (short)((value >> 16) & 0xFFFF));
+    }
+
     public static void SetBorderColor(IntPtr hwnd, Color color)
     {
         int colorRef = color.R | (color.G << 8) | (color.B << 16);

@@ -1,3 +1,5 @@
+using Notas.Theme;
+
 namespace Notas.UI.Chrome;
 
 internal sealed partial class TitleBar
@@ -54,6 +56,26 @@ internal sealed partial class TitleBar
         _pressed = null;
         if (button is not null && button == ButtonAt(e.Location))
             button.OnClick();
+    }
+
+    /// <summary>
+    /// Fora dos botões a barra fica "transparente": o formulário recebe o teste e responde
+    /// HTCAPTION (arrastar, duplo clique, Aero Snap), HTMAXBUTTON ou HTTOP (redimensionar).
+    /// </summary>
+    protected override void WndProc(ref Message m)
+    {
+        if (m.Msg == Win32.WM_NCHITTEST)
+        {
+            Point p = PointToClient(Win32.PointFromLParam(m.LParam));
+            bool resizeEdge = p.Y < this.Px(4) && FindForm()?.WindowState != FormWindowState.Maximized;
+            if (resizeEdge || ButtonAt(p) is null)
+            {
+                m.Result = Win32.HTTRANSPARENT;
+                return;
+            }
+        }
+
+        base.WndProc(ref m);
     }
 
     private ChromeButton? ButtonAt(Point p) => AllButtons.FirstOrDefault(b => b != _maximize && b.Bounds.Contains(p));
