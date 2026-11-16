@@ -1,5 +1,6 @@
 using Notas.Settings;
 using Notas.Theme;
+using Notas.UI.Chrome;
 using Notas.UI.Controls;
 
 namespace Notas.UI.Settings;
@@ -40,10 +41,14 @@ internal sealed partial class SettingsDialog : Form
     /// <summary>Cópia editada; quem abriu aplica se o resultado for OK.</summary>
     public AppSettings Draft { get; }
 
+    /// <summary>A página velha fica parada na tela até a nova estar montada (sem meio-termo em branco ou pela metade).</summary>
     private void ShowPage(int index)
     {
         _page = index;
         _header.SetPage(_pages[index]);
+        bool freeze = _content.IsHandleCreated;
+        if (freeze)
+            Win32.SetRedraw(_content.Handle, false);
         _content.SuspendLayout();
         foreach (Control old in _content.Controls.Cast<Control>().ToList())
             old.Dispose();
@@ -57,6 +62,10 @@ internal sealed partial class SettingsDialog : Form
 
         _content.ResumeLayout();
         _content.AutoScrollPosition = Point.Empty;
+        if (!freeze)
+            return;
+        Win32.SetRedraw(_content.Handle, true);
+        Win32.RedrawNow(_content.Handle);
     }
 
     /// <summary>Sem foco inicial: o primeiro campo (a fonte) rolaria a página e ficaria com o texto selecionado.</summary>
