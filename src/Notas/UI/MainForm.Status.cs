@@ -28,6 +28,7 @@ internal sealed partial class MainForm
 
         _blocks = null;
         _foldsStale = true;
+        _foldVersion++;
         UpdateStatus();
     }
 

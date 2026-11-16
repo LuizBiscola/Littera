@@ -16,16 +16,10 @@ internal sealed partial class MainForm
     {
         bool sql = document.Language is SqlLanguage;
         bool stale = _foldsStale || _foldsLanguage != document.Language;
-        if (stale && small && !document.Language.LexerFolds)
-        {
-            List<LineBlock> blocks = _blocks is not null && _blocksLanguage == document.Language ? _blocks
-                : sql ? BlockScanner.SqlStatements(text()) : BlockScanner.Paragraphs(text());
-            List<FoldRegion> regions = sql ? FoldScanner.Sql(text(), blocks) : FoldScanner.Paragraphs(blocks);
-            EditorFolding.ApplyLevels(editor, FoldLevels.From(editor.Lines.Count, regions));
-        }
-
         _foldsStale = false;
         _foldsLanguage = document.Language;
+        if (stale && small && !document.Language.LexerFolds)
+            _ = ComputeFoldsAsync(editor, sql, text(), _blocks is not null && _blocksLanguage == document.Language ? _blocks : null);
         _status.SetFolded(EditorFolding.Refresh(editor, sql, CurrentBlock(editor), force: stale));
     }
 
