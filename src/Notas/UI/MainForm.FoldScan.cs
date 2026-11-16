@@ -24,6 +24,8 @@ internal sealed partial class MainForm
             return;
 
         EditorFolding.ApplyLevels(editor, levels);
+        if (_documents.Active is { } document && document.Editor == editor)
+            RestoreFolds(editor, document); // sessão anterior: só agora os cabeçalhos existem
         RefreshFoldSummaries(editor);
     }
 }

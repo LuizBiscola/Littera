@@ -39,6 +39,7 @@ internal sealed partial class MainForm
             UntitledNumber = document.UntitledNumber,
             Encoding = document.Format.Encoding.ToString(),
             LineEnding = document.Format.LineEnding.ToString(),
+            Folded = FoldedHeaders(document, editor),
         }
         : document.Restore ?? new SessionDocument { Path = document.Path ?? "" };
 }

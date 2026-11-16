@@ -20,6 +20,13 @@ internal sealed partial class MainForm
         _foldsLanguage = document.Language;
         if (stale && small && !document.Language.LexerFolds)
             _ = ComputeFoldsAsync(editor, sql, text(), _blocks is not null && _blocksLanguage == document.Language ? _blocks : null);
+        else if (small && document.Language.LexerFolds && document.PendingFolds is not null)
+        {
+            editor.Colorize(0, editor.TextLength); // a Lexilla só calcula os trechos do texto que já coloriu
+            RestoreFolds(editor, document);
+        }
+        else if (!small)
+            document.PendingFolds = null; // arquivo grande demais: sem trechos recolhíveis
         _status.SetFolded(EditorFolding.Refresh(editor, sql, CurrentBlock(editor), force: stale));
     }
 
