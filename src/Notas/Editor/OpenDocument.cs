@@ -49,6 +49,9 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
 
     /// <summary>Trechos que estavam recolhidos: aplicados quando os trechos do arquivo já estiverem calculados.</summary>
     public Folding.FoldRestore? PendingFolds { get; set; }
+
+    /// <summary>Versões de quando abriu e do disco, para marcar linhas alteradas; null = arquivo grande demais.</summary>
+    public Changes.ChangeBaseline? Baseline { get; set; }
 }
 
 internal static class LineEndingExtensions

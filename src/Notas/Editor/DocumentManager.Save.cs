@@ -14,9 +14,15 @@ internal sealed partial class DocumentManager
         string target = Path.GetFullPath(path ?? document.Path ?? throw new InvalidOperationException("Documento sem caminho."));
         Scintilla editor = document.Editor!;
         editor.ReadOnly = true; // o texto não pode mudar entre a cópia e o ponto de salvamento
+        bool untitled = document.Path is null;
         try
         {
-            await TextFileWriter.SaveAsync(target, editor.Text, document.Format.Encoding);
+            string text = editor.Text;
+            await TextFileWriter.SaveAsync(target, text, document.Format.Encoding);
+            if (document.Baseline is { } baseline)
+                baseline.MarkSaved(text); // o que está no disco agora é a referência do laranja
+            else if (untitled && text.Length <= Changes.ChangeBaseline.MaxChars)
+                document.Baseline = Changes.ChangeBaseline.ForNewFile(text);
             document.Path = target;
             DetectLanguage(document); // "Salvar como" .sql passa a realçar SQL
             document.FormatChanged = false;
