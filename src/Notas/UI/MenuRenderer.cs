@@ -9,6 +9,8 @@ namespace Notas.UI;
 /// </summary>
 internal sealed partial class MenuRenderer(int dpi) : ToolStripProfessionalRenderer(new MenuColors())
 {
+    private static readonly LineIcon SubmenuArrow = new("m9 18 6-6-6-6"); // chevron-right
+
     private int Px(int px) => (int)Math.Round(px * dpi / 96.0);
 
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
@@ -47,11 +49,26 @@ internal sealed partial class MenuRenderer(int dpi) : ToolStripProfessionalRende
             Rectangle text = e.TextRectangle;
             if (shortcut)
                 e.TextFont = UiFonts.Get(11, dpi);
-            // o rótulo vai até a coluna do atalho: andou para a direita e não pode cortar
-            e.TextRectangle = Rectangle.FromLTRB(shortcut ? text.Left : TextLeft(e.Item), text.Top, ShortcutRight(e.Item), text.Bottom);
+            // O layout centraliza a linha sem contar o Padding do item (texto ficava 5 px acima); o rótulo vai até
+            // a coluna do atalho: andou para a direita e não pode cortar.
+            int left = shortcut ? text.Left : TextLeft(e.Item);
+            e.TextRectangle = new Rectangle(left, (e.Item.Height - text.Height) / 2, ShortcutRight(e.Item) - left, text.Height);
         }
 
         base.OnRenderItemText(e);
+    }
+
+    /// <summary>Submenu: chevron-right do Lucide, centrado na altura e alinhado à coluna dos atalhos.</summary>
+    protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+    {
+        if (e.Item is not { Owner: ToolStripDropDownMenu } item)
+        {
+            base.OnRenderArrow(e);
+            return;
+        }
+
+        var box = new Rectangle(ShortcutRight(item) - Px(14), (item.Height - Px(14)) / 2, Px(14), Px(14));
+        SubmenuArrow.Draw(e.Graphics, box, item.Enabled ? StateColor(item, Palette.TextFaint) : Palette.TextFaint);
     }
 
     protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e) =>
