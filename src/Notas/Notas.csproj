@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Notas</RootNamespace>
+    <AssemblyName>Notas</AssemblyName>
+    <Version>0.1.0</Version>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <SatelliteResourceLanguages>pt-BR</SatelliteResourceLanguages>
+    <!-- Menos threads e memória ociosa: o editor não se beneficia de GC concorrente. -->
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Scintilla5.NET" Version="7.1.1" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <!--
+    Com Notas.dll E Scintilla.NET.dll pré-compilados (ReadyToRun) no mesmo single-file, alguns builds
+    caem na inicialização com fail-fast no coreclr (0xC0000602). Tirar qualquer um dos dois do R2R
+    resolve; o Scintilla.NET sai porque o nosso código é o que cresce. Investigado na Fase 0.
+  -->
+  <ItemGroup>
+    <PublishReadyToRunExclude Include="Scintilla.NET.dll" />
+  </ItemGroup>
+
+  <!--
+    Single-file: o Scintilla.NET só carrega Scintilla.dll/Lexilla.dll a partir do disco.
+    Embutimos as DLLs da arquitetura publicada no exe (NativeLibraryBootstrap extrai na 1ª execução)
+    e deixamos de copiar a pasta runtimes\ para o diretório de publicação.
+  -->
+  <ItemGroup Condition="'$(PublishSingleFile)' == 'true'">
+    <EmbeddedResource Include="$(PkgScintilla5_NET)\runtimes\$(RuntimeIdentifier)\native\*.dll"
+                      LogicalName="native.%(Filename)%(Extension)"
+                      Visible="false" />
+  </ItemGroup>
+
+  <Target Name="NotasDropNativeRuntimesFolder" AfterTargets="AssignTargetPaths" Condition="'$(PublishSingleFile)' == 'true'">
+    <ItemGroup>
+      <ContentWithTargetPath Remove="@(ContentWithTargetPath)"
+                             Condition="$([System.String]::Copy('%(ContentWithTargetPath.TargetPath)').StartsWith('runtimes'))" />
+    </ItemGroup>
+  </Target>
+
+  <!-- Com -r win-x64 o SDK também resolve as DLLs como "native assets" e as deixaria soltas ao lado do exe. -->
+  <Target Name="NotasDropLooseNativeDlls" AfterTargets="ComputeResolvedFilesToPublishList" Condition="'$(PublishSingleFile)' == 'true'">
+    <ItemGroup>
+      <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
+                             Condition="'%(ResolvedFileToPublish.AssetType)' == 'native' and '%(ResolvedFileToPublish.NuGetPackageId)' == 'Scintilla5.NET'" />
+    </ItemGroup>
+  </Target>
+
+</Project>
