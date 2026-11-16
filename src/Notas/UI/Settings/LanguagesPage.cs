@@ -21,7 +21,7 @@ internal sealed class LanguagesPage : SettingsPage
 
         var keywordCase = new Segmented("MAIÚSCULAS", "minúsculas", "Manter") { SelectedIndex = Math.Max(0, Array.IndexOf(Cases, sql.KeywordCase)) };
         keywordCase.SelectedIndexChanged += () => sql.KeywordCase = Cases[keywordCase.SelectedIndex];
-        yield return new SettingRow("Palavras-chave", "SELECT, FROM, COUNT... e tipos de dados.", keywordCase);
+        yield return new SettingRow("Palavras-chave", "SELECT, COUNT, INT…", keywordCase);
 
         yield return Toggle("Uma coluna por linha", "Colunas do SELECT alinhadas abaixo da primeira.",
             sql.OneColumnPerLine, v => sql.OneColumnPerLine = v);
