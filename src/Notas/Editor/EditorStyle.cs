@@ -24,6 +24,11 @@ internal static class EditorStyle
         numbers.SizeF = settings.FontSize * 12f / 13f; // números 12 px para código de 13 px, como no protótipo
         numbers.ForeColor = Palette.LineNumber;
         numbers.BackColor = Palette.Background;
+        Style brace = editor.Styles[Style.BraceLight];
+        brace.ForeColor = Palette.Accent;
+        brace.BackColor = Palette.Selection;
+        brace.Bold = true;
+        editor.Styles[Style.BraceBad].ForeColor = Palette.WindowCloseHover; // vermelho: parêntese sem par
         editor.Styles[Style.IndentGuide].ForeColor = Palette.IndentGuide;
         editor.Styles[Style.IndentGuide].BackColor = Palette.Background;
         SummaryStyle(editor.Styles[EditorFolding.SummaryStyle], Palette.TextMuted, Palette.FoldSummary, settings);
