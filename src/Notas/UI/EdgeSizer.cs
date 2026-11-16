@@ -14,14 +14,24 @@ internal sealed partial class EdgeSizer(Control panel, bool rightEdge)
 
     private bool Contains(Point p) => rightEdge ? p.X >= panel.Width - panel.Px(6) : p.X < panel.Px(6);
 
-    /// <summary>Mouse em cima da borda: cursor ↔ e linha azul (o painel segue com o hover normal).</summary>
-    public void MouseMove(MouseEventArgs e) => SetHot(e.Button == MouseButtons.None && Contains(e.Location));
+    /// <summary>Durante o arrasto (<see cref="Dragging"/>) o painel ignora o mouse; fora dele, segue com o hover normal.</summary>
+    public void MouseMove(MouseEventArgs e)
+    {
+        if (Dragging)
+            DragTo(panel.PointToScreen(e.Location).X);
+        else
+            SetHot(e.Button == MouseButtons.None && Contains(e.Location));
+    }
 
-    public void MouseLeave() => SetHot(false);
+    public void MouseLeave()
+    {
+        if (!Dragging)
+            SetHot(false);
+    }
 
     public void Paint(Graphics g)
     {
-        if (!Hot)
+        if (!Hot && !Dragging)
             return;
         using var accent = new SolidBrush(Palette.Accent);
         g.FillRectangle(accent, Line);
