@@ -6,12 +6,22 @@ namespace Notas.UI;
 
 internal sealed partial class MainForm
 {
-    private static SettingsPage[] CreateSettingsPages() => [new EditorPage()];
+    private static SettingsPage[] CreateSettingsPages() =>
+        [new GeneralPage(), new EditorPage(), new LanguagesPage(), new FilesPage(), new ShortcutsPage()];
 
     private void ShowSettings()
     {
+        _ = Shortcuts; // a página de atalhos lista o settings.json já completo
         using var dialog = new SettingsDialog(_settings, CreateSettingsPages());
-        if (dialog.ShowDialog(this) != DialogResult.OK)
+        DialogResult result = dialog.ShowDialog(this);
+        if (result == DialogResult.Retry)
+        {
+            SettingsStore.SaveSettings(_settings);
+            OpenFile(SettingsStore.SettingsPath); // "Editar no settings.json"
+            return;
+        }
+
+        if (result != DialogResult.OK)
             return;
 
         ApplySettings(dialog.Draft);
