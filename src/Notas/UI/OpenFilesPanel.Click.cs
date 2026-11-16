@@ -1,47 +1,52 @@
 using Notas.Editor;
+using Notas.Theme;
 
 namespace Notas.UI;
 
 internal sealed partial class OpenFilesPanel
 {
-    private ToolTip? _toolTip;
-    private int _toolTipIndex = -1;
-
-    /// <summary>Fechar pela aba (clique no X ou botão do meio): quem trata pergunta se quer salvar.</summary>
-    public event Action<OpenDocument>? CloseRequested;
-
-    public event Action? NewRequested;
-
+    /// <summary>Clique ativa; alfinete fixa ou desafixa; × e botão do meio fecham (fixada não fecha por eles); direito abre o menu.</summary>
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
+        if (EndDrag())
+            return;
         if (e.Button == MouseButtons.Left && NewButtonBounds.Contains(e.Location))
         {
             NewRequested?.Invoke();
             return;
         }
 
-        int index = IndexAt(e.Location);
-        if (index < 0)
+        if (SlotAt(e.Location) is not { } slot)
             return;
-
-        OpenDocument document = _documents.Documents[index];
-        bool onClose = CloseBounds(ItemBounds(index)).Contains(e.Location);
-        if (e.Button == MouseButtons.Middle || (e.Button == MouseButtons.Left && onClose))
+        OpenDocument document = slot.Document;
+        TabButton button = ButtonAt(slot, e.Location);
+        if (e.Button == MouseButtons.Left && button == TabButton.Pin)
+        {
+            HideTip();
+            TogglePin(document);
+        }
+        else if ((e.Button == MouseButtons.Left && button == TabButton.Close) || (e.Button == MouseButtons.Middle && !document.Pinned))
             CloseRequested?.Invoke(document);
         else if (e.Button == MouseButtons.Left)
             _documents.Activate(document);
+        else if (e.Button == MouseButtons.Right)
+            MenuRequested?.Invoke(document, PointToScreen(e.Location));
     }
 
-    /// <summary>Caminho completo ao passar o mouse sobre a aba.</summary>
-    protected override void OnMouseHover(EventArgs e)
+    protected override void OnMouseWheel(MouseEventArgs e)
     {
-        base.OnMouseHover(e);
-        if (_hoverIndex == _toolTipIndex || _hoverIndex >= _documents.Documents.Count)
-            return;
-
-        _toolTipIndex = _hoverIndex;
-        _toolTip ??= new ToolTip();
-        _toolTip.SetToolTip(this, _hoverIndex >= 0 ? _documents.Documents[_hoverIndex].Path ?? "Ainda não salvo" : null);
+        base.OnMouseWheel(e);
+        int step = e.Delta / 120 * this.Px(ItemStep);
+        if (PinnedArea.Contains(e.Location))
+            _pinnedScroll -= step;
+        else
+            _openScroll -= step;
+        ClampScroll();
+        Invalidate();
     }
+
+    private TabButton ButtonAt(TabSlot slot, Point p) =>
+        PinBounds(slot).Contains(p) ? TabButton.Pin
+        : !slot.Pinned && CloseBounds(slot.Bounds).Contains(p) ? TabButton.Close : TabButton.None;
 }
