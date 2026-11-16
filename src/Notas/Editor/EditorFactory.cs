@@ -13,7 +13,6 @@ internal static class EditorFactory
         {
             Dock = DockStyle.Fill,
             BorderStyle = ScintillaNET.BorderStyle.None,
-            Technology = settings.Renderer == "directwrite" ? Technology.DirectWrite : Technology.Default,
             Visible = false,
         };
 
@@ -40,6 +39,7 @@ internal static class EditorFactory
     /// <summary>Tudo que depende das configurações; chamado de novo quando elas mudam.</summary>
     public static void ApplySettings(Scintilla editor, EditorSettings settings)
     {
+        editor.Technology = settings.Renderer == "directwrite" ? Technology.DirectWrite : Technology.Default;
         EditorStyle.Apply(editor, settings);
         EditorMargins.Apply(editor, settings);
         editor.IndentWidth = settings.IndentSize;

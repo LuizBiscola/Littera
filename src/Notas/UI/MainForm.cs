@@ -53,7 +53,7 @@ internal sealed partial class MainForm : ChromeForm
         _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
         _panelButton.Toggled = settings.Window.ShowOpenFiles; // Visible é falso até a janela aparecer
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => FindPanel.Open(replace: false));
-        TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
+        TitleBar.AddAction(Icons.Settings, "Configurações (Ctrl+,)", ShowSettings);
 
         TitleBar.MenuRequested += ShowAppMenu;
         _documents.EditorCreated += editor => EditorDrop.Attach(editor, OpenFile);
