@@ -9,7 +9,7 @@ internal static class EditorFactory
 {
     public static Scintilla Create(EditorSettings settings)
     {
-        var editor = new Scintilla
+        var editor = new NotasEditor
         {
             Dock = DockStyle.Fill,
             BorderStyle = ScintillaNET.BorderStyle.None,
