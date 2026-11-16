@@ -8,6 +8,8 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 - Realce de SQL (T-SQL/ANSI), JSON, XML, C#, JavaScript, Python, Markdown e texto; escolha manual na barra de status.
 - Bloco atual (instrução SQL ou parágrafo) destacado, ocorrências da palavra do cursor e o parêntese que fecha o
   do cursor (em vermelho quando não tem par).
+- Linhas alteradas marcadas na calha: laranja = não salva, verde = salva. Clicar na barra mostra o que mudou em
+  relação ao arquivo salvo, com "Copiar original" e "Reverter"; Alt+F5 vai para a próxima alteração.
 - Paleta de comandos (Ctrl+Shift+P) com todos os comandos, troca de linguagem, encoding, quebra de linha e recentes.
 - Buscar e substituir com regex, maiúsculas e palavra inteira, em arquivo, bloco, seleção, abas abertas ou pasta.
 - Formatador de SQL configurável, múltiplos cursores, seleção em coluna (Alt+arrastar), zoom, quebra de linha.
@@ -32,6 +34,7 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 | Ctrl+Shift+[ | Recolher trecho do cursor | Ctrl+Shift+] | Expandir trecho do cursor |
 | Ctrl+Shift+P | Paleta de comandos | Ctrl+/ | Comentar ou descomentar |
 | Ctrl+D | Duplicar linha ou seleção | Alt+↑ / Alt+↓ | Mover linha |
+| Alt+F5 | Próxima alteração | Shift+Alt+F5 | Alteração anterior |
 
 Os atalhos podem ser trocados no `settings.json` (seção `shortcuts`); "Recolher tudo" e "Expandir tudo" ficam no menu
 e podem ganhar atalho lá (`recolherTudo`, `expandirTudo`). Teclas como `[` e `]` seguem o layout do teclado (ABNT2 ou americano).
