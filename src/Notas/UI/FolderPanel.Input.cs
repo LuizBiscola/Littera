@@ -30,6 +30,8 @@ internal sealed partial class FolderPanel
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
+        if (e.Button == MouseButtons.Right && RowAt(e.Location) is >= 0 and int row)
+            ShowRowMenu(_rows[row].Entry, e.Location);
         if (e.Button != MouseButtons.Left)
             return;
         if (HeaderButtons().FirstOrDefault(b => b.Bounds.Contains(e.Location)).Run is { } run)
