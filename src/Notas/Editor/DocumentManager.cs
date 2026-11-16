@@ -21,6 +21,9 @@ internal sealed partial class DocumentManager(Control host, EditorSettings setti
     /// <summary>O editor visível trocou: quem escuta eventos do editor precisa religar.</summary>
     public event Action? ActiveChanged;
 
+    /// <summary>Editor recém-criado (uma vez por documento): a janela acrescenta arrastar-e-soltar e destaques.</summary>
+    public event Action<Scintilla>? EditorCreated;
+
     public void Activate(OpenDocument document)
     {
         if (document == Active)
@@ -51,6 +54,7 @@ internal sealed partial class DocumentManager(Control host, EditorSettings setti
         editor.SavePointReached += (_, _) => Changed?.Invoke();
         host.Controls.Add(editor);
         document.Editor = editor;
+        EditorCreated?.Invoke(editor);
         return editor;
     }
 }
