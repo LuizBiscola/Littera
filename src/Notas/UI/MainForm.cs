@@ -36,7 +36,6 @@ internal sealed partial class MainForm : ChromeForm
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Changed += UpdateStatus;
         _documents.ActiveChanged += BindActiveEditor;
-        _documents.Loaded += document => EditorSetup.ApplySql(document.Editor!); // até existir o registro de linguagens
         _documents.LoadFailed += (document, error) =>
         {
             MessageBox.Show(this, error.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);

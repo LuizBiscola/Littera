@@ -1,4 +1,5 @@
 using Notas.Editor;
+using Notas.Editor.Languages;
 using Notas.Services;
 
 namespace Notas.UI;
@@ -21,6 +22,8 @@ internal sealed partial class MainForm
                 document.Format.LineEnding, e => e.Label(), e => _documents.SetLineEnding(document, e)),
             StatusSegment.Indent => Menus.Choices(this, "Indentação", IndentChoices,
                 _settings.Editor.UseTabs ? IndentChoices[2] : $"Espaços: {_settings.Editor.IndentSize}", c => c, ApplyIndent),
+            StatusSegment.Language => Menus.Choices(this, "Linguagem", LanguageRegistry.All,
+                document.Language, l => l.Name, l => _documents.SetLanguage(document, l)),
             _ => null,
         };
         menu?.Show(bounds.Location, ToolStripDropDownDirection.AboveRight);

@@ -35,6 +35,7 @@ internal sealed partial class MainForm
         _status.SetSegment(StatusSegment.Indent, _settings.Editor.UseTabs ? "Tabulação" : $"Espaços: {_settings.Editor.IndentSize}");
         _status.SetSegment(StatusSegment.Encoding, document.Format.Encoding.Label());
         _status.SetSegment(StatusSegment.LineEnding, document.Format.LineEnding.Label());
+        _status.SetSegment(StatusSegment.Language, document.Language.Name);
         _status.SetBlock(document.IsLoading ? "Carregando…" : null);
     }
 
