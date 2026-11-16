@@ -13,6 +13,14 @@ internal sealed partial class MainForm
         ("salvar", "Salvar", "Ctrl+S", () => _ = SaveActiveAsync(askPath: false)),
         ("salvarComo", "Salvar como…", "Ctrl+Shift+S", () => _ = SaveActiveAsync(askPath: true)),
         ("fecharAba", "Fechar aba", "Ctrl+W", CloseActive),
+        ("fecharOutras", "Fechar outras abas", "", () => OnActive(d => _ = CloseOthersAsync(d))),
+        ("fecharSalvas", "Fechar abas salvas", "", CloseSavedTabs),
+        ("fixarAba", "Fixar ou desafixar aba", "Ctrl+Alt+P", () => OnActive(_openFiles.TogglePin)),
+        ("copiarCaminho", "Copiar caminho do arquivo", "Ctrl+Alt+C", () => OnActive(CopyPath)),
+        ("mostrarNaPasta", "Mostrar arquivo na pasta", "", () => OnActive(RevealInFolder)),
+        ("renomearArquivo", "Renomear arquivo…", "F2", () => OnActive(RenameTab)),
+        ("duplicarAba", "Duplicar em nova aba", "", () => OnActive(DuplicateTab)),
+        ("descartarAlteracoes", "Descartar alterações", "", () => OnActive(DiscardChanges)),
         ("proximaAba", "Próxima aba", "Ctrl+Tab", () => CycleTabs(+1)),
         ("abaAnterior", "Aba anterior", "Ctrl+Shift+Tab", () => CycleTabs(-1)),
         ("painelAbas", "Mostrar ou ocultar o painel de abas", "Ctrl+B", ToggleOpenFiles),
@@ -43,12 +51,6 @@ internal sealed partial class MainForm
         ("quebraDeLinha", "Quebra de linha automática", "Alt+Z", ToggleWordWrap),
         ("numerosDeLinha", "Mostrar ou ocultar números de linha", "Ctrl+Shift+L", ToggleLineNumbers),
     ];
-
-    private void CloseActive()
-    {
-        if (_documents.Active is { } active)
-            _ = RequestCloseAsync(active);
-    }
 
     /// <summary>Texto do atalho de um comando para mostrar no menu (o primeiro, se houver vários).</summary>
     private string? ShortcutText(string command) =>

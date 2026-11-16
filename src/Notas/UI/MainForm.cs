@@ -61,6 +61,9 @@ internal sealed partial class MainForm : ChromeForm
         _openFiles = new OpenFilesPanel(_documents) { Visible = settings.Window.ShowOpenFiles };
         _openFiles.NewRequested += () => _documents.New();
         _openFiles.CloseRequested += document => _ = RequestCloseAsync(document);
+        _openFiles.MenuRequested += ShowTabMenu;
+        _openFiles.RenameRequested += RenameFile;
+        _openFiles.ShortcutText = ShortcutText;
         Controls.Add(_openFiles);
         Controls.SetChildIndex(_openFiles, 1); // encaixa depois da barra de status: ela ocupa a largura toda
         StartupMetrics.Mark("f_panels");
