@@ -78,7 +78,7 @@ internal sealed class MainForm : ChromeForm
             StartupMetrics.Write("f_lexer_ms", stopwatch.Elapsed.TotalMilliseconds);
             Text = Path.GetFileName(path) + " — Notas";
 
-            await WaitForIdleAsync();
+            await UiIdle.NextAsync();
             StartupMetrics.Write("load_ms", stopwatch.Elapsed.TotalMilliseconds);
             if (stalls is not null)
                 StartupMetrics.Write("load_max_ui_stall_ms", stalls.MaxGapMs);
@@ -110,18 +110,5 @@ internal sealed class MainForm : ChromeForm
         }
 
         return loader.ConvertToDocument();
-    }
-
-    private static Task WaitForIdleAsync()
-    {
-        var done = new TaskCompletionSource();
-        void OnIdle(object? sender, EventArgs e)
-        {
-            Application.Idle -= OnIdle;
-            done.SetResult();
-        }
-
-        Application.Idle += OnIdle;
-        return done.Task;
     }
 }
