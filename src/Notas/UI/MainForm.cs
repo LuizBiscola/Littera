@@ -4,40 +4,23 @@ using Notas.Services;
 using Notas.Settings;
 using Notas.Theme;
 using Notas.UI.Chrome;
-using ScintillaNET;
 
 namespace Notas.UI;
 
 internal sealed class MainForm : ChromeForm
 {
-    private readonly Scintilla _editor;
     private readonly DocumentManager _documents;
-    private readonly string? _initialFile;
 
     public MainForm(string[] args)
     {
-        _initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
-
-        // GDI é o padrão: DirectWrite custou +90 ms e +40 MB na Fase 0.
-        // Chave temporária até existir a opção no settings.json (Fase 1).
-        Technology technology = Environment.GetEnvironmentVariable("NOTAS_TECH") == "directwrite"
-            ? Technology.DirectWrite
-            : Technology.Default;
+        string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
         Text = "Notas";
         AutoScaleMode = AutoScaleMode.Dpi;
         AutoScaleDimensions = new SizeF(96f, 96f);
         ClientSize = new Size(1200, 760);
         StartPosition = FormStartPosition.CenterScreen;
-        BackColor = Color.White;
-
-        StartupMetrics.Mark("t_before_editor");
-        _editor = new Scintilla { Dock = DockStyle.Fill };
-        StartupMetrics.Mark("t_editor_new");
-        EditorSetup.ConfigureView(_editor, technology);
-        EditorSetup.ApplySql(_editor);
-        StartupMetrics.Mark("t_editor_setup");
-        Controls.Add(_editor);
+        BackColor = Palette.Background;
 
         var editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
         Controls.Add(editorHost);
@@ -54,10 +37,10 @@ internal sealed class MainForm : ChromeForm
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
 
-        if (_initialFile is null)
+        if (initialFile is null)
             _documents.New();
         else
-            OpenMeasured(_initialFile);
+            OpenMeasured(initialFile);
     }
 
     protected override void OnShown(EventArgs e)
