@@ -37,6 +37,8 @@ $rows = @()
 for ($i = 1; $i -le $Runs; $i++) {
     $metrics = [System.IO.Path]::GetTempFileName()
     $env:NOTAS_METRICS = $metrics
+    # Pasta de dados limpa: a medição não depende (nem altera) a sessão real do usuário.
+    if (-not $Env.ContainsKey('NOTAS_HOME')) { $env:NOTAS_HOME = Join-Path ([System.IO.Path]::GetTempPath()) "notas-medicao-$i" }
     foreach ($key in $Env.Keys) { Set-Item "env:$key" $Env[$key] }
 
     try {
@@ -79,6 +81,7 @@ for ($i = 1; $i -le $Runs; $i++) {
     finally {
         Remove-Item $metrics -ErrorAction SilentlyContinue
         Remove-Item env:NOTAS_METRICS -ErrorAction SilentlyContinue
+        if ($env:NOTAS_HOME -like '*notas-medicao-*') { Remove-Item $env:NOTAS_HOME -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item env:NOTAS_HOME }
         foreach ($key in $Env.Keys) { Remove-Item "env:$key" -ErrorAction SilentlyContinue }
     }
 }
