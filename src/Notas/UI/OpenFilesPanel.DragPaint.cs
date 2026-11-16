@@ -29,7 +29,7 @@ internal sealed partial class OpenFilesPanel
         Shapes.FillRounded(g, Palette.Border, ghost, this.Px(6));
         Rectangle inner = Rectangle.Inflate(ghost, -1, -1);
         Shapes.FillRounded(g, Palette.Background, inner, this.Px(5));
-        Icons.Draw(g, Icons.Document, new Rectangle(ghost.X + this.Px(10), ghost.Y + this.Px(9), this.Px(15), this.Px(15)), Palette.IconActive, 13, dpi);
+        TabIcon(_drag).Draw(g, new Rectangle(ghost.X + this.Px(10), ghost.Y + this.Px(9), this.Px(15), this.Px(15)), Palette.IconActive);
         TextRenderer.DrawText(g, _drag.Title, UiFonts.Get(13, dpi),
             Rectangle.FromLTRB(ghost.X + this.Px(33), ghost.Y, ghost.Right - this.Px(10), ghost.Bottom), Palette.Text, LeftText);
         g.Restore(state);

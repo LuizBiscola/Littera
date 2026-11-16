@@ -26,6 +26,8 @@ internal static class Palette
     public static readonly Color CloseInactive = Hex(0xB4B8BF);
     public static readonly Color Dirty = Hex(0xE0892B);
     public static readonly Color FolderIcon = Hex(0x8C939D);
+    public static readonly Color MissingIcon = Hex(0xD08A8A);
+    public static readonly Color MissingText = Hex(0xB06464);
     public static readonly Color OpenInTab = Hex(0xC3C7CD);
     public static readonly Color WindowCloseHover = Hex(0xC42B1C);
 

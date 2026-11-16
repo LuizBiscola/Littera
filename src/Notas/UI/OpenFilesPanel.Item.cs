@@ -28,7 +28,7 @@ internal sealed partial class OpenFilesPanel
         PaintFlash(g, document, item);
 
         var icon = new Rectangle(item.X + this.Px(10), item.Y + this.Px(9), this.Px(15), this.Px(15));
-        Icons.Draw(g, Icons.Document, icon, active ? Palette.IconActive : Palette.IconInactive, 13, dpi);
+        TabIcon(document).Draw(g, icon, document.Missing ? Palette.MissingIcon : active ? Palette.IconActive : Palette.IconInactive);
 
         int left = PaintButtons(g, slot, hover, dpi);
         if (document.IsDirty)
@@ -40,8 +40,12 @@ internal sealed partial class OpenFilesPanel
             left -= this.Px(19);
         }
 
-        Color color = document.IsLoading || document.Missing ? Palette.TextFaint : active ? Palette.Text : Palette.TextSecondary;
+        Color color = document.Missing ? Palette.MissingText : document.IsLoading ? Palette.TextFaint : active ? Palette.Text : Palette.TextSecondary;
         Font font = UiFonts.Get(13, dpi, document.Missing ? FontStyle.Strikeout : FontStyle.Regular);
         TextRenderer.DrawText(g, document.Title, font, Rectangle.FromLTRB(item.X + this.Px(33), item.Y, left - this.Px(4), item.Bottom), color, LeftText);
     }
+
+    /// <summary>Estados têm prioridade sobre a extensão: arquivo sumido, depois "Sem título".</summary>
+    private static LineIcon TabIcon(OpenDocument document) =>
+        document.Missing ? FileIcons.Missing : document.Path is null ? FileIcons.Untitled : FileKinds.For(document.Path);
 }
