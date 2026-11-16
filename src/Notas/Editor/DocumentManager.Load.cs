@@ -25,6 +25,7 @@ internal sealed partial class DocumentManager
             document.Format = new TextFormat(reader.Encoding, lineEnding);
             editor.EolMode = lineEnding.ToScintilla();
             document.IsLoaded = true;
+            RestorePosition(document, editor);
             Loaded?.Invoke(document);
         }
         catch (OperationCanceledException)
@@ -41,5 +42,17 @@ internal sealed partial class DocumentManager
             cancellation.Dispose();
             Changed?.Invoke();
         }
+    }
+
+    /// <summary>Volta cursor, seleção e rolagem salvos na sessão (limitados ao tamanho atual do arquivo).</summary>
+    private static void RestorePosition(OpenDocument document, Scintilla editor)
+    {
+        if (document.Restore is not { } saved)
+            return;
+
+        int length = editor.TextLength;
+        editor.SetSelection(Math.Clamp(saved.CaretPosition, 0, length), Math.Clamp(saved.AnchorPosition, 0, length));
+        editor.FirstVisibleLine = Math.Max(0, saved.FirstVisibleLine);
+        document.Restore = null;
     }
 }

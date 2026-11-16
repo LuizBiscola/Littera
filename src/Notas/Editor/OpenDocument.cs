@@ -34,6 +34,9 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
     public bool FormatChanged { get; set; }
 
     public bool IsDirty => (Editor?.Modified ?? false) || FormatChanged;
+
+    /// <summary>Cursor e rolagem da sessão anterior, aplicados quando o arquivo terminar de carregar.</summary>
+    public Settings.SessionDocument? Restore { get; set; }
 }
 
 internal static class LineEndingExtensions
