@@ -1,5 +1,6 @@
 using Notas.Editor;
 using Notas.Services;
+using Notas.Settings;
 using Notas.UI;
 
 namespace Notas;
@@ -18,7 +19,9 @@ internal static class Program
         StartupMetrics.Mark("t_bootstrap");
 
         ApplicationConfiguration.Initialize();
-        var form = new MainForm(args);
+        AppSettings settings = SettingsStore.LoadSettings();
+        StartupMetrics.Mark("t_settings");
+        var form = new MainForm(settings, args);
         StartupMetrics.Mark("t_form");
         Application.Run(form);
     }

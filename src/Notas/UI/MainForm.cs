@@ -7,12 +7,15 @@ using Notas.UI.Chrome;
 
 namespace Notas.UI;
 
-internal sealed class MainForm : ChromeForm
+internal sealed partial class MainForm : ChromeForm
 {
+    private readonly AppSettings _settings;
     private readonly DocumentManager _documents;
+    private readonly StatusBar _status = new();
 
-    public MainForm(string[] args)
+    public MainForm(AppSettings settings, string[] args)
     {
+        _settings = settings;
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
         Text = "Notas";
@@ -25,7 +28,8 @@ internal sealed class MainForm : ChromeForm
 
         var editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
         Controls.Add(editorHost);
-        _documents = new DocumentManager(editorHost, new EditorSettings());
+        Controls.Add(_status);
+        _documents = new DocumentManager(editorHost, settings.Editor);
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Loaded += document => EditorSetup.ApplySql(document.Editor!); // até existir o registro de linguagens
         _documents.LoadFailed += (document, error) =>
