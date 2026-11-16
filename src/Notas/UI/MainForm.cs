@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Text;
 using Notas.Editor;
 using Notas.Services;
 using Notas.Theme;
@@ -66,16 +65,9 @@ internal sealed class MainForm : ChromeForm
 
         try
         {
-            long length = new FileInfo(path).Length;
-            ILoader loader = _editor.CreateLoader((int)Math.Min(length, int.MaxValue));
-            Document document = await Task.Run(() => ReadInto(loader, path));
-            StartupMetrics.Write("f_read_ms", stopwatch.Elapsed.TotalMilliseconds);
-
-            _editor.Document = document;
-            StartupMetrics.Write("f_setdoc_ms", stopwatch.Elapsed.TotalMilliseconds);
-            _editor.ReleaseDocument(document); // O controle passa a ser o único dono.
+            TextFileReader reader = await TextFileReader.OpenAsync(path);
+            await DocumentLoader.LoadAsync(_editor, reader.Chunks, CancellationToken.None);
             EditorSetup.ApplySql(_editor);
-            StartupMetrics.Write("f_lexer_ms", stopwatch.Elapsed.TotalMilliseconds);
             Text = Path.GetFileName(path) + " — Notas";
 
             await UiIdle.NextAsync();
@@ -87,28 +79,5 @@ internal sealed class MainForm : ChromeForm
         {
             MessageBox.Show(this, ex.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-    }
-
-    private static Document ReadInto(ILoader loader, string path)
-    {
-        var options = new FileStreamOptions { BufferSize = 1 << 16, Options = FileOptions.SequentialScan };
-        using var reader = new StreamReader(path, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, options);
-
-        // Scintilla.NET 7.1.1 ignora o parâmetro length de AddData e envia o array inteiro
-        // (o resto vira NUL no documento). Por isso: blocos sempre cheios (ReadBlock) e,
-        // no último bloco parcial, um array do tamanho exato.
-        char[] buffer = new char[1 << 16];
-        int read;
-        while ((read = reader.ReadBlock(buffer, 0, buffer.Length)) > 0)
-        {
-            char[] chunk = read == buffer.Length ? buffer : buffer[..read];
-            if (!loader.AddData(chunk, read))
-            {
-                loader.Release();
-                throw new IOException("Memória insuficiente para carregar o arquivo.");
-            }
-        }
-
-        return loader.ConvertToDocument();
     }
 }
