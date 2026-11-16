@@ -52,6 +52,12 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
 
     /// <summary>Versões de quando abriu e do disco, para marcar linhas alteradas; null = arquivo grande demais.</summary>
     public Changes.ChangeBaseline? Baseline { get; set; }
+
+    /// <summary>Aba fixada: fica na seção Fixadas, não fecha com Ctrl+W nem com o botão do meio e sempre volta ao reabrir.</summary>
+    public bool Pinned { get; set; }
+
+    /// <summary>O arquivo foi apagado ou movido fora do Notas (nome riscado na aba).</summary>
+    public bool Missing { get; set; }
 }
 
 internal static class LineEndingExtensions
