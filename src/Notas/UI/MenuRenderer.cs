@@ -33,15 +33,29 @@ internal sealed partial class MenuRenderer(int dpi) : ToolStripProfessionalRende
     protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
     {
         if (e.Item.Selected && e.Item.Enabled)
-            Shapes.FillRounded(e.Graphics, Palette.AccentSoft, new Rectangle(Px(2), 0, e.Item.Width - Px(4), e.Item.Height), Px(6));
+            Shapes.FillRounded(e.Graphics, Palette.AccentSoft, Highlight(e.Item), Px(5));
     }
 
+    /// <summary>Rótulo e atalho (11 px, cinza) reposicionados nas medidas do protótipo.</summary>
     protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
     {
         bool shortcut = e.Item is ToolStripMenuItem item && e.Text == item.ShortcutKeyDisplayString;
-        e.TextColor = !e.Item.Enabled || shortcut ? Palette.TextFaint : StateColor(e.Item, Palette.Text);
+        if (e.Item is ToolStripMenuItem)
+            e.TextColor = !e.Item.Enabled || shortcut ? Palette.TextFaint : StateColor(e.Item, Palette.Text);
+        if (e.Item is ToolStripMenuItem && e.Item.Owner is ToolStripDropDownMenu) // título (ToolStripLabel) já vem alinhado ao texto
+        {
+            Rectangle text = e.TextRectangle;
+            if (shortcut)
+                e.TextFont = UiFonts.Get(11, dpi);
+            // o rótulo vai até a coluna do atalho: andou para a direita e não pode cortar
+            e.TextRectangle = Rectangle.FromLTRB(shortcut ? text.Left : TextLeft(e.Item), text.Top, ShortcutRight(e.Item), text.Bottom);
+        }
+
         base.OnRenderItemText(e);
     }
+
+    protected override void OnRenderItemCheck(ToolStripItemImageRenderEventArgs e) =>
+        Icons.Draw(e.Graphics, Icons.CheckMark, IconBox(e.Item), Palette.Accent, 11, dpi);
 
     /// <summary>Ícone guardado em Tag (glifo da Segoe Fluent): cinza, azul em destaque, vermelho em ação perigosa.</summary>
     protected override void OnRenderItemImage(ToolStripItemImageRenderEventArgs e)
@@ -53,6 +67,6 @@ internal sealed partial class MenuRenderer(int dpi) : ToolStripProfessionalRende
         }
 
         Color color = e.Item.Enabled ? StateColor(e.Item, Palette.TextMuted) : Palette.TextFaint;
-        Icons.Draw(e.Graphics, glyph, e.ImageRectangle, color, 12, dpi); // 14 px no protótipo
+        Icons.Draw(e.Graphics, glyph, IconBox(e.Item), color, 12, dpi); // 14 px no protótipo
     }
 }
