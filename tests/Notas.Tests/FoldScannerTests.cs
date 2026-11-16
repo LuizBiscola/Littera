@@ -31,6 +31,14 @@ public class FoldScannerTests
     }
 
     [Fact]
+    public void Begin_e_case_recolhem_ate_o_end_mas_begin_tran_nao()
+    {
+        string text = "BEGIN TRAN;\nIF @x = 1\nBEGIN\n  SELECT CASE\n    WHEN a THEN 1\n  END;\nEND\nCOMMIT;";
+        List<FoldRegion> regions = FoldScanner.Sql(text, []);
+        Assert.Equal([new(2, 6), new(3, 5)], regions.OrderBy(r => r.Header));
+    }
+
+    [Fact]
     public void Niveis_marcam_cabecalhos_e_aninham_trechos()
     {
         int[] levels = FoldLevels.From(6, [new FoldRegion(0, 4), new FoldRegion(1, 3)]);

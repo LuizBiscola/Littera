@@ -12,11 +12,13 @@ internal static partial class FoldSummary
         return $"{count} │ {detail ?? FirstLine(hidden)}{Closing(hidden)}";
     }
 
-    /// <summary>A última linha escondida só fecha o trecho (")", ");", ") AS t"): aparece no fim do resumo.</summary>
+    /// <summary>A última linha escondida só fecha o trecho (")", ") AS t", "END", "END TRY"): aparece no fim do resumo.</summary>
     private static string Closing(IReadOnlyList<string> hidden)
     {
         string last = hidden[^1].Trim();
-        return last.StartsWith(')') && last.Length <= 16 ? "  " + last : "";
+        bool closes = last.StartsWith(')') || last.Equals("END", StringComparison.OrdinalIgnoreCase)
+            || last.StartsWith("END ", StringComparison.OrdinalIgnoreCase) || last.StartsWith("END;", StringComparison.OrdinalIgnoreCase);
+        return closes && last.Length <= 16 ? "  " + last : "";
     }
 
     private static string FirstLine(IReadOnlyList<string> hidden)
