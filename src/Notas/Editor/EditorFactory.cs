@@ -28,6 +28,7 @@ internal static class EditorFactory
         editor.BackspaceUnindents = true;
 
         ApplySettings(editor, settings);
+        AutoIndent.Attach(editor);
         BlockHighlighter.Setup(editor);
         OccurrenceHighlighter.Setup(editor);
         Search.FindSession.Setup(editor);
@@ -45,6 +46,7 @@ internal static class EditorFactory
         editor.IndentWidth = settings.IndentSize;
         editor.TabWidth = settings.IndentSize;
         editor.UseTabs = settings.UseTabs;
+        editor.IndentationGuides = settings.ShowIndentGuides ? IndentView.LookBoth : IndentView.None;
         editor.WrapMode = settings.WordWrap ? WrapMode.Word : WrapMode.None;
     }
 }
