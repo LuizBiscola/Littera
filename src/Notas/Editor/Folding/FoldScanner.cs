@@ -10,7 +10,7 @@ internal static partial class FoldScanner
 {
     public static List<FoldRegion> Sql(string text, List<LineBlock> statements)
     {
-        Dictionary<int, int> parens = Parentheses(text);
+        Dictionary<int, int> parens = Brackets(text);
         var regions = parens.Select(p => new FoldRegion(p.Key, p.Value)).ToList();
         foreach (LineBlock statement in statements)
         {
