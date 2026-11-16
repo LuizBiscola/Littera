@@ -33,6 +33,8 @@ internal sealed partial class EditorPage : SettingsPage
             yield return row;
     }
 
+    public override void Reset(AppSettings draft) => SettingsCopy.Into(new EditorSettings(), draft.Editor);
+
     private static ComboBox FontPicker(EditorSettings editor)
     {
         var picker = new ComboBox

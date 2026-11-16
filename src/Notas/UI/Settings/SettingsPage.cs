@@ -15,6 +15,9 @@ internal abstract class SettingsPage
 
     public abstract IEnumerable<Control> Build(AppSettings draft);
 
+    /// <summary>"Restaurar padrões": volta os valores desta página aos de fábrica.</summary>
+    public abstract void Reset(AppSettings draft);
+
     /// <summary>Título de seção em versalete ("TEXTO", "DESTAQUES").</summary>
     protected static Control Section(string title) => new SectionLabel(title);
 
