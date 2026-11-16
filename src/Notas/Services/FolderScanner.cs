@@ -29,7 +29,7 @@ internal static class FolderScanner
             // Pasta sumiu ou sem permissão: mostra vazia.
         }
 
-        return [.. entries.OrderByDescending(e => e.IsDirectory).ThenBy(e => e.Name, StringComparer.CurrentCultureIgnoreCase)];
+        return [.. entries.OrderByDescending(e => e.IsDirectory).ThenBy(e => e.Name, StringComparer.OrdinalIgnoreCase)];
     }
 
     /// <summary>Arquivos de toda a árvore cujo nome contém o filtro (para no limite, pastas enormes não travam).</summary>
@@ -43,12 +43,12 @@ internal static class FolderScanner
             {
                 if (entry.IsDirectory)
                     pending.Push(entry.Path);
-                else if (entry.Name.Contains(filter, StringComparison.CurrentCultureIgnoreCase) && found.Count < limit)
+                else if (entry.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) && found.Count < limit)
                     found.Add(entry);
             }
         }
 
-        return [.. found.OrderBy(e => e.Path, StringComparer.CurrentCultureIgnoreCase)];
+        return [.. found.OrderBy(e => e.Path, StringComparer.OrdinalIgnoreCase)];
     }
 
     /// <summary>Arquivos e subpastas da árvore toda para o rodapé; Partial quando parou no limite.</summary>
