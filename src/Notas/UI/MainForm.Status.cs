@@ -17,13 +17,16 @@ internal sealed partial class MainForm
         _boundEditor = _documents.Active?.Editor;
         if (_boundEditor is not null)
             _boundEditor.UpdateUI += OnEditorUpdateUI;
+        _blocks = null;
         UpdateStatus();
     }
 
     private void OnEditorUpdateUI(object? sender, UpdateUIEventArgs e)
     {
-        if ((e.Change & (UpdateChange.Selection | UpdateChange.Content)) != 0)
-            UpdatePosition();
+        if ((e.Change & (UpdateChange.Selection | UpdateChange.Content)) == 0)
+            return;
+        UpdatePosition();
+        ScheduleHighlights(textChanged: (e.Change & UpdateChange.Content) != 0);
     }
 
     private void UpdateStatus()
@@ -36,7 +39,10 @@ internal sealed partial class MainForm
         _status.SetSegment(StatusSegment.Encoding, document.Format.Encoding.Label());
         _status.SetSegment(StatusSegment.LineEnding, document.Format.LineEnding.Label());
         _status.SetSegment(StatusSegment.Language, document.Language.Name);
-        _status.SetBlock(document.IsLoading ? "Carregando…" : null);
+        if (document.IsLoading)
+            _status.SetBlock("Carregando…");
+        else
+            ScheduleHighlights(textChanged: false);
     }
 
     private void UpdatePosition()

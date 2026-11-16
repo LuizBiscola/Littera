@@ -1,3 +1,4 @@
+using Notas.Editor.Highlights;
 using Notas.Settings;
 using ScintillaNET;
 
@@ -28,6 +29,8 @@ internal static class EditorFactory
         editor.BackspaceUnindents = true;
 
         ApplySettings(editor, settings);
+        BlockHighlighter.Setup(editor);
+        OccurrenceHighlighter.Setup(editor);
         editor.Insert += (_, _) => EditorMargins.UpdateNumberWidth(editor, settings.ShowLineNumbers);
         editor.Delete += (_, _) => EditorMargins.UpdateNumberWidth(editor, settings.ShowLineNumbers);
         return editor;
