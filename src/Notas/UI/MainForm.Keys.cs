@@ -1,3 +1,5 @@
+using Notas.Services;
+
 namespace Notas.UI;
 
 internal sealed partial class MainForm
@@ -36,7 +38,15 @@ internal sealed partial class MainForm
 
         if (Shortcuts.TryGetValue(keyData, out Action? action))
         {
-            action();
+            try
+            {
+                action();
+            }
+            catch (Exception ex)
+            {
+                ErrorReport.Show(ex, this); // exceções aqui seriam engolidas pelo laço de mensagens
+            }
+
             return true;
         }
 
