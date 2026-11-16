@@ -12,6 +12,8 @@ internal sealed partial class MainForm : ChromeForm
     private readonly AppSettings _settings;
     private readonly DocumentManager _documents;
     private readonly StatusBar _status = new();
+    private readonly OpenFilesPanel _openFiles;
+    private readonly ChromeButton _panelButton;
 
     public MainForm(AppSettings settings, string[] args)
     {
@@ -40,7 +42,14 @@ internal sealed partial class MainForm : ChromeForm
             _documents.Close(document);
         };
 
-        TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", () => { }).Toggled = true;
+        _openFiles = new OpenFilesPanel(_documents) { Visible = settings.Window.ShowOpenFiles };
+        _openFiles.NewRequested += () => _documents.New();
+        _openFiles.CloseRequested += _documents.Close;
+        Controls.Add(_openFiles);
+        Controls.SetChildIndex(_openFiles, 1); // encaixa depois da barra de status: ela ocupa a largura toda
+
+        _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
+        _panelButton.Toggled = _openFiles.Visible;
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
 
@@ -48,6 +57,14 @@ internal sealed partial class MainForm : ChromeForm
             _documents.New();
         else
             OpenMeasured(initialFile);
+    }
+
+    private void ToggleOpenFiles()
+    {
+        _openFiles.Visible = !_openFiles.Visible;
+        _panelButton.Toggled = _openFiles.Visible;
+        _settings.Window.ShowOpenFiles = _openFiles.Visible;
+        TitleBar.Invalidate();
     }
 
     protected override void OnShown(EventArgs e)
