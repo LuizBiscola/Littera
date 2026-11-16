@@ -25,6 +25,18 @@ internal sealed class SettingsHeader : Control
         Invalidate();
     }
 
+    /// <summary>Fora do X deixa o teste passar para o diálogo, que responde "barra de título" (arrastar).</summary>
+    protected override void WndProc(ref Message m)
+    {
+        if (m.Msg == Chrome.Win32.WM_NCHITTEST && !CloseBounds.Contains(PointToClient(Chrome.Win32.PointFromLParam(m.LParam))))
+        {
+            m.Result = Chrome.Win32.HTTRANSPARENT;
+            return;
+        }
+
+        base.WndProc(ref m);
+    }
+
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);
