@@ -53,6 +53,11 @@ internal sealed class MainForm : ChromeForm
         TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", () => { }).Toggled = true;
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
+
+        if (_initialFile is null)
+            _documents.New();
+        else
+            OpenMeasured(_initialFile);
     }
 
     protected override void OnShown(EventArgs e)
@@ -60,9 +65,6 @@ internal sealed class MainForm : ChromeForm
         base.OnShown(e);
         StartupMetrics.Mark("t_shown");
         Application.Idle += OnFirstIdle;
-
-        if (_initialFile is not null)
-            _ = OpenAsync(_initialFile);
     }
 
     private void OnFirstIdle(object? sender, EventArgs e)
@@ -71,26 +73,20 @@ internal sealed class MainForm : ChromeForm
         StartupMetrics.Write("ready_ms", StartupMetrics.SinceProcessStart());
     }
 
-    private async Task OpenAsync(string path)
+    private void OpenMeasured(string path)
     {
         var stopwatch = Stopwatch.StartNew();
-        using UiStallMonitor? stalls = StartupMetrics.Enabled ? new UiStallMonitor() : null;
-
-        try
+        UiStallMonitor? stalls = StartupMetrics.Enabled ? new UiStallMonitor() : null;
+        _documents.Loaded += async _ =>
         {
-            TextFileReader reader = await TextFileReader.OpenAsync(path);
-            await DocumentLoader.LoadAsync(_editor, reader.Chunks, CancellationToken.None);
-            EditorSetup.ApplySql(_editor);
-            Text = Path.GetFileName(path) + " — Notas";
-
+            if (stalls is null)
+                return;
             await UiIdle.NextAsync();
             StartupMetrics.Write("load_ms", stopwatch.Elapsed.TotalMilliseconds);
-            if (stalls is not null)
-                StartupMetrics.Write("load_max_ui_stall_ms", stalls.MaxGapMs);
-        }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
-        {
-            MessageBox.Show(this, ex.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
+            StartupMetrics.Write("load_max_ui_stall_ms", stalls.MaxGapMs);
+            stalls.Dispose();
+            stalls = null;
+        };
+        _documents.Open(path);
     }
 }
