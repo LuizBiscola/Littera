@@ -37,7 +37,7 @@ internal sealed partial class MainForm : ChromeForm
         _status.SegmentClicked += OnStatusSegmentClicked;
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
         _draftTimer.Tick += (_, _) => SaveDrafts(AutosaveLimit);
-        _documents = new DocumentManager(_editorHost, settings.Editor);
+        _documents = new DocumentManager(_editorHost, settings.Editor) { NewFileFormat = NewFileFormat(settings.Files) };
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Changed += UpdateStatus;
         _documents.ActiveChanged += BindActiveEditor;

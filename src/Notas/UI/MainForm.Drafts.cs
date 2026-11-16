@@ -45,4 +45,8 @@ internal sealed partial class MainForm
             }
         }
     }
+
+    private static TextFormat NewFileFormat(Notas.Settings.FilesSettings files) => new(
+        Enum.TryParse(files.NewFileEncoding, out TextEncodingKind encoding) ? encoding : TextEncodingKind.Utf8,
+        Enum.TryParse(files.NewFileLineEnding, out LineEnding ending) ? ending : LineEnding.CrLf);
 }

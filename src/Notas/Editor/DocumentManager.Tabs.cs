@@ -2,12 +2,16 @@ namespace Notas.Editor;
 
 internal sealed partial class DocumentManager
 {
+    /// <summary>Encoding e quebra de linha de arquivos novos (configurações → Arquivos).</summary>
+    public Services.TextFormat NewFileFormat { get; set; } = Services.TextFormat.Default;
+
     public OpenDocument New()
     {
         int number = _documents.Where(d => d.Path is null).Select(d => d.UntitledNumber).DefaultIfEmpty(0).Max() + 1;
-        var document = new OpenDocument(null, number) { IsLoaded = true };
+        var document = new OpenDocument(null, number) { IsLoaded = true, Format = NewFileFormat };
         _documents.Add(document);
         Activate(document);
+        document.Editor!.EolMode = NewFileFormat.LineEnding.ToScintilla();
         return document;
     }
 
