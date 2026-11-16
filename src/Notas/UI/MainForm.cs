@@ -16,9 +16,10 @@ internal sealed class MainForm : ChromeForm
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
         Text = "Notas";
-        AutoScaleMode = AutoScaleMode.Dpi;
-        AutoScaleDimensions = new SizeF(96f, 96f);
-        ClientSize = new Size(1200, 760);
+        // Sem auto-escala do WinForms: cada controle já mede em Px() pelo DPI do monitor.
+        AutoScaleMode = AutoScaleMode.None;
+        ClientSize = new Size(this.Px(1200), this.Px(760));
+        MinimumSize = new Size(this.Px(560), this.Px(360));
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Palette.Background;
 
