@@ -48,6 +48,30 @@ internal static class BlockScanner
         return blocks;
     }
 
+    /// <summary>Parágrafos de texto: linhas seguidas que não estão em branco.</summary>
+    public static List<LineBlock> Paragraphs(string text)
+    {
+        var blocks = new List<LineBlock>();
+        int line = 0, first = -1;
+        foreach (ReadOnlySpan<char> current in text.AsSpan().EnumerateLines())
+        {
+            bool blank = current.IsWhiteSpace();
+            if (!blank && first < 0)
+                first = line;
+            else if (blank && first >= 0)
+            {
+                blocks.Add(new LineBlock(first, line - 1));
+                first = -1;
+            }
+
+            line++;
+        }
+
+        if (first >= 0)
+            blocks.Add(new LineBlock(first, line - 1));
+        return blocks;
+    }
+
     private static bool IsGoLine(string text, int i) =>
         i + 1 < text.Length && (text[i] | 0x20) == 'g' && (text[i + 1] | 0x20) == 'o'
         && text.AsSpan(i + 2, SqlTextSkipper.ToEndOfLine(text, i) - i - 2).IsWhiteSpace();
