@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection;
 using Notas.Theme;
 
 namespace Notas.Tests;
@@ -47,5 +48,22 @@ public class SvgPathTests
     public void Recusa_caminho_invalido(string d)
     {
         Assert.Throws<FormatException>(() => Parse(d));
+    }
+
+    [Fact]
+    public void Todos_os_icones_desenham_dentro_da_caixa()
+    {
+        foreach (FieldInfo field in typeof(FileIcons).GetFields(BindingFlags.Public | BindingFlags.Static))
+        {
+            using var bitmap = new Bitmap(28, 28);
+            using (Graphics g = Graphics.FromImage(bitmap))
+                ((LineIcon)field.GetValue(null)!).Draw(g, new RectangleF(2, 2, 24, 24), Color.Black);
+            bool inked = false, edge = false;
+            for (int x = 0; x < 28; x++)
+                for (int y = 0; y < 28; y++)
+                    if (bitmap.GetPixel(x, y).A > 0)
+                        (inked, edge) = (true, edge || x == 0 || y == 0 || x == 27 || y == 27);
+            Assert.True(inked && !edge, field.Name);
+        }
     }
 }
