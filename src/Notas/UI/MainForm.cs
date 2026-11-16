@@ -55,21 +55,29 @@ internal sealed class MainForm : ChromeForm
     {
         Application.Idle -= OnFirstIdle;
         StartupMetrics.Write("ready_ms", StartupMetrics.SinceProcessStart());
+
+        // A trava só conta depois da janela pronta: antes disso o usuário ainda nem pode interagir.
+        if (StartupMetrics.Enabled && _documents.Active?.IsLoading == true)
+            _loadStalls = new UiStallMonitor();
     }
+
+    private UiStallMonitor? _loadStalls;
 
     private void OpenMeasured(string path)
     {
         var stopwatch = Stopwatch.StartNew();
-        UiStallMonitor? stalls = StartupMetrics.Enabled ? new UiStallMonitor() : null;
+        bool measured = !StartupMetrics.Enabled;
         _documents.Loaded += async _ =>
         {
-            if (stalls is null)
+            if (measured)
                 return;
+            measured = true;
+            UiStallMonitor? stalls = _loadStalls;
+            _loadStalls = null;
             await UiIdle.NextAsync();
             StartupMetrics.Write("load_ms", stopwatch.Elapsed.TotalMilliseconds);
-            StartupMetrics.Write("load_max_ui_stall_ms", stalls.MaxGapMs);
-            stalls.Dispose();
-            stalls = null;
+            StartupMetrics.Write("load_max_ui_stall_ms", stalls?.MaxGapMs ?? 0);
+            stalls?.Dispose();
         };
         _documents.Open(path);
     }
