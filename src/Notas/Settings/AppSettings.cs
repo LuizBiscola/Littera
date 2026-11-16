@@ -1,0 +1,48 @@
+namespace Notas.Settings;
+
+/// <summary>Conteúdo de %APPDATA%\Notas\settings.json.</summary>
+internal sealed class AppSettings
+{
+    public EditorSettings Editor { get; set; } = new();
+
+    public WindowSettings Window { get; set; } = new();
+
+    public List<string> RecentFiles { get; set; } = [];
+}
+
+internal sealed class EditorSettings
+{
+    public string FontFamily { get; set; } = "Cascadia Code";
+
+    /// <summary>Tamanho em pontos (9,75 pt = 13 px a 100%, como no protótipo).</summary>
+    public float FontSize { get; set; } = 9.75f;
+
+    /// <summary>Altura da linha como múltiplo do tamanho da fonte (1,7 ≈ 22 px a 13 px).</summary>
+    public float LineSpacing { get; set; } = 1.7f;
+
+    public int IndentSize { get; set; } = 4;
+
+    public bool UseTabs { get; set; }
+
+    public bool WordWrap { get; set; }
+
+    public bool ShowLineNumbers { get; set; } = true;
+
+    public bool HighlightCurrentLine { get; set; } = true;
+
+    public bool HighlightCurrentBlock { get; set; } = true;
+
+    public bool HighlightOccurrences { get; set; } = true;
+
+    /// <summary>"gdi" (padrão, mais leve) ou "directwrite" (ligaduras, +40 MB).</summary>
+    public string Renderer { get; set; } = "gdi";
+}
+
+internal sealed class WindowSettings
+{
+    public Rectangle Bounds { get; set; }
+
+    public bool Maximized { get; set; }
+
+    public bool ShowOpenFiles { get; set; } = true;
+}
