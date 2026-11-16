@@ -17,6 +17,14 @@ internal partial class ChromeForm : Form
 
     protected TitleBar TitleBar { get; }
 
+    /// <summary>A barra fica por último na ordem z: o WinForms encaixa primeiro quem está no fundo.</summary>
+    protected override void OnControlAdded(ControlEventArgs e)
+    {
+        base.OnControlAdded(e);
+        if (e.Control != TitleBar)
+            TitleBar.SendToBack();
+    }
+
     protected override void OnHandleCreated(EventArgs e)
     {
         base.OnHandleCreated(e);
