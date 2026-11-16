@@ -1,5 +1,4 @@
 using Notas.Settings;
-using Notas.Theme;
 using Notas.UI.Controls;
 
 namespace Notas.UI.Settings;
@@ -20,28 +19,8 @@ internal sealed partial class ShortcutsPage : SettingsPage
         yield return new SettingRow("Arquivo de configurações", "Salve o arquivo e os atalhos novos já valem.", edit);
 
         yield return Section("COMANDOS");
-        foreach ((string command, string keys) in draft.Shortcuts.OrderBy(s => s.Key))
-            yield return new SettingRow(command, null, new KeyCap(keys));
+        yield return new ShortcutList(draft.Shortcuts);
     }
 
     public override void Reset(AppSettings draft) => draft.Shortcuts.Clear(); // na próxima abertura voltam os padrões
-
-    /// <summary>Atalho desenhado como tecla: fundo cinza claro e cantos arredondados.</summary>
-    private sealed class KeyCap : Control
-    {
-        public KeyCap(string keys)
-        {
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
-            Text = keys;
-            Size = new Size(TextRenderer.MeasureText(keys, UiFonts.Get(12, DeviceDpi)).Width + this.Px(16), this.Px(26));
-        }
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            e.Graphics.Clear(Palette.Background);
-            Shapes.FillRounded(e.Graphics, Palette.ItemHover, new Rectangle(0, 0, Width, Height), this.Px(5));
-            TextRenderer.DrawText(e.Graphics, Text, UiFonts.Get(12, DeviceDpi), new Rectangle(0, 0, Width, Height), Palette.TextSecondary,
-                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
-        }
-    }
 }
