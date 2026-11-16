@@ -40,7 +40,14 @@ internal sealed class EditorSettings
 
 internal sealed class WindowSettings
 {
-    public Rectangle Bounds { get; set; }
+    // Campos soltos em vez de Rectangle: o JSON fica limpo e não depende de Location/Size.
+    public int X { get; set; }
+
+    public int Y { get; set; }
+
+    public int Width { get; set; }
+
+    public int Height { get; set; }
 
     public bool Maximized { get; set; }
 
