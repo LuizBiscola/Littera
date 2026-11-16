@@ -50,62 +50,7 @@ internal sealed class MainForm : ChromeForm
         Application.Idle += OnFirstIdle;
 
         if (_initialFile is not null)
-        {
-            // Experimento da Fase 0 (não adotado): carga progressiva em blocos.
-            if (Environment.GetEnvironmentVariable("NOTAS_LOAD") == "chunks")
-                _ = OpenInChunksAsync(_initialFile);
-            else
-                _ = OpenAsync(_initialFile);
-        }
-    }
-
-    private async Task OpenInChunksAsync(string path)
-    {
-        var stopwatch = Stopwatch.StartNew();
-        using UiStallMonitor? stalls = StartupMetrics.Enabled ? new UiStallMonitor() : null;
-
-        var chunks = System.Threading.Channels.Channel.CreateBounded<string>(2);
-        Task producer = Task.Run(async () =>
-        {
-            var options = new FileStreamOptions { BufferSize = 1 << 16, Options = FileOptions.SequentialScan };
-            using var reader = new StreamReader(path, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, options);
-            char[] buffer = new char[1 << 19];
-            string carry = "";
-            int read;
-            while ((read = reader.ReadBlock(buffer, 0, buffer.Length)) > 0)
-            {
-                // Não corta par substituto nem CRLF entre dois blocos.
-                int keep = read;
-                if (read == buffer.Length && (char.IsHighSurrogate(buffer[read - 1]) || buffer[read - 1] == '\r'))
-                    keep--;
-
-                await chunks.Writer.WriteAsync(carry + new string(buffer, 0, keep));
-                carry = keep < read ? buffer[read - 1].ToString() : "";
-            }
-
-            if (carry.Length > 0)
-                await chunks.Writer.WriteAsync(carry);
-            chunks.Writer.Complete();
-        });
-
-        const int SCI_SETUNDOCOLLECTION = 2012;
-        _editor.DirectMessage(SCI_SETUNDOCOLLECTION, IntPtr.Zero);
-        _editor.ClearAll();
-        await foreach (string chunk in chunks.Reader.ReadAllAsync())
-        {
-            _editor.AppendText(chunk);
-            await Task.Delay(1); // devolve a vez para a fila de mensagens (pintura, teclado, mouse)
-        }
-
-        await producer;
-        _editor.DirectMessage(SCI_SETUNDOCOLLECTION, new IntPtr(1));
-        _editor.EmptyUndoBuffer();
-        Text = Path.GetFileName(path) + " — Notas";
-
-        await WaitForIdleAsync();
-        StartupMetrics.Write("load_ms", stopwatch.Elapsed.TotalMilliseconds);
-        if (stalls is not null)
-            StartupMetrics.Write("load_max_ui_stall_ms", stalls.MaxGapMs);
+            _ = OpenAsync(_initialFile);
     }
 
     private void OnFirstIdle(object? sender, EventArgs e)
