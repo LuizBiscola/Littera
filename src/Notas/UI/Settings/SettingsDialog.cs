@@ -55,5 +55,14 @@ internal sealed partial class SettingsDialog : Form
         }
 
         _content.ResumeLayout();
+        _content.AutoScrollPosition = Point.Empty;
+    }
+
+    /// <summary>Sem foco inicial: o primeiro campo (a fonte) rolaria a página e ficaria com o texto selecionado.</summary>
+    protected override void OnShown(EventArgs e)
+    {
+        base.OnShown(e);
+        ActiveControl = null;
+        _content.AutoScrollPosition = Point.Empty;
     }
 }
