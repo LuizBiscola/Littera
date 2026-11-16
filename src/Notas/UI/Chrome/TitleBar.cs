@@ -10,6 +10,7 @@ internal sealed partial class TitleBar : Control
     private readonly ChromeButton _minimize;
     private readonly ChromeButton _maximize;
     private readonly ChromeButton _close;
+    private readonly ChromeButton _brand;
 
     public TitleBar()
     {
@@ -19,11 +20,17 @@ internal sealed partial class TitleBar : Control
         _minimize = new(Icons.Minimize, "Minimizar", () => FindForm()!.WindowState = FormWindowState.Minimized) { IsWindowButton = true };
         _maximize = new(Icons.Maximize, "Maximizar", ToggleMaximize) { IsWindowButton = true };
         _close = new(Icons.Close, "Fechar", () => FindForm()!.Close()) { IsWindowButton = true, IsClose = true };
+        _brand = new(Icons.Logo, "Menu (Alt)", OpenMenu) { Label = "Notas" };
         Height = this.Px(40); // depois dos botões: mudar a altura já dispara o layout
     }
 
     /// <summary>Área do maximizar: o formulário responde HTMAXBUTTON aqui (Snap Layouts do Windows 11).</summary>
     public Rectangle MaximizeBounds => _maximize.Bounds;
+
+    /// <summary>Menu do app (a marca \"Notas\" ou Alt); o retângulo, em tela, posiciona o menu.</summary>
+    public event Action<Rectangle>? MenuRequested;
+
+    public void OpenMenu() => MenuRequested?.Invoke(RectangleToScreen(_brand.Bounds));
 
     public ChromeButton AddLeft(char glyph, string toolTip, Action onClick) => Add(_left, glyph, toolTip, onClick);
 
@@ -43,5 +50,5 @@ internal sealed partial class TitleBar : Control
         return button;
     }
 
-    private IEnumerable<ChromeButton> AllButtons => [.. _left, .. _actions, _minimize, _maximize, _close];
+    private IEnumerable<ChromeButton> AllButtons => [_brand, .. _left, .. _actions, _minimize, _maximize, _close];
 }
