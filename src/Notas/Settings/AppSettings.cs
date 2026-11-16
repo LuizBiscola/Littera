@@ -7,6 +7,8 @@ internal sealed class AppSettings
 
     public WindowSettings Window { get; set; } = new();
 
+    public SqlFormatSettings SqlFormat { get; set; } = new();
+
     public List<string> RecentFiles { get; set; } = [];
 }
 
