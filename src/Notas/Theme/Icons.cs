@@ -19,6 +19,12 @@ internal static class Icons
     public const char Minimize = '';
     public const char Maximize = '';
     public const char Restore = '';
+    public const char Refresh = '';
+    public const char CollapseAll = '';
+    public const char Folder = '';
+    public const char FolderOpen = '';
+    public const char ChevronDownSmall = '';
+    public const char ChevronRightSmall = '';
 
     public static void Draw(Graphics g, char glyph, Rectangle bounds, Color color, float px, int dpi)
     {

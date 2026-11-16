@@ -6,6 +6,15 @@ internal sealed class SessionState
     public List<SessionDocument> Documents { get; set; } = [];
 
     public int ActiveIndex { get; set; }
+
+    /// <summary>Pasta do painel "PASTA"; null = nenhuma aberta.</summary>
+    public string? Folder { get; set; }
+
+    /// <summary>Pasta aberta, mas painel oculto pelo botão da barra.</summary>
+    public bool FolderHidden { get; set; }
+
+    /// <summary>Subpastas expandidas na árvore, para voltar como estava.</summary>
+    public List<string> ExpandedFolders { get; set; } = [];
 }
 
 internal sealed class SessionDocument
