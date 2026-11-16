@@ -55,6 +55,7 @@ internal sealed class FindSession
             return;
         Current = (Current + step + Count) % Count;
         TextRange match = _matches[Current];
+        editor.Lines[editor.LineFromPosition(match.Start)].EnsureVisible(); // ocorrência em trecho recolhido: expande
         editor.SetSelection(match.End, match.Start);
         editor.ScrollRange(match.Start, match.End);
     }

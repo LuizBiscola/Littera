@@ -17,6 +17,7 @@ internal sealed partial class GoToLineBox
         line = Math.Clamp(line, 1, editor.Lines.Count) - 1;
         int column = parts.Length > 1 && int.TryParse(parts[1].Trim(), out int c) ? Math.Max(0, c - 1) : 0;
         Line target = editor.Lines[line];
+        target.EnsureVisible(); // linha dentro de um trecho recolhido: expande
         editor.GotoPosition(Math.Min(target.Position + column, target.EndPosition));
         editor.FirstVisibleLine = Math.Max(0, line - editor.LinesOnScreen / 2); // linha no meio da tela
         editor.Focus();
