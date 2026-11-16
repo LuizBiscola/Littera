@@ -20,6 +20,7 @@ internal static class Palette
     public static readonly Color ButtonHover = Hex(0xE3E5E9);
     public static readonly Color PinFlash = Hex(0xE4ECFD);
     public static readonly Color Tooltip = Hex(0x1F2328);
+    public static readonly Color Danger = Hex(0xC0392B);
     public static readonly Color IconActive = Hex(0x5B6270);
     public static readonly Color IconInactive = Hex(0x9AA0A8);
     public static readonly Color CloseInactive = Hex(0xB4B8BF);
