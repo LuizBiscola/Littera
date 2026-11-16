@@ -14,9 +14,7 @@ internal sealed partial class MainForm
         string? path = document.Path;
         if (askPath || path is null)
         {
-            using var dialog = new SaveFileDialog { Filter = FileFilter, FileName = document.Title, Title = "Salvar como" };
-            if (path is not null)
-                dialog.InitialDirectory = Path.GetDirectoryName(path);
+            using SaveFileDialog dialog = SaveDialogFor(document);
             if (dialog.ShowDialog(this) != DialogResult.OK)
                 return false;
             path = dialog.FileName;
