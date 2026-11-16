@@ -12,7 +12,7 @@ internal sealed partial class MainForm
     private Dictionary<Keys, Action> BuildShortcuts()
     {
         var map = new Dictionary<Keys, Action>();
-        foreach ((string name, string defaults, Action run) in CommandTable())
+        foreach ((string name, _, string defaults, Action run) in CommandTable())
         {
             if (!_settings.Shortcuts.TryGetValue(name, out string? keys))
                 _settings.Shortcuts[name] = keys = defaults;
