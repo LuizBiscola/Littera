@@ -12,22 +12,34 @@ internal sealed partial class MainForm
     private void BindActiveEditor()
     {
         if (_boundEditor is not null)
+        {
             _boundEditor.UpdateUI -= OnEditorUpdateUI;
+            _boundEditor.Insert -= OnEditorTextChanged;
+            _boundEditor.Delete -= OnEditorTextChanged;
+        }
 
         _boundEditor = _documents.Active?.Editor;
         if (_boundEditor is not null)
+        {
             _boundEditor.UpdateUI += OnEditorUpdateUI;
+            _boundEditor.Insert += OnEditorTextChanged;
+            _boundEditor.Delete += OnEditorTextChanged;
+        }
+
         _blocks = null;
         UpdateStatus();
     }
 
+    /// <summary>Só seleção: o "Content" do UpdateUI também dispara com marcadores, e os destaques mexem neles.</summary>
     private void OnEditorUpdateUI(object? sender, UpdateUIEventArgs e)
     {
-        if ((e.Change & (UpdateChange.Selection | UpdateChange.Content)) == 0)
+        if ((e.Change & UpdateChange.Selection) == 0)
             return;
         UpdatePosition();
-        ScheduleHighlights(textChanged: (e.Change & UpdateChange.Content) != 0);
+        ScheduleHighlights(textChanged: false);
     }
+
+    private void OnEditorTextChanged(object? sender, ModificationEventArgs e) => ScheduleHighlights(textChanged: true);
 
     private void UpdateStatus()
     {
