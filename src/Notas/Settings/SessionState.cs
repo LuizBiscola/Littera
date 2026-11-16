@@ -40,4 +40,7 @@ internal sealed class SessionDocument
     public string? Encoding { get; set; }
 
     public string? LineEnding { get; set; }
+
+    /// <summary>Linhas (base 0) dos cabeçalhos de trechos recolhidos; null = nenhum.</summary>
+    public List<int>? Folded { get; set; }
 }

@@ -46,6 +46,9 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
 
     /// <summary>Cursor e rolagem da sessão anterior, aplicados quando o arquivo terminar de carregar.</summary>
     public Settings.SessionDocument? Restore { get; set; }
+
+    /// <summary>Trechos que estavam recolhidos: aplicados quando os trechos do arquivo já estiverem calculados.</summary>
+    public Folding.FoldRestore? PendingFolds { get; set; }
 }
 
 internal static class LineEndingExtensions
