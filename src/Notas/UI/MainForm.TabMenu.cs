@@ -34,13 +34,13 @@ internal sealed partial class MainForm
     private void AddTabItem(ContextMenuStrip menu, char glyph, string text, string? command, Action action,
         bool enabled = true, bool accent = false, bool danger = false)
     {
-        Color color = accent ? Palette.Accent : danger ? Palette.Danger : Palette.Text;
-        Color icon = accent || danger ? color : Palette.TextMuted;
-        menu.Items.Add(new ToolStripMenuItem(text, Menus.Glyph(glyph, enabled ? icon : Palette.TextFaint, this.Px(16), DeviceDpi), (_, _) => action())
+        var item = new ToolStripMenuItem(text, null, (_, _) => action())
         {
             Enabled = enabled,
-            ForeColor = color,
+            ForeColor = accent ? Palette.Accent : danger ? Palette.Danger : Palette.Text,
             ShortcutKeyDisplayString = command is null ? null : ShortcutText(command),
-        });
+        };
+        Menus.SetIcon(item, glyph, this.Px(16)); // cor do ícone acompanha o estado (cinza, azul, vermelho)
+        menu.Items.Add(item);
     }
 }

@@ -37,26 +37,6 @@ internal static partial class Menus
         };
     }
 
-    private static readonly Dictionary<(char, Color, int), Bitmap> Glyphs = [];
-
-    /// <summary>Ícone da Segoe Fluent como imagem de item de menu (guardado: menus são recriados a cada clique).</summary>
-    public static Bitmap Glyph(char glyph, Color color, int size, int dpi)
-    {
-        if (Glyphs.TryGetValue((glyph, color, size), out Bitmap? cached))
-            return cached;
-        var image = new Bitmap(size, size, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-        using (Graphics g = Graphics.FromImage(image))
-        {
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit; // ClearType não funciona em fundo transparente
-            using var brush = new SolidBrush(color);
-            using var center = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center };
-            g.DrawString(glyph.ToString(), UiFonts.Icon(10.5f, dpi), brush, new RectangleF(0, 0, size, size), center);
-        }
-
-        Glyphs[(glyph, color, size)] = image;
-        return image;
-    }
-
     /// <summary>Desenho dos menus, para listas suspensas próprias (caixa de fonte).</summary>
     public static ToolStripRenderer Renderer(int dpi) => new MenuRenderer(dpi);
 
