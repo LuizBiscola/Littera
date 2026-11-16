@@ -27,7 +27,7 @@ internal sealed partial class TitleBar : Control
     /// <summary>Área do maximizar: o formulário responde HTMAXBUTTON aqui (Snap Layouts do Windows 11).</summary>
     public Rectangle MaximizeBounds => _maximize.Bounds;
 
-    /// <summary>Menu do app (a marca \"Notas\" ou Alt); o retângulo, em tela, posiciona o menu.</summary>
+    /// <summary>Menu do app (a marca "Notas" ou Alt); o retângulo, em tela, posiciona o menu.</summary>
     public event Action<Rectangle>? MenuRequested;
 
     public void OpenMenu() => MenuRequested?.Invoke(RectangleToScreen(_brand.Bounds));

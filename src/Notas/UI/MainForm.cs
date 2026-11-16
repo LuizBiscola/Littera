@@ -54,6 +54,7 @@ internal sealed partial class MainForm : ChromeForm
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
 
+        TitleBar.MenuRequested += ShowAppMenu;
         _documents.EditorCreated += editor => EditorDrop.Attach(editor, OpenFile);
         foreach (Control area in new Control[] { editorHost, _openFiles, _status, TitleBar })
             FileDrop.Attach(area, OpenFile);
