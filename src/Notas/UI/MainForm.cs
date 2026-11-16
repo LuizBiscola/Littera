@@ -100,6 +100,7 @@ internal sealed partial class MainForm : ChromeForm
         Application.Idle -= OnFirstIdle;
         StartupMetrics.Write("ready_ms", StartupMetrics.SinceProcessStart());
         EnableFileDrop(); // registrar alvos OLE custa; ninguém arrasta um arquivo nos primeiros milissegundos
+        _ = Shortcuts; // monta os atalhos (e completa o settings.json) fora do caminho da abertura
 
         // A trava só conta depois da janela pronta: antes disso o usuário ainda nem pode interagir.
         if (StartupMetrics.Enabled && _documents.Active?.IsLoading == true)

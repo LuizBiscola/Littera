@@ -6,34 +6,22 @@ internal sealed partial class MainForm
 {
     private Dictionary<Keys, Action>? _shortcuts;
 
-    /// <summary>Atalhos da janela; na Fase 2 esta tabela passa a ser lida do settings.json.</summary>
-    private Dictionary<Keys, Action> Shortcuts => _shortcuts ??= new()
+    private Dictionary<Keys, Action> Shortcuts => _shortcuts ??= BuildShortcuts();
+
+    /// <summary>Atalhos do settings.json; comando que não estiver lá ganha o padrão e passa a aparecer no arquivo.</summary>
+    private Dictionary<Keys, Action> BuildShortcuts()
     {
-        [Keys.Control | Keys.N] = () => _documents.New(),
-        [Keys.Control | Keys.O] = ShowOpenDialog,
-        [Keys.Control | Keys.S] = () => _ = SaveActiveAsync(askPath: false),
-        [Keys.Control | Keys.Shift | Keys.S] = () => _ = SaveActiveAsync(askPath: true),
-        [Keys.Control | Keys.W] = () => _ = _documents.Active is { } active ? RequestCloseAsync(active) : Task.CompletedTask,
-        [Keys.Control | Keys.B] = ToggleOpenFiles,
-        [Keys.F11] = ToggleFocusMode,
-        [Keys.Control | Keys.F] = () => FindPanel.Open(replace: false),
-        [Keys.Control | Keys.H] = () => FindPanel.Open(replace: true),
-        [Keys.Control | Keys.G] = ShowGoToLine,
-        [Keys.Control | Keys.Shift | Keys.F] = FormatSql,
-        [Keys.Control | Keys.Oemcomma] = ShowSettings,
-        [Keys.F3] = () => FindPanel.Step(+1),
-        [Keys.Shift | Keys.F3] = () => FindPanel.Step(-1),
-        [Keys.Control | Keys.Oemplus] = () => Zoom(+1),
-        [Keys.Control | Keys.Add] = () => Zoom(+1),
-        [Keys.Control | Keys.OemMinus] = () => Zoom(-1),
-        [Keys.Control | Keys.Subtract] = () => Zoom(-1),
-        [Keys.Control | Keys.D0] = () => Zoom(0),
-        [Keys.Control | Keys.NumPad0] = () => Zoom(0),
-        [Keys.Alt | Keys.Z] = ToggleWordWrap,
-        [Keys.Control | Keys.Shift | Keys.L] = ToggleLineNumbers,
-        [Keys.Control | Keys.Tab] = () => CycleTabs(+1),
-        [Keys.Control | Keys.Shift | Keys.Tab] = () => CycleTabs(-1),
-    };
+        var map = new Dictionary<Keys, Action>();
+        foreach ((string name, string defaults, Action run) in CommandTable())
+        {
+            if (!_settings.Shortcuts.TryGetValue(name, out string? keys))
+                _settings.Shortcuts[name] = keys = defaults;
+            foreach (Keys key in KeyText.ParseAll(keys))
+                map[key] = run;
+        }
+
+        return map;
+    }
 
     /// <summary>Roda antes do editor ver a tecla: o Scintilla não engole Ctrl+Tab e companhia.</summary>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

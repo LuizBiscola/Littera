@@ -10,18 +10,18 @@ internal sealed partial class MainForm
     {
         ContextMenuStrip menu = Menus.Create(this);
         menu.ShowCheckMargin = false;
-        Add(menu.Items, "Novo", "Ctrl+N", () => _documents.New());
-        Add(menu.Items, "Abrir…", "Ctrl+O", ShowOpenDialog);
+        Add(menu.Items, "Novo", ShortcutText("novo"), () => _documents.New());
+        Add(menu.Items, "Abrir…", ShortcutText("abrir"), ShowOpenDialog);
         menu.Items.Add(RecentMenu(menu));
         menu.Items.Add(new ToolStripSeparator());
-        Add(menu.Items, "Salvar", "Ctrl+S", () => _ = SaveActiveAsync(askPath: false));
-        Add(menu.Items, "Salvar como…", "Ctrl+Shift+S", () => _ = SaveActiveAsync(askPath: true));
-        Add(menu.Items, "Fechar aba", "Ctrl+W", () => Shortcuts[Keys.Control | Keys.W]());
+        Add(menu.Items, "Salvar", ShortcutText("salvar"), () => _ = SaveActiveAsync(askPath: false));
+        Add(menu.Items, "Salvar como…", ShortcutText("salvarComo"), () => _ = SaveActiveAsync(askPath: true));
+        Add(menu.Items, "Fechar aba", ShortcutText("fecharAba"), CloseActive);
         menu.Items.Add(new ToolStripSeparator());
-        Add(menu.Items, "Formatar SQL", "Ctrl+Shift+F", FormatSql);
-        Add(menu.Items, "Modo foco", "F11", ToggleFocusMode);
+        Add(menu.Items, "Formatar SQL", ShortcutText("formatarSql"), FormatSql);
+        Add(menu.Items, "Modo foco", ShortcutText("modoFoco"), ToggleFocusMode);
         menu.Items.Add(new ToolStripSeparator());
-        Add(menu.Items, "Configurações…", "Ctrl+,", ShowSettings);
+        Add(menu.Items, "Configurações…", ShortcutText("configuracoes"), ShowSettings);
         Add(menu.Items, "Sair", "Alt+F4", Close);
         menu.Show(new Point(anchor.Left, anchor.Bottom + 4));
     }
