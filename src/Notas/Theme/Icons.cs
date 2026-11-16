@@ -27,6 +27,14 @@ internal static class Icons
     public const char View = '';
     public const char Copy = '';
     public const char Undo = '\uE7A7';
+    public const char Pin = '';
+    public const char Unpin = '';
+    public const char Dismiss = '';
+    public const char DismissThin = '';
+    public const char CheckMark = '';
+    public const char Clipboard = '';
+    public const char OpenOutside = '';
+    public const char Edit = '';
     public const char ChevronRightSmall = '';
 
     public static void Draw(Graphics g, char glyph, Rectangle bounds, Color color, float px, int dpi)

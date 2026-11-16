@@ -13,6 +13,7 @@ internal sealed partial class MainForm
         SettingsCopy.Into(source.Files, _settings.Files);
         _settings.Shortcuts = source.Shortcuts;
         _shortcuts = null;
+        _settings.Window.ReopenSession = source.Window.ReopenSession;
         if (source.Window.ShowOpenFiles != _settings.Window.ShowOpenFiles)
             ToggleOpenFiles();
         _documents.NewFileFormat = NewFileFormat(_settings.Files);

@@ -65,4 +65,7 @@ internal sealed class WindowSettings
     public bool Maximized { get; set; }
 
     public bool ShowOpenFiles { get; set; } = true;
+
+    /// <summary>Abas comuns voltam ao reabrir; as fixadas (e as com alterações não salvas) voltam sempre.</summary>
+    public bool ReopenSession { get; set; } = true;
 }

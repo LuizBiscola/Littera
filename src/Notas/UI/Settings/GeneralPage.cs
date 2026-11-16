@@ -17,6 +17,8 @@ internal sealed class GeneralPage : SettingsPage
         yield return Section("JANELA");
         yield return Toggle("Mostrar abas abertas", "Painel à esquerda (Ctrl+B mostra e esconde a qualquer momento).",
             draft.Window.ShowOpenFiles, v => draft.Window.ShowOpenFiles = v);
+        yield return Toggle("Reabrir sessão", "Ao abrir o Notas, volta com as abas da última vez. Fixadas e abas com alterações não salvas voltam sempre.",
+            draft.Window.ReopenSession, v => draft.Window.ReopenSession = v);
 
         yield return Section("DESENHO DO TEXTO");
         var renderer = new Segmented("GDI", "DirectWrite") { SelectedIndex = draft.Editor.Renderer == "directwrite" ? 1 : 0 };
@@ -28,6 +30,7 @@ internal sealed class GeneralPage : SettingsPage
     public override void Reset(AppSettings draft)
     {
         draft.Window.ShowOpenFiles = true;
+        draft.Window.ReopenSession = true;
         draft.Editor.Renderer = "gdi";
     }
 }
