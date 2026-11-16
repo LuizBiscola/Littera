@@ -26,6 +26,8 @@ internal sealed partial class MainForm
         ("ocorrenciaAnterior", "Ocorrência anterior", "Shift+F3", () => FindPanel.Step(-1)),
         ("irParaLinha", "Ir para linha…", "Ctrl+G", ShowGoToLine),
         ("formatarSql", "Formatar SQL", "Ctrl+Shift+F", FormatSql),
+        ("proximaAlteracao", "Próxima alteração", "Alt+F5", () => GoToChange(+1)),
+        ("alteracaoAnterior", "Alteração anterior", "Shift+Alt+F5", () => GoToChange(-1)),
         ("duplicarLinha", "Duplicar linha ou seleção", "Ctrl+D", () => InEditor(e => e.ExecuteCmd(Command.SelectionDuplicate))),
         ("moverLinhaAcima", "Mover linha para cima", "Alt+Up", () => InEditor(e => e.ExecuteCmd(Command.MoveSelectedLinesUp))),
         ("moverLinhaAbaixo", "Mover linha para baixo", "Alt+Down", () => InEditor(e => e.ExecuteCmd(Command.MoveSelectedLinesDown))),

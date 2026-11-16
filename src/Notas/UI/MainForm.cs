@@ -37,6 +37,7 @@ internal sealed partial class MainForm : ChromeForm
         Controls.Add(_status);
         _status.SegmentClicked += OnStatusSegmentClicked;
         _status.ExpandAllClicked += () => SetAllFolds(expand: true);
+        _status.ChangesClicked += () => GoToChange(+1);
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
         _draftTimer.Tick += (_, _) => SaveDrafts(AutosaveLimit);
         _documents = new DocumentManager(_editorHost, settings.Editor) { NewFileFormat = NewFileFormat(settings.Files) };
