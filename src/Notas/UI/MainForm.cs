@@ -2,11 +2,13 @@ using System.Diagnostics;
 using System.Text;
 using Notas.Editor;
 using Notas.Services;
+using Notas.Theme;
+using Notas.UI.Chrome;
 using ScintillaNET;
 
 namespace Notas.UI;
 
-internal sealed class MainForm : Form
+internal sealed class MainForm : ChromeForm
 {
     private readonly Scintilla _editor;
     private readonly string? _initialFile;
@@ -35,6 +37,10 @@ internal sealed class MainForm : Form
         EditorSetup.ApplySql(_editor);
         StartupMetrics.Mark("t_editor_setup");
         Controls.Add(_editor);
+
+        TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", () => { }).Toggled = true;
+        TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
+        TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
     }
 
     protected override void OnShown(EventArgs e)
