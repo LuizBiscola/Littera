@@ -30,5 +30,6 @@ O exe é single-file: `Scintilla.dll` e `Lexilla.dll` vão embutidas e são extr
 `measure.ps1` reporta abertura (criação do processo até a janela pintada e ociosa), tempo do arquivo,
 maior travamento da UI e memória (coluna "Gerenc. Tarefas" = o que o Gerenciador de Tarefas mostra).
 
-Variáveis de diagnóstico (temporárias, da Fase 0): `NOTAS_TECH=directwrite` (renderização DirectWrite)
-e `NOTAS_LOAD=chunks` (carga progressiva em blocos).
+Medições de cada fase: [docs/medicoes.md](docs/medicoes.md).
+
+`NOTAS_HOME` troca a pasta de configurações e sessão (o `measure.ps1` usa uma pasta limpa a cada execução).
