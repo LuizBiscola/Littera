@@ -38,11 +38,8 @@ internal sealed partial class MainForm
     /// <summary>Roda antes do editor ver a tecla: o Scintilla não engole Ctrl+Tab e companhia.</summary>
     protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
     {
-        if (keyData == Keys.Escape && _findPanel?.Visible == true)
-        {
-            _findPanel.Dismiss();
+        if (keyData == Keys.Escape && HandleEscape())
             return true;
-        }
 
         if (Shortcuts.TryGetValue(keyData, out Action? action))
         {
