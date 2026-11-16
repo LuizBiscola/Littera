@@ -23,6 +23,35 @@ internal static class OccurrenceHighlighter
         }
     }
 
+    /// <summary>Destaca a palavra sob o cursor (inteira, sem diferenciar maiúsculas); devolve "palavra · 7 ocorrências".</summary>
+    public static string? Update(Scintilla editor)
+    {
+        Clear(editor);
+        int caret = editor.CurrentPosition;
+        int start = editor.WordStartPosition(caret, true);
+        int end = editor.WordEndPosition(caret, true);
+        if (end - start < 2 || editor.Selections.Count > 1)
+            return null;
+
+        string word = editor.GetTextRange(start, end - start);
+        editor.SearchFlags = SearchFlags.WholeWord;
+        editor.TargetWholeDocument();
+        int count = 0;
+        while (count < MaxMatches && editor.SearchInTarget(word) != -1)
+        {
+            int found = editor.TargetStart, length = editor.TargetEnd - found;
+            editor.IndicatorCurrent = found == start ? Current : Other;
+            editor.IndicatorFillRange(found, length);
+            count++;
+            editor.SetTargetRange(found + length, editor.TextLength);
+        }
+
+        if (count >= 2)
+            return $"{word} · {count} ocorrências";
+        Clear(editor); // só ela mesma: não vale destacar
+        return null;
+    }
+
     public static void Clear(Scintilla editor)
     {
         foreach (int id in new[] { Other, Current })
