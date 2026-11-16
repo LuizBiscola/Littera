@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Notas.Editor;
 using Notas.Services;
+using Notas.Settings;
 using Notas.Theme;
 using Notas.UI.Chrome;
 using ScintillaNET;
@@ -10,6 +11,7 @@ namespace Notas.UI;
 internal sealed class MainForm : ChromeForm
 {
     private readonly Scintilla _editor;
+    private readonly DocumentManager _documents;
     private readonly string? _initialFile;
 
     public MainForm(string[] args)
@@ -36,6 +38,17 @@ internal sealed class MainForm : ChromeForm
         EditorSetup.ApplySql(_editor);
         StartupMetrics.Mark("t_editor_setup");
         Controls.Add(_editor);
+
+        var editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
+        Controls.Add(editorHost);
+        _documents = new DocumentManager(editorHost, new EditorSettings());
+        _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
+        _documents.Loaded += document => EditorSetup.ApplySql(document.Editor!); // até existir o registro de linguagens
+        _documents.LoadFailed += (document, error) =>
+        {
+            MessageBox.Show(this, error.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            _documents.Close(document);
+        };
 
         TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", () => { }).Toggled = true;
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
