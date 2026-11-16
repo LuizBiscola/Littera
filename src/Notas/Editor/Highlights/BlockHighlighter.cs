@@ -9,7 +9,7 @@ namespace Notas.Editor.Highlights;
 /// </summary>
 internal static class BlockHighlighter
 {
-    // 21 a 24 são do histórico de alterações do Scintilla; 25 a 31, da dobra.
+    // 14 a 16 são das barras de alteração; 25 a 31, da dobra.
     private const int Background = 18;
     private const int Bar = 19;
     private const int CurrentBar = 20;

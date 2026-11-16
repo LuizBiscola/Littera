@@ -21,10 +21,10 @@ internal static class EditorMargins
     {
         Margin changes = editor.Margins[Changes];
         changes.Type = MarginType.Symbol;
-        changes.Mask = ChangeMarkers.AllMask;
-        changes.Sensitive = true; // clique na barra abre a prévia da alteração
+        changes.Mask = ChangeMarkers.Mask;
+        changes.Sensitive = true; // clique na barra laranja abre a prévia da alteração
         changes.Cursor = MarginCursor.Arrow;
-        changes.Width = settings.ShowChanges ? Px(editor, 8) : 0;
+        changes.Width = settings.ShowChanges ? Px(editor, 10) : 0; // largura que dá para acertar com o mouse
 
         Margin fold = editor.Margins[Fold];
         fold.Type = MarginType.Symbol;
