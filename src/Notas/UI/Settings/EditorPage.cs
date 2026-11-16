@@ -29,6 +29,8 @@ internal sealed partial class EditorPage : SettingsPage
         spacing.ValueChanged += () => editor.LineSpacing = spacing.Value;
         yield return new SettingRow("Espaçamento entre linhas", "Altura da linha em relação à fonte (1,7 = protótipo).", spacing);
 
+        foreach (Control row in BehaviorRows(editor))
+            yield return row;
     }
 
     private static ComboBox FontPicker(EditorSettings editor)
