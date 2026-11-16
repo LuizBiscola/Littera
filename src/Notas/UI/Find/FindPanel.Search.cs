@@ -10,6 +10,12 @@ internal sealed partial class FindPanel
     /// <summary>Refaz a busca; com <paramref name="select"/>, leva o editor até a ocorrência a partir do cursor.</summary>
     partial void Search(bool select)
     {
+        SearchActive(select);
+        ScheduleFiles();
+    }
+
+    private void SearchActive(bool select = false)
+    {
         if (_activeEditor() is not { } editor)
             return;
 
@@ -23,7 +29,10 @@ internal sealed partial class FindPanel
     {
         if (_activeEditor() is not { } editor)
             return;
-        Search(select: false); // o texto pode ter mudado desde a última busca
+        SearchActive(); // o texto pode ter mudado desde a última busca
+        int target = TargetIndex(editor, step);
+        if (MultiFile && (target < 0 || target >= _session.Count) && StepToFile(step < 0 ? -1 : 1))
+            return;
         _session.Select(editor, editor.SelectionStart == editor.SelectionEnd ? 0 : step);
         Invalidate();
     }
@@ -32,6 +41,7 @@ internal sealed partial class FindPanel
     {
         SearchScope.Selection when _selectionScope is { } selection => selection,
         SearchScope.Block when BlockRange?.Invoke() is { } block => block,
+        SearchScope.Folder when Files?.ActiveInScope(SearchScope.Folder) != true => new TextRange(0, 0), // ativo fora da pasta
         _ => new TextRange(0, editor.TextLength),
     };
 }

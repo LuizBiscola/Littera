@@ -21,9 +21,9 @@ internal sealed partial class FindPanel
             y = _replaceBox.Bottom + this.Px(8);
         }
 
-        // "Em: Arquivo | Bloco atual | Seleção"; abas abertas e pasta ficam para a Fase 2.
+        // "Em: Arquivo | Bloco atual | Seleção | Abas abertas | Pasta" (Pasta só com uma pasta aberta).
         int x = _findBox.X + this.Px(26);
-        foreach (FindButton scope in _scopes)
+        foreach (FindButton scope in _scopes.Where(s => s.Visible))
         {
             int width = TextRenderer.MeasureText(scope.Text, UiFonts.Get(12, DeviceDpi)).Width + this.Px(4);
             scope.Bounds = new Rectangle(x, y, width, this.Px(22));

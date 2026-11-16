@@ -26,7 +26,7 @@ internal sealed partial class FindPanel
         if (_find.Text.Length > 0)
         {
             var counter = Rectangle.FromLTRB(_findBox.Right + this.Px(8), _findBox.Top, _previous.Bounds.Left - this.Px(4), _findBox.Bottom);
-            TextRenderer.DrawText(g, _session.Label, UiFonts.Get(12, DeviceDpi), counter, Palette.TextMuted,
+            TextRenderer.DrawText(g, MultiFile ? FilesLabel() : _session.Label, UiFonts.Get(12, DeviceDpi), counter, Palette.TextMuted,
                 TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis | TextFormatFlags.NoPadding);
         }
     }
