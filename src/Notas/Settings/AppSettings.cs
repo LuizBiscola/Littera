@@ -44,6 +44,9 @@ internal sealed class EditorSettings
 
     public bool HighlightOccurrences { get; set; } = true;
 
+    /// <summary>Barras laranja (não salva) e verde (salva) nas linhas alteradas.</summary>
+    public bool ShowChanges { get; set; } = true;
+
     /// <summary>"gdi" (padrão, mais leve) ou "directwrite" (ligaduras, +40 MB).</summary>
     public string Renderer { get; set; } = "gdi";
 }

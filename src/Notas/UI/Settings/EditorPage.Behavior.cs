@@ -31,5 +31,7 @@ internal sealed partial class EditorPage
             editor.HighlightCurrentBlock, v => editor.HighlightCurrentBlock = v);
         yield return Toggle("Destacar ocorrências da palavra", "Ao posicionar o cursor, marca a mesma palavra no arquivo.",
             editor.HighlightOccurrences, v => editor.HighlightOccurrences = v);
+        yield return Toggle("Marcar linhas alteradas", "Barra laranja: alterada e não salva. Verde: alterada e já salva.",
+            editor.ShowChanges, v => editor.ShowChanges = v);
     }
 }
