@@ -21,7 +21,7 @@ internal sealed partial class MainForm
             _blocks = null;
             _foldsStale = true;
             _foldVersion++;
-            _changedLines = null;
+            InvalidateChanges();
         }
 
         _highlightTimer.Stop();
@@ -58,6 +58,6 @@ internal sealed partial class MainForm
         _status.SetBlock(block);
         _status.SetOccurrences(occurrences);
         RefreshFolds(editor, document, small, Text);
-        RefreshChanges(editor, small);
+        RefreshChanges(editor, document, small, Text);
     }
 }

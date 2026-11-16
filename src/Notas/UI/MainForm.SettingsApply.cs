@@ -24,7 +24,7 @@ internal sealed partial class MainForm
     {
         if (document.Path is { } saved && _folderPanel?.Contains(saved) == true)
             _folderPanel.Reload(); // "Salvar como" pode ter criado um arquivo novo na pasta
-        _changedLines = null; // salvar troca as barras laranja por verdes
+        InvalidateChanges(); // salvar troca as barras laranja por verdes
         ScheduleHighlights(textChanged: false);
 
         if (!string.Equals(document.Path, Path.GetFullPath(SettingsStore.SettingsPath), StringComparison.OrdinalIgnoreCase))
