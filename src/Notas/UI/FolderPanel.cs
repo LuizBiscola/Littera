@@ -23,6 +23,11 @@ internal sealed partial class FolderPanel : Control
         Dock = DockStyle.Right;
         Width = this.Px(PanelWidth);
         CreateFilter();
+        _watchTimer.Tick += (_, _) =>
+        {
+            _watchTimer.Stop();
+            Reload();
+        };
         ResumeLayout(false);
     }
 

@@ -11,6 +11,7 @@ internal sealed partial class FolderPanel
         _filter.Text = "";
         _filterTimer.Stop(); // limpar o texto agendaria outra leitura
         Reload();
+        WhenReady(Watch);
     }
 
     /// <summary>Relê a pasta do disco (botão atualizar ou arquivo salvo dentro dela).</summary>
@@ -30,6 +31,7 @@ internal sealed partial class FolderPanel
     {
         _search?.Cancel();
         _count?.Cancel();
+        StopWatching();
         Folder = null;
         _expanded.Clear();
         _filter.Text = "";

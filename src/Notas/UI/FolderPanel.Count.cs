@@ -12,25 +12,15 @@ internal sealed partial class FolderPanel
     private void CountInBackground()
     {
         _count?.Cancel();
-        Application.Idle -= CountWhenIdle;
-        if (Folder is null)
-            return;
-        if (IsHandleCreated)
-            _ = CountAsync();
-        else
-            Application.Idle += CountWhenIdle; // pasta restaurada na abertura: o rodapé espera a janela ficar pronta
-    }
-
-    private void CountWhenIdle(object? sender, EventArgs e)
-    {
-        Application.Idle -= CountWhenIdle;
-        _ = CountAsync();
+        if (Folder is not null)
+            WhenReady(() => _ = CountAsync());
     }
 
     private async Task CountAsync()
     {
         if (Folder is not { } folder)
             return;
+        _count?.Cancel();
         var cancel = new CancellationTokenSource();
         _count = cancel;
         var (files, folders, partial) = await Task.Run(() => FolderScanner.Count(folder, cancel.Token));
@@ -40,6 +30,25 @@ internal sealed partial class FolderPanel
         string more = partial ? "+" : "";
         _countText = $"{files}{more} {Plural(files, "arquivo", "arquivos")} · {folders}{more} {Plural(folders, "pasta", "pastas")}";
         Invalidate(Rectangle.FromLTRB(0, Height - this.Px(FooterHeight), Width, Height));
+    }
+
+    /// <summary>Roda agora ou, com a pasta restaurada na abertura, quando a janela ficar pronta.</summary>
+    private void WhenReady(Action action)
+    {
+        if (IsHandleCreated)
+        {
+            action();
+            return;
+        }
+
+        void Run(object? sender, EventArgs e)
+        {
+            Application.Idle -= Run;
+            if (!IsDisposed)
+                action();
+        }
+
+        Application.Idle += Run;
     }
 
     private static string Plural(int count, string one, string many) => count == 1 ? one : many;
