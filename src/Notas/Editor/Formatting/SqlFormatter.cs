@@ -43,6 +43,10 @@ internal sealed partial class SqlFormatter
                 case SqlTokenKind.Symbol:
                     HandleSymbol(token.Text, previous, next);
                     break;
+                case SqlTokenKind.Variable when _clause is "CREATE" && _inline == 0 && previous is { } p && p.Kind != SqlTokenKind.Symbol | p.Text == ",":
+                    NewLine(_base + 1); // parâmetros da procedure, um por linha
+                    Write(token.Text);
+                    break;
                 default:
                     Write(token.Text);
                     break;
