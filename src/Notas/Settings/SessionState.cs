@@ -20,4 +20,15 @@ internal sealed class SessionDocument
 
     /// <summary>Linguagem escolhida manualmente; null = pela extensão do arquivo.</summary>
     public string? Language { get; set; }
+
+    /// <summary>Rascunho com alterações não salvas (arquivo em rascunhos\); vazio = abre do disco.</summary>
+    public string? Draft { get; set; }
+
+    /// <summary>"Sem título N" (só quando Path está vazio).</summary>
+    public int UntitledNumber { get; set; }
+
+    /// <summary>Formato do arquivo original: o rascunho é sempre UTF-8, mas salvar deve manter o formato.</summary>
+    public string? Encoding { get; set; }
+
+    public string? LineEnding { get; set; }
 }
