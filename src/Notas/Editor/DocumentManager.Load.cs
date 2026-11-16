@@ -54,7 +54,7 @@ internal sealed partial class DocumentManager
         int length = editor.TextLength;
         editor.SetSelection(Math.Clamp(saved.CaretPosition, 0, length), Math.Clamp(saved.AnchorPosition, 0, length));
         editor.FirstVisibleLine = Math.Max(0, saved.FirstVisibleLine);
-        if (Enum.TryParse(saved.Encoding, out TextEncodingKind encoding) && Enum.TryParse(saved.LineEnding, out LineEnding ending))
+        if (document.HasUnsavedDraft && Enum.TryParse(saved.Encoding, out TextEncodingKind encoding) && Enum.TryParse(saved.LineEnding, out LineEnding ending))
             document.Format = new TextFormat(encoding, ending); // rascunho é UTF-8; vale o formato do arquivo original
         document.Restore = null;
     }
