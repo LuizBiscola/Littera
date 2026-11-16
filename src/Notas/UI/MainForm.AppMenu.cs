@@ -18,6 +18,8 @@ internal sealed partial class MainForm
         Add(menu.Items, "Salvar como…", "Ctrl+Shift+S", () => _ = SaveActiveAsync(askPath: true));
         Add(menu.Items, "Fechar aba", "Ctrl+W", () => Shortcuts[Keys.Control | Keys.W]());
         menu.Items.Add(new ToolStripSeparator());
+        Add(menu.Items, "Formatar SQL", "Ctrl+Shift+F", FormatSql);
+        menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Configurações…", "Ctrl+,", ShowSettings);
         Add(menu.Items, "Sair", "Alt+F4", Close);
         menu.Show(new Point(anchor.Left, anchor.Bottom + 4));
