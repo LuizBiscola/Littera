@@ -31,8 +31,10 @@ internal sealed partial class StatusBar
             Shapes.FillRounded(g, Palette.MatchBorder, swatch, this.Px(2));
             swatch.Inflate(-1, -1);
             Shapes.FillRounded(g, Palette.Match, swatch, this.Px(2));
-            PaintText(g, _occurrences, font, Palette.TextMuted, x + this.Px(16), limit);
+            x = PaintText(g, _occurrences, font, Palette.TextMuted, x + this.Px(16), limit);
         }
+
+        PaintChanges(g, font, x, limit);
     }
 
     private int PaintText(Graphics g, string? text, Font font, Color color, int x, int limit)
