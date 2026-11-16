@@ -31,6 +31,7 @@ internal sealed partial class GoToLineBox : Control
             return;
 
         _input.Text = (editor.CurrentLine + 1).ToString();
+        PlaceInParent();
         Visible = true;
         BringToFront();
         _input.Focus();
@@ -42,6 +43,8 @@ internal sealed partial class GoToLineBox : Control
     {
         if (e.KeyCode == Keys.Escape)
             _activeEditor()?.Focus();
+        else if (e.KeyCode == Keys.Enter)
+            Go();
         else
             return;
         e.SuppressKeyPress = true;
