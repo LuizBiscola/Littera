@@ -31,6 +31,7 @@ internal sealed partial class MainForm : ChromeForm
         var editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
         Controls.Add(editorHost);
         Controls.Add(_status);
+        _status.SegmentClicked += OnStatusSegmentClicked;
         _documents = new DocumentManager(editorHost, settings.Editor);
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Changed += UpdateStatus;
