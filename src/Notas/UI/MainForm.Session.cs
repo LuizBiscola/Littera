@@ -35,10 +35,16 @@ internal sealed partial class MainForm
     {
         bool hasDraft = saved.Draft is { } id && File.Exists(DraftStore.PathFor(id));
         bool hasFile = saved.Path.Length > 0 && File.Exists(saved.Path);
-        if (!hasDraft && !hasFile)
-            return null;
+        if (!hasDraft && !hasFile && !saved.Pinned)
+            return null; // fixada continua na lista mesmo sem arquivo, com o nome riscado
 
-        var document = new OpenDocument(saved.Path.Length > 0 ? Path.GetFullPath(saved.Path) : null, saved.UntitledNumber) { Restore = saved };
+        var document = new OpenDocument(saved.Path.Length > 0 ? Path.GetFullPath(saved.Path) : null, saved.UntitledNumber)
+        {
+            Restore = saved,
+            Pinned = saved.Pinned,
+            Missing = saved.Path.Length > 0 && !hasFile && !hasDraft,
+            IsLoaded = saved.Path.Length == 0 && !hasDraft, // "Sem título" fixada e vazia
+        };
         if (hasDraft)
         {
             document.DraftId = saved.Draft;

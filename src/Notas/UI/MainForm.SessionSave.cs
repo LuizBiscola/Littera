@@ -15,16 +15,22 @@ internal sealed partial class MainForm
             FolderHidden = !_folderShown,
             ExpandedFolders = [.. _folderPanel?.ExpandedFolders ?? []],
         };
-        foreach (OpenDocument document in _documents.Documents.Where(d => d.Path is not null || d.DraftId is not null))
+        foreach (OpenDocument document in _documents.Documents.Where(KeepInSession))
         {
             if (document == _documents.Active)
                 session.ActiveIndex = session.Documents.Count;
-            session.Documents.Add(SessionEntry(document));
+            SessionDocument entry = SessionEntry(document);
+            entry.Pinned = document.Pinned;
+            session.Documents.Add(entry);
         }
 
         SettingsStore.SaveSession(session);
         DraftStore.DeleteAllExcept(session.Documents.Select(d => d.Draft).OfType<string>());
     }
+
+    /// <summary>Fixadas sempre voltam; com alterações não salvas também (nada se perde); as outras, se "Reabrir sessão" estiver ligado.</summary>
+    private bool KeepInSession(OpenDocument document) =>
+        document.Pinned || document.DraftId is not null || (_settings.Window.ReopenSession && document.Path is not null);
 
     /// <summary>Aba nunca vista mantém o que veio da sessão anterior.</summary>
     private static SessionDocument SessionEntry(OpenDocument document) => document.Editor is { } editor && document.IsLoaded

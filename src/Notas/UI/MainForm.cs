@@ -48,6 +48,12 @@ internal sealed partial class MainForm : ChromeForm
         _documents.Loaded += CaptureBaseline; // referência das barras de alteração
         _documents.LoadFailed += (document, error) =>
         {
+            if (document.Pinned)
+            {
+                document.Missing = document.IsLoaded = true; // fixada fica, vazia e riscada, até o usuário desafixar
+                return;
+            }
+
             MessageBox.Show(this, error.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             _documents.Close(document);
         };

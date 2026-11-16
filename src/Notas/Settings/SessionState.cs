@@ -43,4 +43,6 @@ internal sealed class SessionDocument
 
     /// <summary>Linhas (base 0) dos cabeçalhos de trechos recolhidos; null = nenhum.</summary>
     public List<int>? Folded { get; set; }
+
+    public bool Pinned { get; set; }
 }
