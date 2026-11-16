@@ -34,6 +34,12 @@ internal sealed partial class FolderPanel
         {
             if (e.KeyCode == Keys.Escape)
                 _filter.Clear();
+            else if (e.KeyCode == Keys.Enter && Filtering)
+            {
+                _openFirst = true;
+                RefreshFilter(); // a lista pode estar atrasada em relação ao que foi digitado
+                e.SuppressKeyPress = true;
+            }
         };
     }
 
@@ -53,7 +59,9 @@ internal sealed partial class FolderPanel
         _search = cancel;
         string text = _filter.Text.Trim();
         List<FolderEntry> found = await Task.Run(() => FolderScanner.Search(folder, text, cancel.Token));
-        if (!cancel.IsCancellationRequested && !IsDisposed)
-            ShowRows([.. found.Select(entry => new FolderRow(entry, 0))]);
+        if (cancel.IsCancellationRequested || IsDisposed)
+            return;
+        ShowRows([.. found.Select(entry => new FolderRow(entry, 0))]);
+        OpenFirstIfAsked();
     }
 }
