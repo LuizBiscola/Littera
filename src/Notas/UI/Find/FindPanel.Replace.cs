@@ -42,6 +42,12 @@ internal sealed partial class FindPanel
 
     private void ReplaceAll()
     {
+        if (MultiFile)
+        {
+            _ = ReplaceInFilesAsync();
+            return;
+        }
+
         if (_activeEditor() is not { } editor)
             return;
         int count = TextSearch.ReplaceAll(editor, Query, _replace!.Text, ScopeRange(editor));
