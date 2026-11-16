@@ -16,6 +16,7 @@ internal sealed partial class DocumentManager
         Scintilla editor = document.Editor!;
         var cancellation = new CancellationTokenSource();
         document.LoadCancellation = cancellation;
+        DetectLanguage(document);
         Changed?.Invoke();
         try
         {

@@ -18,6 +18,7 @@ internal sealed partial class DocumentManager
         {
             await TextFileWriter.SaveAsync(target, editor.Text, document.Format.Encoding);
             document.Path = target;
+            DetectLanguage(document); // "Salvar como" .sql passa a realçar SQL
             document.FormatChanged = false;
             editor.SetSavePoint();
         }
