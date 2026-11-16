@@ -34,7 +34,7 @@ internal sealed partial class MainForm
     private ToolStripMenuItem RecentMenu(ContextMenuStrip owner)
     {
         var recent = new ToolStripMenuItem("Abrir recente") { Enabled = _settings.RecentFiles.Count > 0 };
-        recent.DropDown.Renderer = owner.Renderer;
+        Menus.Style(recent.DropDown, DeviceDpi);
         foreach (string path in _settings.RecentFiles)
             Add(recent.DropDownItems, Path.GetFileName(path), Path.GetDirectoryName(path), () => OpenFile(path)); // pasta à direita, em cinza
         return recent;

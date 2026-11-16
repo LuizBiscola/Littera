@@ -20,7 +20,8 @@ internal sealed partial class FontBox
         list.DrawItem += DrawFont;
 
         // ToolStripDropDown simples (não menu): sem margens de ícone, fica da largura da caixa.
-        var menu = new ToolStripDropDown { Renderer = Menus.Renderer(), Padding = new Padding(1) };
+        var menu = new ToolStripDropDown { Renderer = Menus.Renderer(DeviceDpi), Padding = new Padding(1) };
+        menu.HandleCreated += (_, _) => Chrome.Win32.RoundCorners(menu.Handle, Palette.Border);
         menu.Items.Add(new ToolStripControlHost(list) { AutoSize = false, Size = list.Size, Margin = Padding.Empty, Padding = Padding.Empty });
         menu.Closed += (_, _) => BeginInvoke(menu.Dispose);
         void Pick()
