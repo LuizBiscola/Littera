@@ -1,0 +1,28 @@
+# Medições
+
+Medido com `tools\measure.ps1` (mediana de 8–10 aberturas, pasta de dados limpa via `NOTAS_HOME`).
+"Abertura" = criação do processo até a janela pintada e ociosa. "Memória" = coluna do Gerenciador de Tarefas
+(working set privado). O **piso** é um WinForms vazio publicado do mesmo jeito, medido na mesma hora:
+a máquina tem bastante ruído (até ±150 ms entre execuções), então compare sempre com o piso.
+
+## Fase 0 — base (monitor em 100%)
+
+| | Abertura | Piso | Memória | Exe |
+|---|---|---|---|---|
+| fd | 400 ms | 306 ms | 7,6 MB | 3,0 MB |
+| sc | 331 ms | — | 9,8 MB | 117,8 MB |
+
+## Fase 1 — MVP (monitor em 150%, CPU ~35% ocupada por outros processos)
+
+| | Abertura | Piso | Memória | Exe |
+|---|---|---|---|---|
+| fd | 480–600 ms | 350–360 ms | 10,9 MB | 3,4 MB |
+| sc | 440 ms | 350–360 ms | 12,5 MB | 118,5 MB |
+
+Arquivo de 50 MB (fd): abre em ~2,2 s com o texto aparecendo aos poucos; maior travamento da interface **~56 ms**;
+memória com o arquivo aberto ~169 MB.
+
+O que pesa na abertura (marcas `-ShowMarks`): runtime até o `Main` (~100 ms, igual ao piso), construtor da
+janela com barra, painel, status e o primeiro editor (~150 ms), e a primeira pintura (~100 ms).
+Já otimizado: DLLs nativas carregadas em segundo plano, configurações e sessão lidas em paralelo,
+layout agrupado, arrastar-e-soltar registrado depois da janela pronta, busca e "ir para linha" criadas só no primeiro uso.
