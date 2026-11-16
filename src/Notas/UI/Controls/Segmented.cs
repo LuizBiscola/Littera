@@ -47,4 +47,18 @@ internal sealed class Segmented : Control
         }
     }
 
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        Graphics g = e.Graphics;
+        g.Clear(Parent?.BackColor ?? Palette.Background);
+        Shapes.FillRounded(g, Palette.ItemHover, new Rectangle(0, 0, Width, Height), this.Px(6));
+        for (int i = 0; i < _options.Length; i++)
+        {
+            Rectangle segment = Segment(i);
+            if (i == _selected)
+                Shapes.FillRounded(g, Palette.Background, segment, this.Px(5));
+            TextRenderer.DrawText(g, _options[i], UiFonts.Get(12.5f, DeviceDpi), segment, i == _selected ? Palette.Text : Palette.TextMuted,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+        }
+    }
 }
