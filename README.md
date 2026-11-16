@@ -9,6 +9,10 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 - Bloco atual (instrução SQL ou parágrafo) destacado e ocorrências da palavra do cursor.
 - Buscar e substituir com regex, maiúsculas e palavra inteira, em arquivo, bloco, seleção, abas abertas ou pasta.
 - Formatador de SQL configurável, múltiplos cursores, seleção em coluna (Alt+arrastar), zoom, quebra de linha.
+- Enter mantém a indentação da linha de cima; guias de indentação (desligáveis nas configurações).
+- Trechos recolhíveis pela seta da calha: instruções, parênteses, BEGIN/CASE…END e comentários em SQL; parágrafos
+  em texto; chaves, tags e recuo nas outras linguagens. O trecho recolhido mostra um resumo ("8 linhas │ SELECT
+  4 colunas · FROM pedidos · WHERE 2 filtros"); parar o mouse nele abre a prévia, clicar expande.
 - Encoding (UTF-8, UTF-8 com BOM, ANSI) e fim de linha detectados e convertidos pela barra de status.
 - Arquivos de 50 MB abrem em blocos sem travar a janela; sessão e rascunhos não salvos voltam ao reabrir.
 - Configurações em `%APPDATA%\Notas\settings.json` (também pela janela de configurações, Ctrl+,).
@@ -23,8 +27,10 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 | Ctrl+B / Ctrl+Shift+E | Painel de abas / de pasta | Alt+Z | Quebra de linha |
 | Ctrl+Plus / Minus / 0 | Zoom | Ctrl+Shift+L | Números de linha |
 | Ctrl+P | Ir para arquivo da pasta (Enter abre) | Ctrl+, | Configurações |
+| Ctrl+Shift+[ | Recolher trecho do cursor | Ctrl+Shift+] | Expandir trecho do cursor |
 
-Os atalhos podem ser trocados no `settings.json` (seção `shortcuts`).
+Os atalhos podem ser trocados no `settings.json` (seção `shortcuts`); "Recolher tudo" e "Expandir tudo" ficam no menu
+e podem ganhar atalho lá (`recolherTudo`, `expandirTudo`). Teclas como `[` e `]` seguem o layout do teclado (ABNT2 ou americano).
 
 ## Desenvolvimento
 
