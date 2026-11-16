@@ -20,6 +20,8 @@ internal sealed partial class MainForm
         Add(menu.Items, "Fechar aba", ShortcutText("fecharAba"), CloseActive);
         menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Formatar SQL", ShortcutText("formatarSql"), FormatSql);
+        Add(menu.Items, "Recolher tudo", ShortcutText("recolherTudo"), () => SetAllFolds(expand: false));
+        Add(menu.Items, "Expandir tudo", ShortcutText("expandirTudo"), () => SetAllFolds(expand: true));
         Add(menu.Items, "Modo foco", ShortcutText("modoFoco"), ToggleFocusMode);
         menu.Items.Add(new ToolStripSeparator());
         Add(menu.Items, "Configurações…", ShortcutText("configuracoes"), ShowSettings);
