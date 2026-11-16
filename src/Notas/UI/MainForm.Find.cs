@@ -23,6 +23,20 @@ internal sealed partial class MainForm
         }
     }
 
+    private GoToLineBox? _goToLine;
+
+    /// <summary>Ctrl+G; como a busca, só é criada no primeiro uso.</summary>
+    private void ShowGoToLine()
+    {
+        if (_goToLine is null)
+        {
+            _goToLine = new GoToLineBox(() => _documents.Active?.Editor);
+            _editorHost.Controls.Add(_goToLine);
+        }
+
+        _goToLine.Open();
+    }
+
     /// <summary>Faixa de texto do bloco do cursor (escopo "Bloco atual" da busca).</summary>
     private TextRange? CurrentBlockRange()
     {

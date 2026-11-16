@@ -17,6 +17,7 @@ internal sealed partial class MainForm
         [Keys.Control | Keys.B] = ToggleOpenFiles,
         [Keys.Control | Keys.F] = () => FindPanel.Open(replace: false),
         [Keys.Control | Keys.H] = () => FindPanel.Open(replace: true),
+        [Keys.Control | Keys.G] = ShowGoToLine,
         [Keys.F3] = () => FindPanel.Step(+1),
         [Keys.Shift | Keys.F3] = () => FindPanel.Step(-1),
         [Keys.Control | Keys.Oemplus] = () => Zoom(+1),
