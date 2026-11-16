@@ -4,7 +4,11 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 
 ## Recursos
 
-- Abas verticais ("ABERTOS") e painel "PASTA" com árvore, filtro e marca dos arquivos já abertos.
+- Abas verticais em duas seções, "FIXADAS" e "ABERTOS": alfinete para fixar (aba fixada não fecha por Ctrl+W nem
+  pelo botão do meio e sempre volta ao reabrir), arrastar para reordenar ou mudar de seção, clique direito com
+  fechar outras/salvas, copiar caminho, mostrar na pasta, renomear (F2), duplicar e descartar alterações.
+  Arquivo apagado ou movido fora do Notas aparece riscado.
+- Painel "PASTA" com árvore, filtro e marca dos arquivos já abertos.
 - Realce de SQL (T-SQL/ANSI), JSON, XML, C#, JavaScript, Python, Markdown e texto; escolha manual na barra de status.
 - Bloco atual (instrução SQL ou parágrafo) destacado, ocorrências da palavra do cursor e o parêntese que fecha o
   do cursor (em vermelho quando não tem par).
@@ -35,6 +39,8 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 | Ctrl+Shift+P | Paleta de comandos | Ctrl+/ | Comentar ou descomentar |
 | Ctrl+D | Duplicar linha ou seleção | Alt+↑ / Alt+↓ | Mover linha |
 | Alt+F5 | Próxima alteração | Shift+Alt+F5 | Alteração anterior |
+| Ctrl+Alt+P | Fixar ou desafixar a aba | Ctrl+Alt+C | Copiar caminho do arquivo |
+| F2 | Renomear o arquivo da aba | | |
 
 Os atalhos podem ser trocados no `settings.json` (seção `shortcuts`); "Recolher tudo" e "Expandir tudo" ficam no menu
 e podem ganhar atalho lá (`recolherTudo`, `expandirTudo`). Teclas como `[` e `]` seguem o layout do teclado (ABNT2 ou americano).
