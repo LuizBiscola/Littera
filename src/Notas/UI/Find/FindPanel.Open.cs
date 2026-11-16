@@ -24,6 +24,17 @@ internal sealed partial class FindPanel
         Search(select: false);
     }
 
+    /// <summary>F3 / Shift+F3: com o painel fechado, abre; aberto, vai para a próxima/anterior.</summary>
+    public void Step(int step)
+    {
+        if (Visible && _find.Text.Length > 0)
+            Navigate(step);
+        else
+            Open(replace: false);
+    }
+
+    public void Dismiss() => Close();
+
     partial void CaptureSelection(TextRange? selection);
 
     partial void ShowReplace(bool replace);

@@ -14,6 +14,7 @@ internal sealed partial class MainForm : ChromeForm
     private readonly StatusBar _status = new();
     private readonly OpenFilesPanel _openFiles;
     private readonly ChromeButton _panelButton;
+    private readonly Panel _editorHost;
 
     public MainForm(AppSettings settings, string[] args)
     {
@@ -28,12 +29,12 @@ internal sealed partial class MainForm : ChromeForm
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Palette.Background;
 
-        var editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
-        Controls.Add(editorHost);
+        _editorHost = new Panel { Dock = DockStyle.Fill, BackColor = Palette.Background };
+        Controls.Add(_editorHost);
         Controls.Add(_status);
         _status.SegmentClicked += OnStatusSegmentClicked;
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
-        _documents = new DocumentManager(editorHost, settings.Editor);
+        _documents = new DocumentManager(_editorHost, settings.Editor);
         _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
         _documents.Changed += UpdateStatus;
         _documents.ActiveChanged += BindActiveEditor;
@@ -51,12 +52,12 @@ internal sealed partial class MainForm : ChromeForm
 
         _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
         _panelButton.Toggled = settings.Window.ShowOpenFiles; // Visible é falso até a janela aparecer
-        TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
+        TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => FindPanel.Open(replace: false));
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
 
         TitleBar.MenuRequested += ShowAppMenu;
         _documents.EditorCreated += editor => EditorDrop.Attach(editor, OpenFile);
-        foreach (Control area in new Control[] { editorHost, _openFiles, _status, TitleBar })
+        foreach (Control area in new Control[] { _editorHost, _openFiles, _status, TitleBar })
             FileDrop.Attach(area, OpenFile);
 
         if (initialFile is null)

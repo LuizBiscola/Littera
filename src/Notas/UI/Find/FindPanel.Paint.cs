@@ -20,6 +20,8 @@ internal sealed partial class FindPanel
 
         foreach (FindButton button in _buttons.Where(b => b.Visible))
             PaintButton(g, button);
+        TextRenderer.DrawText(g, "Em:", UiFonts.Get(12, DeviceDpi), new Rectangle(_findBox.X, _scopes[0].Bounds.Y, this.Px(26), _scopes[0].Bounds.Height),
+            Palette.TextFaint, TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
 
         if (_find.Text.Length > 0)
         {
