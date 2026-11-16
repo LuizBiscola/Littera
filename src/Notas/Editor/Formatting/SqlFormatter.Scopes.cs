@@ -11,6 +11,16 @@ internal sealed partial class SqlFormatter
     private string? _clause;  // SELECT, WHERE...
     private int _inline;      // parênteses em linha abertos: funções, IN (...), OVER (...)
     private int _hang;        // alinhamento das continuações (colunas do SELECT)
+    private bool _breakBefore;
+
+    /// <summary>Quebra pendente (depois de BEGIN ou de ";" dentro de um bloco).</summary>
+    private void BreakIfPending()
+    {
+        if (!_breakBefore)
+            return;
+        _breakBefore = false;
+        NewLine(_base);
+    }
 
     private void OpenParen(bool subquery, bool spaceBefore)
     {
@@ -40,4 +50,15 @@ internal sealed partial class SqlFormatter
         Write(")", spaceBefore: false);
     }
 
+    /// <summary>";": fecha a instrução; dentro de BEGIN...END a próxima vem na linha de baixo, fora dele com uma linha em branco.</summary>
+    private void EndStatement()
+    {
+        Write(";", spaceBefore: false);
+        _scopes.Clear();
+        (_base, _clause, _inline, _hang) = (_blocks.Count(b => b), null, 0, 0);
+        if (_base == 0)
+            BlankLine();
+        else
+            _breakBefore = true;
+    }
 }
