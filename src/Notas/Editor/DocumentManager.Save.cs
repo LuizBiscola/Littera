@@ -20,6 +20,9 @@ internal sealed partial class DocumentManager
             document.Path = target;
             DetectLanguage(document); // "Salvar como" .sql passa a realçar SQL
             document.FormatChanged = false;
+            document.HasUnsavedDraft = false;
+            DraftStore.Delete(document.DraftId);
+            document.DraftId = null;
             editor.SetSavePoint();
         }
         finally

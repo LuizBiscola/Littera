@@ -20,11 +20,12 @@ internal sealed partial class DocumentManager
         Changed?.Invoke();
         try
         {
-            TextFileReader reader = await TextFileReader.OpenAsync(document.Path!, cancellation.Token);
+            TextFileReader reader = await TextFileReader.OpenAsync(document.SourcePath ?? document.Path!, cancellation.Token);
             LineEnding lineEnding = await DocumentLoader.LoadAsync(editor, reader.Chunks, cancellation.Token);
             document.Format = new TextFormat(reader.Encoding, lineEnding);
             editor.EolMode = lineEnding.ToScintilla();
             document.IsLoaded = true;
+            document.SourcePath = null;
             RestorePosition(document, editor);
             Loaded?.Invoke(document);
         }
@@ -53,6 +54,8 @@ internal sealed partial class DocumentManager
         int length = editor.TextLength;
         editor.SetSelection(Math.Clamp(saved.CaretPosition, 0, length), Math.Clamp(saved.AnchorPosition, 0, length));
         editor.FirstVisibleLine = Math.Max(0, saved.FirstVisibleLine);
+        if (Enum.TryParse(saved.Encoding, out TextEncodingKind encoding) && Enum.TryParse(saved.LineEnding, out LineEnding ending))
+            document.Format = new TextFormat(encoding, ending); // rascunho é UTF-8; vale o formato do arquivo original
         document.Restore = null;
     }
 }

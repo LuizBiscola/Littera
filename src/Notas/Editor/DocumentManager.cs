@@ -40,7 +40,7 @@ internal sealed partial class DocumentManager(Control host, EditorSettings setti
         ActiveChanged?.Invoke();
         Changed?.Invoke();
 
-        if (!document.IsLoaded && !document.IsLoading && document.Path is not null)
+        if (!document.IsLoaded && !document.IsLoading && (document.SourcePath ?? document.Path) is not null)
             _ = LoadAsync(document);
     }
 

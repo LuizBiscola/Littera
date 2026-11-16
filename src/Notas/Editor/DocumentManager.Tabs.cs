@@ -28,12 +28,20 @@ internal sealed partial class DocumentManager
         return document;
     }
 
+    /// <summary>Entra na lista já montado (aba restaurada de rascunho), sem carregar.</summary>
+    public void AddUnloaded(OpenDocument document)
+    {
+        _documents.Add(document);
+        Changed?.Invoke();
+    }
+
     /// <summary>Fecha sem perguntar (quem chama já tratou "salvar alterações?"). Nunca fica sem aba.</summary>
     public void Close(OpenDocument document)
     {
         int index = _documents.IndexOf(document);
         _documents.RemoveAt(index);
         document.LoadCancellation?.Cancel();
+        Services.DraftStore.Delete(document.DraftId); // fechou por vontade própria: o rascunho não serve mais
 
         if (document == Active)
         {

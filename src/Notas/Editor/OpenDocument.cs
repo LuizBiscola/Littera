@@ -33,7 +33,16 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
     /// <summary>Encoding trocado pela barra de status: o texto é o mesmo, mas o arquivo precisa ser regravado.</summary>
     public bool FormatChanged { get; set; }
 
-    public bool IsDirty => (Editor?.Modified ?? false) || FormatChanged;
+    public bool IsDirty => (Editor?.Modified ?? false) || FormatChanged || HasUnsavedDraft;
+
+    /// <summary>Id do rascunho em rascunhos\ (alterações guardadas fora do arquivo).</summary>
+    public string? DraftId { get; set; }
+
+    /// <summary>Veio de um rascunho da sessão anterior: está alterado mesmo sem edição nova.</summary>
+    public bool HasUnsavedDraft { get; set; }
+
+    /// <summary>De onde ler ao carregar quando não é o próprio arquivo (o rascunho).</summary>
+    public string? SourcePath { get; set; }
 
     /// <summary>Cursor e rolagem da sessão anterior, aplicados quando o arquivo terminar de carregar.</summary>
     public Settings.SessionDocument? Restore { get; set; }
