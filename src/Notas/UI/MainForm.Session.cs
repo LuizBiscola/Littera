@@ -48,29 +48,4 @@ internal sealed partial class MainForm
 
         return document;
     }
-
-    private void SaveSession()
-    {
-        var session = new SessionState();
-        foreach (OpenDocument document in _documents.Documents.Where(d => d.Path is not null))
-        {
-            if (document == _documents.Active)
-                session.ActiveIndex = session.Documents.Count;
-            session.Documents.Add(SessionEntry(document));
-        }
-
-        SettingsStore.SaveSession(session);
-    }
-
-    /// <summary>Aba nunca vista mantém a posição que veio da sessão anterior.</summary>
-    private static SessionDocument SessionEntry(OpenDocument document) => document.Editor is { } editor && document.IsLoaded
-        ? new SessionDocument
-        {
-            Path = document.Path!,
-            CaretPosition = editor.CurrentPosition,
-            AnchorPosition = editor.AnchorPosition,
-            FirstVisibleLine = editor.FirstVisibleLine,
-            Language = document.LanguageChosen ? document.Language.Name : null,
-        }
-        : document.Restore ?? new SessionDocument { Path = document.Path! };
 }
