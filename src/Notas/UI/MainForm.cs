@@ -36,6 +36,7 @@ internal sealed partial class MainForm : ChromeForm
         Controls.Add(_editorHost);
         Controls.Add(_status);
         _status.SegmentClicked += OnStatusSegmentClicked;
+        _status.ExpandAllClicked += () => SetAllFolds(expand: true);
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
         _draftTimer.Tick += (_, _) => SaveDrafts(AutosaveLimit);
         _documents = new DocumentManager(_editorHost, settings.Editor) { NewFileFormat = NewFileFormat(settings.Files) };
@@ -67,6 +68,7 @@ internal sealed partial class MainForm : ChromeForm
         {
             editor.Insert += (_, _) => ScheduleDrafts();
             editor.Delete += (_, _) => ScheduleDrafts();
+            editor.MarginClick += (_, e) => OnFoldMarginClick(editor, e);
         };
 
         StartupMetrics.Mark("f_drop");

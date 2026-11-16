@@ -11,7 +11,7 @@ internal sealed partial class StatusBar
     {
         base.OnMouseMove(e);
         StatusSegment? hit = SegmentAt(e.Location);
-        Cursor = hit is null ? Cursors.Default : Cursors.Hand;
+        Cursor = hit is null && !OverExpandAll(e.Location) ? Cursors.Default : Cursors.Hand;
         if (hit == _hover)
             return;
         _hover = hit;
@@ -30,6 +30,8 @@ internal sealed partial class StatusBar
         base.OnMouseUp(e);
         if (e.Button == MouseButtons.Left && SegmentAt(e.Location) is { } segment)
             SegmentClicked?.Invoke(segment, RectangleToScreen(_segmentBounds[segment]));
+        else if (e.Button == MouseButtons.Left && OverExpandAll(e.Location))
+            ExpandAllClicked?.Invoke();
     }
 
     private StatusSegment? SegmentAt(Point p)

@@ -23,6 +23,8 @@ internal sealed partial class StatusBar
             x = PaintText(g, _block, font, Palette.TextMuted, x + this.Px(9), limit);
         }
 
+        x = PaintFolded(g, font, x, limit);
+
         if (_occurrences is not null && x < limit)
         {
             var swatch = new Rectangle(x, (Height - this.Px(10)) / 2, this.Px(10), this.Px(10));
