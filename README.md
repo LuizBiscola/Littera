@@ -22,6 +22,7 @@ Editor de texto minimalista para Windows, focado em SQL e texto. C# / .NET 10 / 
 | Ctrl+Tab | Próxima aba | F11 | Modo foco |
 | Ctrl+B / Ctrl+Shift+E | Painel de abas / de pasta | Alt+Z | Quebra de linha |
 | Ctrl+Plus / Minus / 0 | Zoom | Ctrl+Shift+L | Números de linha |
+| Ctrl+P | Ir para arquivo da pasta (Enter abre) | Ctrl+, | Configurações |
 
 Os atalhos podem ser trocados no `settings.json` (seção `shortcuts`).
 

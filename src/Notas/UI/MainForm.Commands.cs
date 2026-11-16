@@ -15,6 +15,7 @@ internal sealed partial class MainForm
         ("painelAbas", "Ctrl+B", ToggleOpenFiles),
         ("abrirPasta", "Ctrl+Shift+O", ShowOpenFolderDialog),
         ("painelPasta", "Ctrl+Shift+E", ToggleFolderPanel),
+        ("irParaArquivo", "Ctrl+P", GoToFile),
         ("modoFoco", "F11", ToggleFocusMode),
         ("buscar", "Ctrl+F", () => FindPanel.Open(replace: false)),
         ("substituir", "Ctrl+H", () => FindPanel.Open(replace: true)),
