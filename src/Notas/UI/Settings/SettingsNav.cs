@@ -44,4 +44,22 @@ internal sealed class SettingsNav : Control
         Selected?.Invoke(index);
     }
 
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        Graphics g = e.Graphics;
+        g.Clear(Palette.Panel);
+        using (var border = new Pen(Palette.Border))
+            g.DrawLine(border, Width - 1, 0, Width - 1, Height);
+        TextRenderer.DrawText(g, "Configurações", UiFonts.Semibold(14, DeviceDpi), new Point(this.Px(18), this.Px(24)), Palette.Text, TextFormatFlags.NoPadding);
+
+        for (int i = 0; i < _pages.Count; i++)
+        {
+            Rectangle item = Item(i);
+            if (i == _selected || i == _hover)
+                Shapes.FillRounded(g, i == _selected ? Palette.ItemActive : Palette.ItemHover, item, this.Px(6));
+            Icons.Draw(g, _pages[i].Icon, new Rectangle(item.X + this.Px(6), item.Y, this.Px(22), item.Height), Palette.TextMuted, 13, DeviceDpi);
+            TextRenderer.DrawText(g, _pages[i].Name, UiFonts.Get(13, DeviceDpi), new Rectangle(item.X + this.Px(34), item.Y, item.Width, item.Height),
+                Palette.Text, TextFormatFlags.VerticalCenter | TextFormatFlags.NoPadding);
+        }
+    }
 }
