@@ -49,7 +49,7 @@ internal sealed partial class MainForm : ChromeForm
         Controls.SetChildIndex(_openFiles, 1); // encaixa depois da barra de status: ela ocupa a largura toda
 
         _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
-        _panelButton.Toggled = _openFiles.Visible;
+        _panelButton.Toggled = settings.Window.ShowOpenFiles; // Visible é falso até a janela aparecer
         TitleBar.AddAction(Icons.Search, "Buscar (Ctrl+F)", () => { });
         TitleBar.AddAction(Icons.Settings, "Configurações", () => { });
 
@@ -61,9 +61,10 @@ internal sealed partial class MainForm : ChromeForm
 
     private void ToggleOpenFiles()
     {
-        _openFiles.Visible = !_openFiles.Visible;
-        _panelButton.Toggled = _openFiles.Visible;
-        _settings.Window.ShowOpenFiles = _openFiles.Visible;
+        bool show = !_settings.Window.ShowOpenFiles;
+        _settings.Window.ShowOpenFiles = show;
+        _openFiles.Visible = show;
+        _panelButton.Toggled = show;
         TitleBar.Invalidate();
     }
 
