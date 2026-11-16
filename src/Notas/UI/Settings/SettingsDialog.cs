@@ -27,6 +27,7 @@ internal sealed partial class SettingsDialog : Form
         // Ordem importa: o WinForms encaixa primeiro o último adicionado (menu à esquerda, depois topo e rodapé).
         _content.Padding = new Padding(this.Px(28), 0, this.Px(28), this.Px(12));
         Controls.Add(_content);
+        Controls.Add(CreateFooter());
         Controls.Add(_header = new SettingsHeader(Close));
         var nav = new SettingsNav(pages);
         nav.Selected += ShowPage;
