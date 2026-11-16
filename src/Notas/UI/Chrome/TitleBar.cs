@@ -16,10 +16,10 @@ internal sealed partial class TitleBar : Control
         SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer
             | ControlStyles.UserPaint | ControlStyles.ResizeRedraw, true);
         Dock = DockStyle.Top;
-        Height = this.Px(40);
         _minimize = new(Icons.Minimize, "Minimizar", () => FindForm()!.WindowState = FormWindowState.Minimized) { IsWindowButton = true };
         _maximize = new(Icons.Maximize, "Maximizar", ToggleMaximize) { IsWindowButton = true };
         _close = new(Icons.Close, "Fechar", () => FindForm()!.Close()) { IsWindowButton = true, IsClose = true };
+        Height = this.Px(40); // depois dos botões: mudar a altura já dispara o layout
     }
 
     /// <summary>Área do maximizar: o formulário responde HTMAXBUTTON aqui (Snap Layouts do Windows 11).</summary>
