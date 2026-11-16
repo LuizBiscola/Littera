@@ -8,6 +8,10 @@ internal sealed partial class MainForm
     private Dictionary<Keys, Action> Shortcuts => _shortcuts ??= new()
     {
         [Keys.Control | Keys.N] = () => _documents.New(),
+        [Keys.Control | Keys.O] = ShowOpenDialog,
+        [Keys.Control | Keys.S] = () => _ = SaveActiveAsync(askPath: false),
+        [Keys.Control | Keys.Shift | Keys.S] = () => _ = SaveActiveAsync(askPath: true),
+        [Keys.Control | Keys.W] = () => _ = _documents.Active is { } active ? RequestCloseAsync(active) : Task.CompletedTask,
         [Keys.Control | Keys.B] = ToggleOpenFiles,
         [Keys.Control | Keys.Tab] = () => CycleTabs(+1),
         [Keys.Control | Keys.Shift | Keys.Tab] = () => CycleTabs(-1),
@@ -24,6 +28,9 @@ internal sealed partial class MainForm
 
         return base.ProcessCmdKey(ref msg, keyData);
     }
+
+    private Task SaveActiveAsync(bool askPath) =>
+        _documents.Active is { } active ? SaveAsync(active, askPath) : Task.CompletedTask;
 
     private void CycleTabs(int step)
     {
