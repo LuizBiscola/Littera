@@ -39,4 +39,13 @@ internal sealed partial class MainForm
         if (blank is not null)
             _documents.Close(blank);
     }
+
+    private void EnableFileDrop()
+    {
+        foreach (Control area in new Control[] { _editorHost, _openFiles, _status, TitleBar })
+            FileDrop.Attach(area, OpenFile);
+        foreach (OpenDocument document in _documents.Documents.Where(d => d.Editor is not null))
+            EditorDrop.Attach(document.Editor!, OpenFile);
+        _documents.EditorCreated += editor => EditorDrop.Attach(editor, OpenFile);
+    }
 }

@@ -19,6 +19,7 @@ internal sealed partial class MainForm : ChromeForm
     public MainForm(AppSettings settings, string[] args)
     {
         StartupMetrics.Mark("f_base");
+        SuspendLayout(); // um layout só no fim, em vez de um a cada controle adicionado
         _settings = settings;
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
@@ -58,9 +59,6 @@ internal sealed partial class MainForm : ChromeForm
         TitleBar.AddAction(Icons.Settings, "Configurações (Ctrl+,)", ShowSettings);
 
         TitleBar.MenuRequested += ShowAppMenu;
-        _documents.EditorCreated += editor => EditorDrop.Attach(editor, OpenFile);
-        foreach (Control area in new Control[] { _editorHost, _openFiles, _status, TitleBar })
-            FileDrop.Attach(area, OpenFile);
 
         StartupMetrics.Mark("f_drop");
         RestoreWindowPlacement();
@@ -69,6 +67,7 @@ internal sealed partial class MainForm : ChromeForm
             OpenMeasured(first);
         else
             _documents.New();
+        ResumeLayout(performLayout: true);
         StartupMetrics.Mark("f_open");
     }
 
@@ -92,6 +91,7 @@ internal sealed partial class MainForm : ChromeForm
     {
         Application.Idle -= OnFirstIdle;
         StartupMetrics.Write("ready_ms", StartupMetrics.SinceProcessStart());
+        EnableFileDrop(); // registrar alvos OLE custa; ninguém arrasta um arquivo nos primeiros milissegundos
 
         // A trava só conta depois da janela pronta: antes disso o usuário ainda nem pode interagir.
         if (StartupMetrics.Enabled && _documents.Active?.IsLoading == true)
