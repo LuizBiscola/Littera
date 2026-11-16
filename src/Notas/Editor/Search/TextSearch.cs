@@ -36,4 +36,36 @@ internal static class TextSearch
 
         return matches;
     }
+
+    /// <summary>Substitui tudo num único "desfazer". Com regex, a substituição aceita os grupos ($1).</summary>
+    public static int ReplaceAll(Scintilla editor, SearchQuery query, string replacement, TextRange range)
+    {
+        if (query.Text.Length == 0)
+            return 0;
+
+        int count = 0, end = range.End;
+        editor.SearchFlags = query.Flags;
+        editor.BeginUndoAction();
+        try
+        {
+            editor.SetTargetRange(range.Start, end);
+            while (editor.SearchInTarget(query.Text) != -1)
+            {
+                int matched = editor.TargetEnd - editor.TargetStart;
+                int written = query.Regex ? editor.ReplaceTargetRe(replacement) : editor.ReplaceTarget(replacement);
+                count++;
+                end += written - matched;
+                int next = editor.TargetEnd + (matched == 0 ? 1 : 0);
+                if (next > end)
+                    break;
+                editor.SetTargetRange(next, end);
+            }
+        }
+        finally
+        {
+            editor.EndUndoAction();
+        }
+
+        return count;
+    }
 }
