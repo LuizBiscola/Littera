@@ -33,11 +33,11 @@ internal static class FolderScanner
     }
 
     /// <summary>Arquivos de toda a árvore cujo nome contém o filtro (para no limite, pastas enormes não travam).</summary>
-    public static List<FolderEntry> Search(string folder, string filter, int limit = 500)
+    public static List<FolderEntry> Search(string folder, string filter, CancellationToken cancel = default, int limit = 500)
     {
         var found = new List<FolderEntry>();
         var pending = new Stack<string>([folder]);
-        while (pending.Count > 0 && found.Count < limit)
+        while (pending.Count > 0 && found.Count < limit && !cancel.IsCancellationRequested)
         {
             foreach (FolderEntry entry in Children(pending.Pop()))
             {
@@ -49,5 +49,29 @@ internal static class FolderScanner
         }
 
         return [.. found.OrderBy(e => e.Path, StringComparer.CurrentCultureIgnoreCase)];
+    }
+
+    /// <summary>Arquivos e subpastas da árvore toda para o rodapé; Partial quando parou no limite.</summary>
+    public static (int Files, int Folders, bool Partial) Count(string folder, CancellationToken cancel = default, int limit = 20_000)
+    {
+        int files = 0, folders = 0;
+        var pending = new Stack<string>([folder]);
+        while (pending.Count > 0 && files + folders < limit && !cancel.IsCancellationRequested)
+        {
+            foreach (FolderEntry entry in Children(pending.Pop()))
+            {
+                if (entry.IsDirectory)
+                {
+                    folders++;
+                    pending.Push(entry.Path);
+                }
+                else
+                {
+                    files++;
+                }
+            }
+        }
+
+        return (files, folders, pending.Count > 0);
     }
 }
