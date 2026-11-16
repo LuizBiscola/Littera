@@ -1,0 +1,38 @@
+using Notas.Theme;
+
+namespace Notas.UI;
+
+/// <summary>
+/// Alça na borda entre um painel lateral e o editor: com o mouse em cima o cursor vira ↔ e a linha fica azul;
+/// arrastar muda a largura e o clique duplo volta à padrão. Larguras em px de 96 dpi, como no protótipo.
+/// </summary>
+internal sealed partial class EdgeSizer(Control panel, bool rightEdge)
+{
+    public bool Hot { get; private set; }
+
+    private Rectangle Line => new(rightEdge ? panel.Width - panel.Px(2) : 0, 0, panel.Px(2), panel.Height);
+
+    private bool Contains(Point p) => rightEdge ? p.X >= panel.Width - panel.Px(6) : p.X < panel.Px(6);
+
+    /// <summary>Mouse em cima da borda: cursor ↔ e linha azul (o painel segue com o hover normal).</summary>
+    public void MouseMove(MouseEventArgs e) => SetHot(e.Button == MouseButtons.None && Contains(e.Location));
+
+    public void MouseLeave() => SetHot(false);
+
+    public void Paint(Graphics g)
+    {
+        if (!Hot)
+            return;
+        using var accent = new SolidBrush(Palette.Accent);
+        g.FillRectangle(accent, Line);
+    }
+
+    private void SetHot(bool hot)
+    {
+        if (hot == Hot)
+            return;
+        Hot = hot;
+        panel.Cursor = hot ? Cursors.SizeWE : Cursors.Default;
+        panel.Invalidate(Line);
+    }
+}

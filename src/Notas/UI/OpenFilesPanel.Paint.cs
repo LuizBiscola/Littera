@@ -37,5 +37,6 @@ internal sealed partial class OpenFilesPanel
 
         PaintDrag(g, dpi);
         PaintFooter(g, dpi);
+        _sizer.Paint(g);
     }
 }

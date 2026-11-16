@@ -12,6 +12,7 @@ internal sealed partial class OpenFilesPanel
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);
+        _sizer.MouseMove(e);
         if (UpdateDrag(e))
             return;
         TabSlot? slot = SlotAt(e.Location);
@@ -29,6 +30,7 @@ internal sealed partial class OpenFilesPanel
     protected override void OnMouseLeave(EventArgs e)
     {
         base.OnMouseLeave(e);
+        _sizer.MouseLeave();
         _hoverDocument = null;
         _hoverButton = TabButton.None;
         _hoverNew = false;

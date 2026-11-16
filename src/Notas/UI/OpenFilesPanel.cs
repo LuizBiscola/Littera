@@ -19,6 +19,7 @@ internal sealed partial class OpenFilesPanel : Control
     private const int ItemStep = 34;
 
     private readonly DocumentManager _documents;
+    private readonly EdgeSizer _sizer;
 
     public OpenFilesPanel(DocumentManager documents)
     {
@@ -28,6 +29,7 @@ internal sealed partial class OpenFilesPanel : Control
         _documents.Changed += Invalidate;
         Dock = DockStyle.Left;
         Width = this.Px(PanelWidth);
+        _sizer = new EdgeSizer(this, rightEdge: true);
         _tipTimer.Tick += (_, _) => ShowTip();
         _flashTimer.Tick += (_, _) => OnFlashTick();
     }
