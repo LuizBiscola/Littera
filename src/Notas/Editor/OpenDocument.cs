@@ -1,3 +1,4 @@
+using Notas.Editor.Languages;
 using Notas.Services;
 using ScintillaNET;
 
@@ -15,6 +16,11 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
     public Scintilla? Editor { get; set; }
 
     public TextFormat Format { get; set; } = TextFormat.Default;
+
+    public Language Language { get; set; } = LanguageRegistry.PlainText;
+
+    /// <summary>Escolhida à mão no seletor: não muda mais pela extensão (nem ao "Salvar como").</summary>
+    public bool LanguageChosen { get; set; }
 
     /// <summary>O conteúdo do arquivo já está no editor (documentos novos nascem carregados).</summary>
     public bool IsLoaded { get; set; }
