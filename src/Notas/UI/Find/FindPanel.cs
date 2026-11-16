@@ -30,6 +30,7 @@ internal sealed partial class FindPanel : Control
         AddReplace();
         AddScopes();
         _find.TextChanged += (_, _) => Search(select: true);
+        HandleKeys(_find);
     }
 
     partial void Search(bool select);
