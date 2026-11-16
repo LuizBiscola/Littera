@@ -16,9 +16,13 @@ internal sealed partial class MainForm
         };
         editor.DwellStart += (_, e) =>
         {
-            if (e.X >= 0 && e.X < editor.Margins[EditorMargins.Changes].Width)
-                ShowChangePreview(editor, editor.LineFromPosition(editor.CharPositionFromPoint(e.X, e.Y)));
+            if (ChangeLineAt(editor, new Point(e.X, e.Y)) is int line)
+                ShowChangePreview(editor, line);
         };
+        editor.MouseMove += (_, e) => SetChangeHover(editor, ChangeLineAt(editor, e.Location) is int line ? _changeSet?.HunkAt(line, editor.Lines.Count) : null);
+        editor.MouseLeave += (_, _) => SetChangeHover(editor, null);
+        if (editor is NotasEditor notas)
+            notas.HandCursorAt = point => ChangeLineAt(editor, point) is not null;
         editor.UpdateUI += (_, e) =>
         {
             if ((e.Change & (UpdateChange.VScroll | UpdateChange.HScroll)) != 0)
