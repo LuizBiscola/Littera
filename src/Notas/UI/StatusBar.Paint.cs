@@ -27,7 +27,7 @@ internal sealed partial class StatusBar
 
             bool language = segment == StatusSegment.Language;
             Font segmentFont = language ? UiFonts.Semibold(11.5f, DeviceDpi) : font;
-            int textWidth = TextRenderer.MeasureText(g, text, segmentFont, Size.Empty, Plain).Width;
+            int textWidth = TextRenderer.MeasureText(g, text, segmentFont, Size.Empty, Measure).Width;
             int width = textWidth + (language ? this.Px(14) : 0);
             x -= width;
 

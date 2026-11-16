@@ -7,6 +7,9 @@ internal sealed partial class StatusBar
     private const TextFormatFlags Plain = TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix
         | TextFormatFlags.SingleLine | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis;
 
+    // Medir sem reticências: com EndEllipsis e tamanho vazio o GDI devolve a largura já cortada.
+    private const TextFormatFlags Measure = TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix | TextFormatFlags.SingleLine;
+
     /// <summary>Posição do cursor, bloco atual (faixa azul) e ocorrências (amostra amarela), como no protótipo.</summary>
     private void PaintLeft(Graphics g, Font font, int limit)
     {
@@ -35,7 +38,7 @@ internal sealed partial class StatusBar
         if (string.IsNullOrEmpty(text) || x >= limit)
             return x;
 
-        int width = Math.Min(TextRenderer.MeasureText(g, text, font, Size.Empty, Plain).Width, limit - x);
+        int width = Math.Min(TextRenderer.MeasureText(g, text, font, Size.Empty, Measure).Width, limit - x);
         TextRenderer.DrawText(g, text, font, new Rectangle(x, 0, width, Height), color, Plain);
         return x + width + this.Px(18);
     }
