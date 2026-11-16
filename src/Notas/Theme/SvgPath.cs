@@ -2,14 +2,14 @@ using System.Drawing.Drawing2D;
 
 namespace Notas.Theme;
 
-/// <summary>Converte o atributo "d" de um caminho SVG para <see cref="GraphicsPath"/> (comandos M L H V Z).</summary>
+/// <summary>Converte o atributo "d" de um caminho SVG para <see cref="GraphicsPath"/> (comandos M L H V C S Q Z).</summary>
 internal static partial class SvgPath
 {
     public static void AddTo(GraphicsPath path, string d)
     {
         var reader = new Reader(d);
-        PointF current = default, start = default;
-        char command = ' ';
+        PointF current = default, start = default, control = default;
+        char command = ' ', previous = ' ';
         while (reader.More)
         {
             if (reader.AtCommand)
@@ -27,6 +27,7 @@ internal static partial class SvgPath
                 return relative ? new PointF(origin.X + p.X, origin.Y + p.Y) : p;
             }
 
+            PointF end;
             switch (char.ToUpperInvariant(command))
             {
                 case 'M':
@@ -44,6 +45,18 @@ internal static partial class SvgPath
                     float y = reader.Number();
                     path.AddLine(current, current = new PointF(current.X, relative ? current.Y + y : y));
                     break;
+                case 'C' or 'S':
+                    PointF c1 = command is 'C' or 'c' ? Next() : previous is 'C' or 'S' ? Mirror(control, current) : current;
+                    control = Next();
+                    path.AddBezier(current, c1, control, end = Next());
+                    current = end;
+                    break;
+                case 'Q':
+                    PointF q = Next();
+                    end = Next();
+                    path.AddBezier(current, Lerp(current, q), Lerp(end, q), end);
+                    current = end;
+                    break;
                 case 'Z':
                     path.CloseFigure();
                     current = start;
@@ -51,6 +64,14 @@ internal static partial class SvgPath
                 default:
                     throw new FormatException($"Comando não suportado: '{command}'.");
             }
+
+            previous = char.ToUpperInvariant(command);
         }
     }
+
+    private static PointF Mirror(PointF point, PointF center) => new(2 * center.X - point.X, 2 * center.Y - point.Y);
+
+    /// <summary>Controle da cúbica equivalente à quadrática: 2/3 do caminho até o controle.</summary>
+    private static PointF Lerp(PointF from, PointF control) =>
+        new(from.X + 2f / 3 * (control.X - from.X), from.Y + 2f / 3 * (control.Y - from.Y));
 }
