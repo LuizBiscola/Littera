@@ -38,6 +38,16 @@ internal static class Palette
     public static readonly Color CodePreview = Hex(0xFBFBFC);
     public static readonly Color ChangeUnsaved = Hex(0xE8892B);
     public static readonly Color ChangeSaved = Hex(0x3BAA6E);
+    public static readonly Color RevertBack = Hex(0xFDF0E3);
+    public static readonly Color RevertText = Hex(0xB8661A);
+    public static readonly Color DiffRemovedBack = Hex(0xFDEEEE);
+    public static readonly Color DiffRemovedNumber = Hex(0xC98A8A);
+    public static readonly Color DiffRemovedSign = Hex(0xC0392B);
+    public static readonly Color DiffRemovedText = Hex(0x8A3A3A);
+    public static readonly Color DiffAddedBack = Hex(0xEAF7EF);
+    public static readonly Color DiffAddedNumber = Hex(0x7DB394);
+    public static readonly Color DiffAddedSign = Hex(0x23874F);
+    public static readonly Color DiffAddedText = Hex(0x1F5E3A);
     public static readonly Color Match = Hex(0xFCE7A6);
     public static readonly Color MatchBorder = Hex(0xE9C65A);
     public static readonly Color MatchCurrent = Hex(0xF8D774);
