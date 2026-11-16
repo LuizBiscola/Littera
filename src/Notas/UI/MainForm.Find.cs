@@ -15,8 +15,9 @@ internal sealed partial class MainForm
         {
             if (_findPanel is null)
             {
-                _findPanel = new FindPanel(() => _documents.Active?.Editor) { BlockRange = CurrentBlockRange };
+                _findPanel = new FindPanel(() => _documents.Active?.Editor) { BlockRange = CurrentBlockRange, Files = this };
                 _editorHost.Controls.Add(_findPanel);
+                _documents.ActiveChanged += KeepFloatingOnTop;
             }
 
             return _findPanel;
@@ -32,9 +33,17 @@ internal sealed partial class MainForm
         {
             _goToLine = new GoToLineBox(() => _documents.Active?.Editor);
             _editorHost.Controls.Add(_goToLine);
+            _documents.ActiveChanged += KeepFloatingOnTop;
         }
 
         _goToLine.Open();
+    }
+
+    /// <summary>Trocar de aba traz o editor para a frente; busca e "ir para linha" abertas continuam por cima.</summary>
+    private void KeepFloatingOnTop()
+    {
+        foreach (Control floating in new Control?[] { _findPanel, _goToLine }.OfType<Control>().Where(c => c.Visible))
+            floating.BringToFront();
     }
 
     /// <summary>Faixa de texto do bloco do cursor (escopo "Bloco atual" da busca).</summary>
