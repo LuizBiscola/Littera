@@ -1,3 +1,4 @@
+using Notas.Editor.Folding;
 using Notas.Settings;
 using Notas.Theme;
 using ScintillaNET;
@@ -11,16 +12,19 @@ namespace Notas.Editor;
 internal static class EditorMargins
 {
     public const int Numbers = 0;
-    public const int Spacer = 1;
+    public const int Fold = 1;
     public const int BlockBar = 2;
 
     public static void Apply(Scintilla editor, EditorSettings settings)
     {
-        Margin spacer = editor.Margins[Spacer];
-        spacer.Type = MarginType.Color;
-        spacer.BackColor = Palette.Background;
-        spacer.Mask = 0;
-        spacer.Width = Px(editor, settings.ShowLineNumbers ? 14 : 8);
+        // Coluna de dobra entre os números e a faixa do bloco: setas dos trechos recolhíveis.
+        Margin fold = editor.Margins[Fold];
+        fold.Type = MarginType.Symbol;
+        fold.Mask = Marker.MaskFolders;
+        fold.Sensitive = true;
+        fold.Cursor = MarginCursor.Arrow;
+        fold.Width = Px(editor, 20);
+        FoldMarkers.Define(editor);
 
         Margin bar = editor.Margins[BlockBar];
         bar.Type = MarginType.Symbol;

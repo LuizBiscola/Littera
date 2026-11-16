@@ -29,6 +29,7 @@ internal static class EditorFactory
 
         ApplySettings(editor, settings);
         AutoIndent.Attach(editor);
+        Folding.EditorFolding.Setup(editor);
         BlockHighlighter.Setup(editor);
         OccurrenceHighlighter.Setup(editor);
         Search.FindSession.Setup(editor);

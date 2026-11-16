@@ -1,3 +1,4 @@
+using Notas.Editor.Folding;
 using Notas.Settings;
 using Notas.Theme;
 using ScintillaNET;
@@ -25,6 +26,8 @@ internal static class EditorStyle
         numbers.BackColor = Palette.Background;
         editor.Styles[Style.IndentGuide].ForeColor = Palette.IndentGuide;
         editor.Styles[Style.IndentGuide].BackColor = Palette.Background;
+        SummaryStyle(editor.Styles[EditorFolding.SummaryStyle], Palette.TextMuted, Palette.FoldSummary, settings);
+        SummaryStyle(editor.Styles[EditorFolding.SummaryActiveStyle], Palette.Accent, Palette.FoldSummaryActive, settings);
 
         ApplyLineSpacing(editor, settings);
         editor.CaretForeColor = Palette.Text;
@@ -33,6 +36,15 @@ internal static class EditorStyle
         editor.SelectionBackColor = Palette.Selection;
         editor.SelectionAdditionalBackColor = Palette.Selection;
         editor.AdditionalCaretForeColor = Palette.Accent;
+    }
+
+    /// <summary>Resumo de trecho recolhido: fonte da interface, um pouco menor que o código, sobre fundo claro.</summary>
+    private static void SummaryStyle(Style style, Color fore, Color back, EditorSettings settings)
+    {
+        style.Font = UiFonts.Family;
+        style.SizeF = settings.FontSize * 11.5f / 13f;
+        style.ForeColor = fore;
+        style.BackColor = back;
     }
 
     /// <summary>Espaçamento como múltiplo da fonte: a sobra vira espaço acima e abaixo do texto.</summary>
