@@ -18,6 +18,9 @@ internal sealed partial class OpenFilesPanel
         if (index == _hoverIndex && overClose == _hoverClose && overNew == _hoverNew)
             return;
 
+        if (index != _hoverIndex)
+            ResetMouseEventArgs(); // faz o MouseHover disparar de novo para a dica da nova aba
+
         _hoverIndex = index;
         _hoverClose = overClose;
         _hoverNew = overNew;
