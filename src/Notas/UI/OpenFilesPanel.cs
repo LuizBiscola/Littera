@@ -27,7 +27,7 @@ internal sealed partial class OpenFilesPanel : Control
 
     private Rectangle ItemBounds(int index)
     {
-        int top = this.Px(HeaderHeight + 2) + index * this.Px(ItemHeight + ItemGap);
+        int top = this.Px(HeaderHeight + 2) + index * this.Px(ItemHeight + ItemGap) - _scroll;
         return new Rectangle(this.Px(8), top, Width - this.Px(16), this.Px(ItemHeight));
     }
 
