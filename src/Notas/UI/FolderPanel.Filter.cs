@@ -34,12 +34,13 @@ internal sealed partial class FolderPanel
         {
             if (e.KeyCode == Keys.Escape)
                 _filter.Clear();
-            else if (e.KeyCode == Keys.Enter && Filtering)
-            {
-                _openFirst = true;
-                RefreshFilter(); // a lista pode estar atrasada em relação ao que foi digitado
-                e.SuppressKeyPress = true;
-            }
+            else if (e.KeyCode is Keys.Down or Keys.Up)
+                MoveKeySelection(e.KeyCode == Keys.Down ? 1 : -1);
+            else if (e.KeyCode == Keys.Enter)
+                OpenKeySelection();
+            else
+                return;
+            e.SuppressKeyPress = true;
         };
     }
 

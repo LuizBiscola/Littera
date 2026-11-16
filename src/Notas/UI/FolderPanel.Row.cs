@@ -15,8 +15,8 @@ internal sealed partial class FolderPanel
         (FolderEntry entry, int depth) = (_rows[index].Entry, _rows[index].Depth);
         OpenDocument? open = entry.IsDirectory ? null : _documents.Documents.FirstOrDefault(d => SamePath(d.Path, entry.Path));
         bool active = open is not null && open == _documents.Active;
-        if (active || index == _hoverIndex)
-            Shapes.FillRounded(g, active ? Palette.AccentSoft : Palette.ItemHover, row, this.Px(5));
+        if (active || index == _hoverIndex || index == _keyIndex)
+            Shapes.FillRounded(g, active ? Palette.AccentSoft : index == _keyIndex ? Palette.ItemActive : Palette.ItemHover, row, this.Px(5));
 
         int x = row.X + this.Px(16 * depth);
         Font font = UiFonts.Get(12.5f, dpi);

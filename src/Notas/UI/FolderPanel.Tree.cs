@@ -31,6 +31,7 @@ internal sealed partial class FolderPanel
     {
         _rows = rows;
         _hoverIndex = -1;
+        _keyIndex = Filtering && rows.Count > 0 ? 0 : -1; // com filtro, Enter abre o primeiro resultado
         ClampScroll();
         Invalidate();
     }
