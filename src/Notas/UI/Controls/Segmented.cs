@@ -12,7 +12,8 @@ internal sealed class Segmented : Control
     {
         SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
         _options = options;
-        Size = new Size(this.Px(76) * options.Length + this.Px(6), this.Px(30));
+        int each = Math.Max(this.Px(76), options.Max(o => TextRenderer.MeasureText(o, UiFonts.Get(12.5f, DeviceDpi)).Width) + this.Px(20));
+        Size = new Size(each * options.Length + this.Px(6), this.Px(30));
         Cursor = Cursors.Hand;
     }
 
