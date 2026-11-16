@@ -24,7 +24,10 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
     /// <summary>Cancelada ao fechar a aba no meio da carga.</summary>
     public CancellationTokenSource? LoadCancellation { get; set; }
 
-    public bool IsDirty => Editor?.Modified ?? false;
+    /// <summary>Encoding trocado pela barra de status: o texto é o mesmo, mas o arquivo precisa ser regravado.</summary>
+    public bool FormatChanged { get; set; }
+
+    public bool IsDirty => (Editor?.Modified ?? false) || FormatChanged;
 }
 
 internal static class LineEndingExtensions
