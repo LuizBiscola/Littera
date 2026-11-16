@@ -5,7 +5,7 @@ using Notas.UI.Controls;
 namespace Notas.UI.Settings;
 
 /// <summary>Página "Atalhos": mostra os atalhos; a edição é no settings.json (aberto numa aba pelo botão).</summary>
-internal sealed class ShortcutsPage : SettingsPage
+internal sealed partial class ShortcutsPage : SettingsPage
 {
     public override string Name => "Atalhos";
 
