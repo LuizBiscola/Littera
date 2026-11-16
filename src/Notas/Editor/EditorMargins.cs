@@ -1,3 +1,4 @@
+using Notas.Editor.Changes;
 using Notas.Editor.Folding;
 using Notas.Settings;
 using Notas.Theme;
@@ -6,18 +7,25 @@ using ScintillaNET;
 namespace Notas.Editor;
 
 /// <summary>
-/// Calha do protótipo: números alinhados à direita, 14 px de respiro, faixa de 3 px do bloco atual
-/// e 16 px antes do texto.
+/// Calha do protótipo, da esquerda para a direita: barra de alterações, números alinhados à direita,
+/// setas de dobra, faixa de 3 px do bloco atual e 16 px antes do texto.
 /// </summary>
 internal static class EditorMargins
 {
-    public const int Numbers = 0;
-    public const int Fold = 1;
-    public const int BlockBar = 2;
+    public const int Changes = 0;
+    public const int Numbers = 1;
+    public const int Fold = 2;
+    public const int BlockBar = 3;
 
     public static void Apply(Scintilla editor, EditorSettings settings)
     {
-        // Coluna de dobra entre os números e a faixa do bloco: setas dos trechos recolhíveis.
+        Margin changes = editor.Margins[Changes];
+        changes.Type = MarginType.Symbol;
+        changes.Mask = ChangeMarkers.AllMask;
+        changes.Sensitive = true; // clique na barra abre a prévia da alteração
+        changes.Cursor = MarginCursor.Arrow;
+        changes.Width = settings.ShowChanges ? Px(editor, 8) : 0;
+
         Margin fold = editor.Margins[Fold];
         fold.Type = MarginType.Symbol;
         fold.Mask = Marker.MaskFolders;
@@ -31,6 +39,7 @@ internal static class EditorMargins
         bar.Width = Px(editor, 3);
 
         editor.Margins[Numbers].Type = MarginType.Number;
+        editor.Margins[Numbers].Mask = 0;
         editor.Margins.Left = Px(editor, 16);
         UpdateNumberWidth(editor, settings.ShowLineNumbers);
     }

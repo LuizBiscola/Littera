@@ -9,9 +9,10 @@ namespace Notas.Editor.Highlights;
 /// </summary>
 internal static class BlockHighlighter
 {
-    private const int Background = 20;
-    private const int Bar = 21;
-    private const int CurrentBar = 22;
+    // 21 a 24 são do histórico de alterações do Scintilla; 25 a 31, da dobra.
+    private const int Background = 18;
+    private const int Bar = 19;
+    private const int CurrentBar = 20;
     private const int MaxMarkedLines = 5000; // bloco gigante: só a faixa da linha atual
 
     public static void Setup(Scintilla editor)

@@ -30,6 +30,7 @@ internal static class EditorFactory
         ApplySettings(editor, settings);
         AutoIndent.Attach(editor);
         BraceMatcher.Attach(editor);
+        Changes.ChangeMarkers.Setup(editor);
         Folding.EditorFolding.Setup(editor);
         BlockHighlighter.Setup(editor);
         OccurrenceHighlighter.Setup(editor);
