@@ -12,7 +12,8 @@ internal sealed partial class MainForm
         {
             if (_folderPanel is null)
             {
-                _folderPanel = new FolderPanel(_documents) { Visible = false };
+                _folderPanel = new FolderPanel(_documents) { Visible = false, ChosenWidth = _settings.Window.FolderWidth };
+                _folderPanel.WidthChosen += width => _settings.Window.FolderWidth = width;
                 _folderPanel.FileRequested += OpenFile;
                 _folderPanel.CloseRequested += CloseFolder;
                 Controls.Add(_folderPanel);

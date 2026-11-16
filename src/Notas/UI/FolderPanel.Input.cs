@@ -8,6 +8,9 @@ internal sealed partial class FolderPanel
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);
+        _sizer.MouseMove(e);
+        if (_sizer.Dragging)
+            return;
         int index = RowAt(e.Location);
         Rectangle button = HeaderButtons().FirstOrDefault(b => b.Bounds.Contains(e.Location)).Bounds;
         if (index == _hoverIndex && button == _hoverButton)
@@ -22,14 +25,23 @@ internal sealed partial class FolderPanel
     protected override void OnMouseLeave(EventArgs e)
     {
         base.OnMouseLeave(e);
+        _sizer.MouseLeave();
         _hoverIndex = -1;
         _hoverButton = Rectangle.Empty;
         Invalidate();
     }
 
+    protected override void OnMouseDown(MouseEventArgs e)
+    {
+        base.OnMouseDown(e);
+        _sizer.MouseDown(e);
+    }
+
     protected override void OnMouseUp(MouseEventArgs e)
     {
         base.OnMouseUp(e);
+        if (_sizer.MouseUp(e))
+            return;
         if (e.Button == MouseButtons.Right && RowAt(e.Location) is >= 0 and int row)
             ShowRowMenu(_rows[row].Entry, e.Location);
         if (e.Button != MouseButtons.Left)

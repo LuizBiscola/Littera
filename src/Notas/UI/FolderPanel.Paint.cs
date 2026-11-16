@@ -24,6 +24,7 @@ internal sealed partial class FolderPanel
         string footer = Filtering ? $"{_rows.Count} {Plural(_rows.Count, "encontrado", "encontrados")}" : _countText;
         TextRenderer.DrawText(g, footer, UiFonts.Get(10.5f, dpi),
             new Rectangle(this.Px(16), Height - this.Px(FooterHeight), Width - this.Px(32), this.Px(FooterHeight)), Palette.TextFaint, Line);
+        _sizer.Paint(g);
     }
 
     private void PaintHeader(Graphics g, int dpi)

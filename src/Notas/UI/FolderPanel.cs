@@ -12,6 +12,8 @@ internal sealed partial class FolderPanel : Control
 
     private readonly DocumentManager _documents;
     private readonly HashSet<string> _expanded = new(StringComparer.OrdinalIgnoreCase);
+    private readonly EdgeSizer _sizer;
+    private int _width = PanelWidth;
 
     public FolderPanel(DocumentManager documents)
     {
@@ -22,6 +24,12 @@ internal sealed partial class FolderPanel : Control
         _documents.Changed += Invalidate; // marcas de "aberto em aba" e "não salvo"
         Dock = DockStyle.Right;
         Width = this.Px(PanelWidth);
+        _sizer = new EdgeSizer(this, rightEdge: false, PanelWidth);
+        _sizer.Resized += width =>
+        {
+            _width = width;
+            WidthChosen?.Invoke(width);
+        };
         CreateFilter();
         _watchTimer.Tick += (_, _) =>
         {
@@ -41,9 +49,19 @@ internal sealed partial class FolderPanel : Control
     /// <summary>Botão "Fechar pasta".</summary>
     public event Action? CloseRequested;
 
+    /// <summary>Largura arrastada na borda (px de 96 dpi), para guardar nas configurações.</summary>
+    public event Action<int>? WidthChosen;
+
+    /// <summary>Largura guardada (px de 96 dpi); valores fora da faixa da alça são corrigidos.</summary>
+    public int ChosenWidth
+    {
+        get => _width;
+        set => Width = this.Px(_width = Math.Clamp(value, EdgeSizer.MinWidth, EdgeSizer.MaxWidth));
+    }
+
     protected override void RescaleConstantsForDpi(int deviceDpiOld, int deviceDpiNew)
     {
         base.RescaleConstantsForDpi(deviceDpiOld, deviceDpiNew);
-        Width = this.Px(PanelWidth);
+        Width = this.Px(_width);
     }
 }
