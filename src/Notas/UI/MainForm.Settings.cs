@@ -14,8 +14,7 @@ internal sealed partial class MainForm
         if (dialog.ShowDialog(this) != DialogResult.OK)
             return;
 
-        SettingsCopy.Into(dialog.Draft.Editor, _settings.Editor);
-        ApplyEditorSettings();
+        ApplySettings(dialog.Draft);
         SettingsStore.SaveSettings(_settings);
     }
 
