@@ -18,6 +18,7 @@ internal sealed partial class MainForm : ChromeForm
 
     public MainForm(AppSettings settings, string[] args)
     {
+        StartupMetrics.Mark("f_base");
         _settings = settings;
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
@@ -49,6 +50,7 @@ internal sealed partial class MainForm : ChromeForm
         _openFiles.CloseRequested += document => _ = RequestCloseAsync(document);
         Controls.Add(_openFiles);
         Controls.SetChildIndex(_openFiles, 1); // encaixa depois da barra de status: ela ocupa a largura toda
+        StartupMetrics.Mark("f_panels");
 
         _panelButton = TitleBar.AddLeft(Icons.PanelLeft, "Mostrar ou ocultar abas (Ctrl+B)", ToggleOpenFiles);
         _panelButton.Toggled = settings.Window.ShowOpenFiles; // Visible é falso até a janela aparecer
@@ -60,12 +62,14 @@ internal sealed partial class MainForm : ChromeForm
         foreach (Control area in new Control[] { _editorHost, _openFiles, _status, TitleBar })
             FileDrop.Attach(area, OpenFile);
 
+        StartupMetrics.Mark("f_drop");
         RestoreWindowPlacement();
         OpenDocument? restored = RestoreSession();
         if ((initialFile ?? restored?.Path) is { } first)
             OpenMeasured(first);
         else
             _documents.New();
+        StartupMetrics.Mark("f_open");
     }
 
     private void ToggleOpenFiles()
