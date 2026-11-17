@@ -5,7 +5,7 @@ using System.Text;
 namespace Notas.Services;
 
 /// <summary>
-/// Métricas de desempenho, ativadas só quando a variável NOTAS_METRICS aponta para um arquivo.
+/// Métricas de desempenho, ativadas só quando a variável LITTERA_METRICS aponta para um arquivo.
 /// Cada linha gravada é "chave=valor"; o tools\measure.ps1 lê esse arquivo.
 /// </summary>
 internal static class StartupMetrics
@@ -18,7 +18,7 @@ internal static class StartupMetrics
 
     public static void Init()
     {
-        string? path = Environment.GetEnvironmentVariable("NOTAS_METRICS");
+        string? path = Environment.GetEnvironmentVariable("LITTERA_METRICS");
         if (string.IsNullOrWhiteSpace(path))
             return;
 

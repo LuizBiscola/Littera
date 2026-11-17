@@ -3,7 +3,7 @@
   Mede o Notas: tempo de abertura, memória ociosa e (opcional) abertura de arquivo grande.
 
 .DESCRIPTION
-  Abre o exe N vezes com NOTAS_METRICS apontando para um arquivo temporário. O app grava:
+  Abre o exe N vezes com LITTERA_METRICS apontando para um arquivo temporário. O app grava:
     ready_ms              tempo desde a criação do processo até a janela pintada e ociosa
     load_ms               tempo para ler o arquivo e exibi-lo
     load_max_ui_stall_ms  maior intervalo em que a UI ficou sem responder durante a leitura
@@ -36,9 +36,9 @@ function Get-Median([double[]]$Values) {
 $rows = @()
 for ($i = 1; $i -le $Runs; $i++) {
     $metrics = [System.IO.Path]::GetTempFileName()
-    $env:NOTAS_METRICS = $metrics
+    $env:LITTERA_METRICS = $metrics
     # Pasta de dados limpa: a medição não depende (nem altera) a sessão real do usuário.
-    if (-not $Env.ContainsKey('NOTAS_HOME')) { $env:NOTAS_HOME = Join-Path ([System.IO.Path]::GetTempPath()) "notas-medicao-$i" }
+    if (-not $Env.ContainsKey('LITTERA_HOME')) { $env:LITTERA_HOME = Join-Path ([System.IO.Path]::GetTempPath()) "littera-medicao-$i" }
     foreach ($key in $Env.Keys) { Set-Item "env:$key" $Env[$key] }
 
     try {
@@ -80,8 +80,8 @@ for ($i = 1; $i -le $Runs; $i++) {
     }
     finally {
         Remove-Item $metrics -ErrorAction SilentlyContinue
-        Remove-Item env:NOTAS_METRICS -ErrorAction SilentlyContinue
-        if ($env:NOTAS_HOME -like '*notas-medicao-*') { Remove-Item $env:NOTAS_HOME -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item env:NOTAS_HOME }
+        Remove-Item env:LITTERA_METRICS -ErrorAction SilentlyContinue
+        if ($env:LITTERA_HOME -like '*littera-medicao-*') { Remove-Item $env:LITTERA_HOME -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item env:LITTERA_HOME }
         foreach ($key in $Env.Keys) { Remove-Item "env:$key" -ErrorAction SilentlyContinue }
     }
 }
