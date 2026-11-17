@@ -17,7 +17,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$project = Join-Path $PSScriptRoot 'src\Notas\Notas.csproj'
+$project = Join-Path $PSScriptRoot 'src\Littera\Littera.csproj'
 $common = @(
     '-c', 'Release', '-r', $Runtime, '-nologo',
     '-p:PublishSingleFile=true',

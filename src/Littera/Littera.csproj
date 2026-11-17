@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Scintilla5.NET" Version="7.1.1" GeneratePathProperty="true" />
-    <InternalsVisibleTo Include="Notas.Tests" />
+    <InternalsVisibleTo Include="Littera.Tests" />
   </ItemGroup>
 
   <!-- Logo do protótipo (versão "Reforçado"): ícone do exe e, como recurso, da janela (barra de tarefas, Alt+Tab). -->

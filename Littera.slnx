@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Littera/Littera.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Littera.Tests/Littera.Tests.csproj" />
+  </Folder>
+</Solution>
