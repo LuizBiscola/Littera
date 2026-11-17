@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 internal sealed class MarkdownLanguage : Language
 {

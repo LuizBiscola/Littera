@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 internal sealed partial class TitleBar
 {

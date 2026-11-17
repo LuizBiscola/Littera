@@ -1,6 +1,6 @@
 using System.Threading.Channels;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Decodifica o arquivo numa thread de fundo e entrega o texto em blocos de ~256 mil caracteres.</summary>
 internal static class TextChunkProducer

@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Seletor "Espaços 2 | Espaços 4 | Tab" do protótipo: fundo cinza, opção escolhida em branco.</summary>
 internal sealed class Segmented : Control

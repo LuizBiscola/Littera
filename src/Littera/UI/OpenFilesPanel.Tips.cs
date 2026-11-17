@@ -1,7 +1,7 @@
-using Notas.Theme;
-using Notas.UI.Controls;
+using Littera.Theme;
+using Littera.UI.Controls;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class OpenFilesPanel
 {

@@ -1,7 +1,7 @@
-using Notas.Settings;
+using Littera.Settings;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>
 /// Documentos abertos e qual está ativo. Cada documento tem seu próprio editor, escondido quando inativo:

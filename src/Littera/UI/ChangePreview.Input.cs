@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using Notas.Editor.Changes;
+using Littera.Editor.Changes;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class ChangePreview
 {

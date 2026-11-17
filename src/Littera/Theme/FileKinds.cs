@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Ícone pela extensão, sem diferenciar maiúsculas; fora da tabela, o genérico. A linguagem escolhida não muda o ícone.</summary>
 internal static class FileKinds

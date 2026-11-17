@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 internal enum TextEncodingKind
 {

@@ -1,11 +1,11 @@
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class FolderPanel
 {
     private readonly System.Windows.Forms.Timer _watchTimer = new() { Interval = 400 };
     private FileSystemWatcher? _watcher;
 
-    /// <summary>Arquivos criados, apagados ou renomeados fora do Notas aparecem sozinhos, depois de uma pausa.</summary>
+    /// <summary>Arquivos criados, apagados ou renomeados fora do Littera aparecem sozinhos, depois de uma pausa.</summary>
     private void Watch()
     {
         StopWatching();

@@ -1,10 +1,10 @@
-using Notas.Editor;
+using Littera.Editor;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {
-    /// <summary>Voltou para o Notas (de um Explorer, por exemplo): arquivo apagado ou movido fica com o nome riscado na aba.</summary>
+    /// <summary>Voltou para o Littera (de um Explorer, por exemplo): arquivo apagado ou movido fica com o nome riscado na aba.</summary>
     protected override void OnActivated(EventArgs e)
     {
         base.OnActivated(e);

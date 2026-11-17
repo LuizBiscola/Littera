@@ -1,8 +1,8 @@
-using Notas.Editor.Search;
-using Notas.Theme;
+using Littera.Editor.Search;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 /// <summary>Painel de buscar/substituir do protótipo, flutuando no canto superior direito do editor.</summary>
 internal sealed partial class FindPanel : Control

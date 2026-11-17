@@ -1,6 +1,6 @@
-using Notas.Editor.Changes;
+using Littera.Editor.Changes;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class ChangeSetTests
 {

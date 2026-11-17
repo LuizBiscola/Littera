@@ -1,6 +1,6 @@
-using Notas.Services;
+using Littera.Services;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public sealed class DataFoldersTests : IDisposable
 {

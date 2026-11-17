@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using ScintillaNET;
 using Architecture = System.Runtime.InteropServices.Architecture;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>
 /// Garante que Scintilla.dll e Lexilla.dll sejam encontradas.
@@ -36,7 +36,7 @@ internal static class NativeLibraryBootstrap
 
         // As DLLs só mudam quando o pacote Scintilla5.NET muda: a pasta é por versão dele, não do app.
         string version = typeof(ScintillaNativeLibrary).Assembly.GetName().Version?.ToString() ?? "0";
-        string nativeRoot = Path.Combine(Notas.Services.DataFolders.Local, "native");
+        string nativeRoot = Path.Combine(Littera.Services.DataFolders.Local, "native");
         string target = Path.Combine(nativeRoot, $"{version}-{rid}");
 
         bool extracted = false;
@@ -74,7 +74,7 @@ internal static class NativeLibraryBootstrap
             try
             {
                 RuntimeHelpers.RunClassConstructor(typeof(Scintilla).TypeHandle);
-                Notas.Services.StartupMetrics.Mark("t_preload_done");
+                Littera.Services.StartupMetrics.Mark("t_preload_done");
             }
             catch (TypeInitializationException)
             {

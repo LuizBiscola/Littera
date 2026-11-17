@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>
 /// Caminhos da logo "Reforçado" do protótipo (caixa 104×99), de baixo para cima: contorno, páginas, linhas, cursor.

@@ -1,6 +1,6 @@
-using Notas.Editor.Search;
+using Littera.Editor.Search;
 
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 internal sealed partial class FindPanel
 {

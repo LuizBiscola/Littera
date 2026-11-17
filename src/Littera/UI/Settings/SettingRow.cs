@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Linha de configuração do protótipo: rótulo e descrição à esquerda, controle à direita, divisória embaixo.</summary>
 internal sealed class SettingRow : Control

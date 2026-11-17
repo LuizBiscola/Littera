@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Search;
+namespace Littera.Editor.Search;
 
 /// <summary>Uma busca em andamento: ocorrências no escopo, qual está selecionada e o destaque de todas.</summary>
 internal sealed class FindSession

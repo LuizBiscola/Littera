@@ -1,8 +1,8 @@
-using Notas.Editor.Highlights;
-using Notas.Editor.Search;
-using Notas.UI.Find;
+using Littera.Editor.Highlights;
+using Littera.Editor.Search;
+using Littera.UI.Find;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {

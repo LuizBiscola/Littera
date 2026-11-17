@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using Notas.Editor;
+using Littera.Editor;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {

@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 /// <summary>
 /// Barras do protótipo "Alterações nas linhas": laranja = diferente do disco, verde = salva mas diferente de quando abriu.

@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>Linguagens no lexer "cpp" da Lexilla (C#, JavaScript): só mudam as palavras-chave.</summary>
 internal abstract class CLikeLanguage : Language

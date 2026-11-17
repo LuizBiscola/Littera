@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using Notas.Editor.Folding;
+using Littera.Editor.Folding;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class FoldPreview
 {

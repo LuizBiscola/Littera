@@ -1,7 +1,7 @@
 using System.Text;
-using Notas.Services;
+using Littera.Services;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class TextFileReaderTests
 {

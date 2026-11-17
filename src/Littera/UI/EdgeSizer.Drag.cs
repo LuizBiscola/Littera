@@ -1,8 +1,8 @@
-using Notas.Theme;
-using Notas.UI.Chrome;
+using Littera.Theme;
+using Littera.UI.Chrome;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class EdgeSizer
 {

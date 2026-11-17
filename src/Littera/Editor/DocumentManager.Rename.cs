@@ -1,4 +1,4 @@
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 internal sealed partial class DocumentManager
 {

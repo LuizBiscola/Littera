@@ -1,7 +1,7 @@
-using Notas.Settings;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Página "Atalhos": mostra os atalhos; a edição é no settings.json (aberto numa aba pelo botão).</summary>
 internal sealed partial class ShortcutsPage : SettingsPage

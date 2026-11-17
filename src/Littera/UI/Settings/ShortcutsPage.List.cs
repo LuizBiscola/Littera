@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 internal sealed partial class ShortcutsPage
 {

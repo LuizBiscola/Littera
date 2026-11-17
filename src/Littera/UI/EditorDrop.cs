@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>
 /// O Scintilla registra seu próprio alvo de arrastar, que só aceita texto. Trocamos pelo do WinForms

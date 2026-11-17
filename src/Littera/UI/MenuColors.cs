@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Cores que o renderizador base ainda usa (marca de item escolhido e submenus).</summary>
 internal sealed class MenuColors : ProfessionalColorTable

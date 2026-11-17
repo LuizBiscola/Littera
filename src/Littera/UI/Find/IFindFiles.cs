@@ -1,6 +1,6 @@
 using ScintillaNET;
 
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 /// <summary>Arquivo de um escopo com vários arquivos. Key é o caminho, ou "*N" para a aba "Sem título N".</summary>
 internal sealed record FindFile(string Key, string? Path);

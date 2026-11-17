@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class FileKindsTests
 {

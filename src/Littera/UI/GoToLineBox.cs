@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Ctrl+G: caixa no topo do editor; aceita "linha" ou "linha:coluna".</summary>
 internal sealed partial class GoToLineBox : Control

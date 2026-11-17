@@ -1,4 +1,4 @@
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 /// <summary>Botão desenhado pela própria barra de título (sem controle filho, sem janela extra).</summary>
 internal sealed class ChromeButton(char glyph, string toolTip, Action onClick)

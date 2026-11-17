@@ -1,6 +1,6 @@
 using ScintillaNET;
 
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>Uma linguagem com realce: lexer da Lexilla, palavras-chave e cores dos tokens.</summary>
 internal abstract class Language
@@ -14,7 +14,7 @@ internal abstract class Language
     /// <summary>Extensões com ponto, em minúsculas.</summary>
     public abstract string[] Extensions { get; }
 
-    /// <summary>A Lexilla calcula os trechos recolhíveis (chaves, tags, recuo); SQL e texto o Notas calcula.</summary>
+    /// <summary>A Lexilla calcula os trechos recolhíveis (chaves, tags, recuo); SQL e texto o Littera calcula.</summary>
     public virtual bool LexerFolds => false;
 
     /// <summary>Prefixo de comentário de linha (Ctrl+/); null = a linguagem não tem.</summary>

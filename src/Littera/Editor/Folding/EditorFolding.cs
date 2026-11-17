@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>Recolher e expandir trechos: níveis de dobra, linhas escondidas e cabeçalhos recolhidos.</summary>
 internal static partial class EditorFolding
@@ -19,7 +19,7 @@ internal static partial class EditorFolding
         EolAnnotations.Show(editor, EOLAnnotationVisible.Stadium);
     }
 
-    /// <summary>Níveis calculados pelo Notas (SQL e texto); só escreve as linhas que mudaram.</summary>
+    /// <summary>Níveis calculados pelo Littera (SQL e texto); só escreve as linhas que mudaram.</summary>
     public static void ApplyLevels(Scintilla editor, int[] levels)
     {
         int count = Math.Min(levels.Length, editor.Lines.Count);

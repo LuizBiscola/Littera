@@ -2,7 +2,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Runtime.InteropServices;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>
 /// O nome escrito na fonte da identidade (protótipo, opção A "Clássico": Fraunces 600, 15 px). A Fraunces vai embutida

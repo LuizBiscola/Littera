@@ -1,8 +1,8 @@
 using System.Drawing.Drawing2D;
-using Notas.Services;
-using Notas.Theme;
+using Littera.Services;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class FolderPanel
 {

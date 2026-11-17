@@ -1,11 +1,11 @@
 using System.Diagnostics;
-using Notas.Editor;
-using Notas.Services;
-using Notas.Settings;
-using Notas.Theme;
-using Notas.UI.Chrome;
+using Littera.Editor;
+using Littera.Services;
+using Littera.Settings;
+using Littera.Theme;
+using Littera.UI.Chrome;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm : ChromeForm
 {

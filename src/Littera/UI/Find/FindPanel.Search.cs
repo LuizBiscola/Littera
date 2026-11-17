@@ -1,7 +1,7 @@
-using Notas.Editor.Search;
+using Littera.Editor.Search;
 using ScintillaNET;
 
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 internal sealed partial class FindPanel
 {

@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
-namespace Notas.Settings;
+namespace Littera.Settings;
 
 /// <summary>Lê e grava settings.json e session.json em %APPDATA%\Littera.</summary>
 internal static class SettingsStore
@@ -19,7 +19,7 @@ internal static class SettingsStore
         try
         {
             error = null;
-            return JsonSerializer.Deserialize(File.ReadAllText(SettingsPath), NotasJsonContext.Default.AppSettings);
+            return JsonSerializer.Deserialize(File.ReadAllText(SettingsPath), LitteraJsonContext.Default.AppSettings);
         }
         catch (JsonException ex)
         {
@@ -29,16 +29,16 @@ internal static class SettingsStore
     }
 
     public static AppSettings LoadSettings() =>
-        Load("settings.json", NotasJsonContext.Default.AppSettings) ?? new AppSettings();
+        Load("settings.json", LitteraJsonContext.Default.AppSettings) ?? new AppSettings();
 
     public static void SaveSettings(AppSettings settings) =>
-        Save("settings.json", settings, NotasJsonContext.Default.AppSettings);
+        Save("settings.json", settings, LitteraJsonContext.Default.AppSettings);
 
     public static SessionState LoadSession() =>
-        Load("session.json", NotasJsonContext.Default.SessionState) ?? new SessionState();
+        Load("session.json", LitteraJsonContext.Default.SessionState) ?? new SessionState();
 
     public static void SaveSession(SessionState session) =>
-        Save("session.json", session, NotasJsonContext.Default.SessionState);
+        Save("session.json", session, LitteraJsonContext.Default.SessionState);
 
     private static T? Load<T>(string fileName, JsonTypeInfo<T> type) where T : class
     {

@@ -1,6 +1,6 @@
-using Notas.Editor.Languages;
+using Littera.Editor.Languages;
 
-namespace Notas.Editor.Formatting;
+namespace Littera.Editor.Formatting;
 
 internal sealed partial class SqlFormatter
 {

@@ -1,4 +1,4 @@
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>JavaScript e TypeScript no mesmo lexer "cpp" (template strings ligadas na base).</summary>
 internal sealed class JavaScriptLanguage : CLikeLanguage

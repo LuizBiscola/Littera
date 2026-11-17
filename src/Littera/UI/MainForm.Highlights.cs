@@ -1,8 +1,8 @@
-using Notas.Editor.Highlights;
-using Notas.Editor.Languages;
+using Littera.Editor.Highlights;
+using Littera.Editor.Languages;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {

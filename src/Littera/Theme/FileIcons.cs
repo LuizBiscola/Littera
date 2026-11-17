@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>
 /// Ícones de arquivo e pasta do protótipo ("Especificação — Ícones de arquivo"): caminhos copiados do Lucide

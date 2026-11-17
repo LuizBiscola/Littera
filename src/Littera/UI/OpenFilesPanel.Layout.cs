@@ -1,7 +1,7 @@
-using Notas.Editor;
-using Notas.Theme;
+using Littera.Editor;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Uma aba na tela: retângulo e seção.</summary>
 internal readonly record struct TabSlot(OpenDocument Document, Rectangle Bounds, bool Pinned);

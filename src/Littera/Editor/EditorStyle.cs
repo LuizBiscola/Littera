@@ -1,9 +1,9 @@
-using Notas.Editor.Folding;
-using Notas.Settings;
-using Notas.Theme;
+using Littera.Editor.Folding;
+using Littera.Settings;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>Fonte, cores, espaçamento e margens do editor; reaplicado quando as configurações mudam.</summary>
 internal static class EditorStyle

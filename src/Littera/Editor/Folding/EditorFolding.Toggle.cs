@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
-using Notas.Editor.Highlights;
+using Littera.Editor.Highlights;
 using ScintillaNET;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 internal static partial class EditorFolding
 {

@@ -1,7 +1,7 @@
-using Notas.Editor;
-using Notas.Services;
+using Littera.Editor;
+using Littera.Services;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {
@@ -46,7 +46,7 @@ internal sealed partial class MainForm
         }
     }
 
-    private static TextFormat NewFileFormat(Notas.Settings.FilesSettings files) => new(
+    private static TextFormat NewFileFormat(Littera.Settings.FilesSettings files) => new(
         Enum.TryParse(files.NewFileEncoding, out TextEncodingKind encoding) ? encoding : TextEncodingKind.Utf8,
         Enum.TryParse(files.NewFileLineEnding, out LineEnding ending) ? ending : LineEnding.CrLf);
 }

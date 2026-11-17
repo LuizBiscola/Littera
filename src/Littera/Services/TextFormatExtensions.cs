@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 internal static class TextFormatExtensions
 {

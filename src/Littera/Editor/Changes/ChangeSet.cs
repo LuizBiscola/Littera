@@ -1,4 +1,4 @@
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 /// <summary>
 /// Linhas alteradas, pela comparação de verdade (não pelo histórico de edição): digitar e apagar não deixa marca,

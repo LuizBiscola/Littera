@@ -1,7 +1,7 @@
-using Notas.Editor;
-using Notas.Theme;
+using Littera.Editor;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Painel "PASTA" do protótipo: árvore da pasta aberta, com filtro, à direita do editor.</summary>
 internal sealed partial class FolderPanel : Control

@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Erros inesperados: grava em %LOCALAPPDATA%\Littera\erros.log e avisa sem derrubar o editor.</summary>
 internal static class ErrorReport

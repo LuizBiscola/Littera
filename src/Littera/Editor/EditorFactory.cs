@@ -1,15 +1,15 @@
-using Notas.Editor.Highlights;
-using Notas.Settings;
+using Littera.Editor.Highlights;
+using Littera.Settings;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>Cria um editor já configurado (um por documento aberto).</summary>
 internal static class EditorFactory
 {
     public static Scintilla Create(EditorSettings settings)
     {
-        var editor = new NotasEditor
+        var editor = new LitteraEditor
         {
             Dock = DockStyle.Fill,
             BorderStyle = ScintillaNET.BorderStyle.None,

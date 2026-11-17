@@ -1,9 +1,9 @@
-using Notas.Settings;
-using Notas.Theme;
-using Notas.UI.Chrome;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.Theme;
+using Littera.UI.Chrome;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Janela de configurações do protótipo: menu lateral, página à direita e rodapé com salvar/cancelar.</summary>
 internal sealed partial class SettingsDialog : Form

@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Contador "− 13 +" do protótipo (tamanho da fonte, espaçamento).</summary>
 internal sealed class Stepper : Control

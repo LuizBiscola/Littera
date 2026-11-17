@@ -1,8 +1,8 @@
-using Notas.Settings;
-using Notas.Theme;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.Theme;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Uma página do menu lateral das configurações. As linhas editam o rascunho; nada é aplicado antes de "Salvar".</summary>
 internal abstract class SettingsPage

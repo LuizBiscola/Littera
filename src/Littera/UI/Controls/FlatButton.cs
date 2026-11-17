@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Botões do rodapé do protótipo: "Salvar" escuro, "Cancelar" com borda, "Restaurar padrões" só texto.</summary>
 internal sealed class FlatButton : Control

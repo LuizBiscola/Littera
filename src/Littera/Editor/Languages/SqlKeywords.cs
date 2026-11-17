@@ -1,4 +1,4 @@
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>
 /// Listas de palavras para o realce de SQL (ANSI + T-SQL + o comum de PostgreSQL/MySQL).

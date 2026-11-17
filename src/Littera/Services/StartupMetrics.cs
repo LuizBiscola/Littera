@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>
 /// Métricas de desempenho, ativadas só quando a variável LITTERA_METRICS aponta para um arquivo.

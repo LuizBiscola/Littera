@@ -1,6 +1,6 @@
-using Notas.Editor.Languages;
+using Littera.Editor.Languages;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 internal sealed partial class DocumentManager
 {

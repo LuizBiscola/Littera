@@ -1,8 +1,8 @@
-using Notas.Editor;
-using Notas.Editor.Changes;
+using Littera.Editor;
+using Littera.Editor.Changes;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {
@@ -21,8 +21,8 @@ internal sealed partial class MainForm
         };
         editor.MouseMove += (_, e) => SetChangeHover(editor, ChangeLineAt(editor, e.Location) is int line ? _changeSet?.HunkAt(line, editor.Lines.Count) : null);
         editor.MouseLeave += (_, _) => SetChangeHover(editor, null);
-        if (editor is NotasEditor notas)
-            notas.HandCursorAt = point => ChangeLineAt(editor, point) is not null;
+        if (editor is LitteraEditor own)
+            own.HandCursorAt = point => ChangeLineAt(editor, point) is not null;
         editor.UpdateUI += (_, e) =>
         {
             if ((e.Change & (UpdateChange.VScroll | UpdateChange.HScroll)) != 0)

@@ -1,7 +1,7 @@
-using Notas.Editor.Folding;
-using Notas.Editor.Highlights;
+using Littera.Editor.Folding;
+using Littera.Editor.Highlights;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class FoldScannerTests
 {

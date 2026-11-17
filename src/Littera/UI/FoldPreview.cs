@@ -1,8 +1,8 @@
-using Notas.Editor.Folding;
-using Notas.Theme;
+using Littera.Editor.Folding;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Prévia do trecho recolhido (protótipo "Blocos recolhidos"): aparece ao parar o mouse sobre o resumo.</summary>
 internal sealed partial class FoldPreview : Control

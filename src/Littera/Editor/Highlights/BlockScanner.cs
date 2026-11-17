@@ -1,4 +1,4 @@
-namespace Notas.Editor.Highlights;
+namespace Littera.Editor.Highlights;
 
 /// <summary>Trecho do texto em linhas (base 0, inclusive).</summary>
 internal readonly record struct LineBlock(int FirstLine, int LastLine)

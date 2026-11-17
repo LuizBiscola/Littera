@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.Threading.Channels;
-using Notas.Services;
+using Littera.Services;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>
 /// Anexa o texto ao editor em blocos, devolvendo a vez à fila de mensagens a cada ~12 ms.

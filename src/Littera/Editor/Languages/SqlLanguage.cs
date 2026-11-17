@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>
 /// SQL com o lexer "mssql" da Lexilla: no ANSI realça igual ao "sql" e ainda distingue

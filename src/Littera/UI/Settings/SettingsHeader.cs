@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Título e subtítulo da página aberta, com o X de fechar à direita.</summary>
 internal sealed class SettingsHeader : Control

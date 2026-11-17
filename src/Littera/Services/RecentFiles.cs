@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Lista de arquivos recentes (guardada no settings.json): mais novo primeiro, sem repetir.</summary>
 internal static class RecentFiles

@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Converte o atributo "d" de um caminho SVG para <see cref="GraphicsPath"/> (comandos M L H V C S Q A Z).</summary>
 internal static partial class SvgPath

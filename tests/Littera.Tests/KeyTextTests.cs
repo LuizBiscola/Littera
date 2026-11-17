@@ -1,7 +1,7 @@
 using System.Windows.Forms;
-using Notas.Services;
+using Littera.Services;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class KeyTextTests
 {

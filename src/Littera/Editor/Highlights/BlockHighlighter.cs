@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Highlights;
+namespace Littera.Editor.Highlights;
 
 /// <summary>
 /// "Destacar bloco atual" do protótipo: fundo azul bem claro nas linhas do bloco, faixa na calha

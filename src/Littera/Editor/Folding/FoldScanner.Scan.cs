@@ -1,6 +1,6 @@
-using Notas.Editor.Highlights;
+using Littera.Editor.Highlights;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 internal static partial class FoldScanner
 {

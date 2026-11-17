@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>
 /// Mede o maior intervalo em que a thread de UI ficou sem processar mensagens.

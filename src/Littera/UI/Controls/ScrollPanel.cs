@@ -1,4 +1,4 @@
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>
 /// Painel com rolagem pintado de uma vez (WS_EX_COMPOSITED): o Windows desenha o painel e todas as linhas filhas fora

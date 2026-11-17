@@ -1,6 +1,6 @@
-namespace Notas.Settings;
+namespace Littera.Settings;
 
-/// <summary>Conteúdo de %APPDATA%\Notas\session.json: o que estava aberto ao fechar.</summary>
+/// <summary>Conteúdo de %APPDATA%\Littera\session.json: o que estava aberto ao fechar.</summary>
 internal sealed class SessionState
 {
     public List<SessionDocument> Documents { get; set; } = [];

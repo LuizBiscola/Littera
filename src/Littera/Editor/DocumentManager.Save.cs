@@ -1,7 +1,7 @@
-using Notas.Services;
+using Littera.Services;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 internal sealed partial class DocumentManager
 {

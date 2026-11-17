@@ -1,6 +1,6 @@
-using Notas.Editor.Folding;
+using Littera.Editor.Folding;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class FoldSummaryTests
 {

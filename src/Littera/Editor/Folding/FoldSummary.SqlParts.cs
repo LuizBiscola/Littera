@@ -1,6 +1,6 @@
-using Notas.Editor.Formatting;
+using Littera.Editor.Formatting;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 internal static partial class FoldSummary
 {

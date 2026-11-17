@@ -1,9 +1,9 @@
-using Notas.Editor;
-using Notas.Services;
-using Notas.Settings;
-using Notas.UI;
+using Littera.Editor;
+using Littera.Services;
+using Littera.Settings;
+using Littera.UI;
 
-namespace Notas;
+namespace Littera;
 
 internal static class Program
 {

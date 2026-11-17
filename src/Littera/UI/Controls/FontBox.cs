@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Escolha de fonte no estilo do Stepper: digita com autocompletar ou escolhe na lista da seta.</summary>
 internal sealed partial class FontBox : Control

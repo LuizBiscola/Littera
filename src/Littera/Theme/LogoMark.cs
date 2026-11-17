@@ -1,10 +1,10 @@
 using System.Drawing.Drawing2D;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>
-/// Logo do Notas (protótipo, quadro "Logo — Notas"): páginas empilhadas, linhas de texto e o cursor azul. Vetorial,
-/// desenhada na barra de título; o ícone do exe (Assets\Notas.ico) foi gerado a partir dela.
+/// Logo do Littera (protótipo, quadro "Logo — Notas"): páginas empilhadas, linhas de texto e o cursor azul. Vetorial,
+/// desenhada na barra de título; o ícone do exe (Assets\Littera.ico) foi gerado a partir dela.
 /// </summary>
 internal static class LogoMark
 {

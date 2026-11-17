@@ -1,10 +1,10 @@
-using Notas.Editor.Changes;
-using Notas.Editor.Folding;
-using Notas.Settings;
-using Notas.Theme;
+using Littera.Editor.Changes;
+using Littera.Editor.Folding;
+using Littera.Settings;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>
 /// Calha do protótipo, da esquerda para a direita: barra de alterações, números alinhados à direita,

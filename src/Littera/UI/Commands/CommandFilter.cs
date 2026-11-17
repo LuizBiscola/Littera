@@ -1,4 +1,4 @@
-namespace Notas.UI.Commands;
+namespace Littera.UI.Commands;
 
 /// <summary>Uma linha da paleta: nome, atalho (desenhado como tecla), detalhe em cinza (a pasta de um recente) e a ação.</summary>
 internal sealed record PaletteItem(string Label, string? Shortcut, string? Detail, Action Run);

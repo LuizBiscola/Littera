@@ -1,4 +1,4 @@
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 /// <summary>Botão desenhado no painel de busca: ícone (glifo) ou texto curto ("Aa", "Arquivo").</summary>
 internal sealed class FindButton(string? text, char glyph, string toolTip, Action onClick)

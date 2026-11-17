@@ -1,14 +1,14 @@
-using Notas.Editor;
-using Notas.Editor.Changes;
-using Notas.Editor.Search;
+using Littera.Editor;
+using Littera.Editor.Changes;
+using Littera.Editor.Search;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {
     /// <summary>
     /// Ao terminar de carregar, o texto vira a referência das barras. Rascunho restaurado (alterações de antes
-    /// de fechar o Notas) compara com o arquivo em disco, então essas alterações também aparecem em laranja.
+    /// de fechar o Littera) compara com o arquivo em disco, então essas alterações também aparecem em laranja.
     /// </summary>
     private async void CaptureBaseline(OpenDocument document)
     {

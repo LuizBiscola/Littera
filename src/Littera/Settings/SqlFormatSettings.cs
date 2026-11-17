@@ -1,4 +1,4 @@
-namespace Notas.Settings;
+namespace Littera.Settings;
 
 /// <summary>Opções do formatador de SQL (Ctrl+Shift+F); o recuo vem das configurações do editor.</summary>
 internal sealed class SqlFormatSettings

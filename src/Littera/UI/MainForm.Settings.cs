@@ -1,8 +1,8 @@
-using Notas.Editor;
-using Notas.Settings;
-using Notas.UI.Settings;
+using Littera.Editor;
+using Littera.Settings;
+using Littera.UI.Settings;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {

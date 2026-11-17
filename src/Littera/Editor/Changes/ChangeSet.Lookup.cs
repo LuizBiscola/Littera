@@ -1,4 +1,4 @@
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 internal sealed partial record ChangeSet
 {

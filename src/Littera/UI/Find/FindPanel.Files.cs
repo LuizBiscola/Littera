@@ -1,4 +1,4 @@
-namespace Notas.UI.Find;
+namespace Littera.UI.Find;
 
 /// <summary>Ocorrências de um arquivo do escopo.</summary>
 internal readonly record struct FileHits(FindFile File, int Count);

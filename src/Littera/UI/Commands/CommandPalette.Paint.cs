@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Commands;
+namespace Littera.UI.Commands;
 
 internal sealed partial class CommandPalette
 {

@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Cores da interface, tiradas das variáveis do protótipo no pen.dev.</summary>
 internal static class Palette

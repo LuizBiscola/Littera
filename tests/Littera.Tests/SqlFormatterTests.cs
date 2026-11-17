@@ -1,6 +1,6 @@
-using Notas.Editor.Formatting;
+using Littera.Editor.Formatting;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class SqlFormatterTests
 {

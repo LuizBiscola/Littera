@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Grava texto no encoding escolhido sem nunca deixar o arquivo original pela metade.</summary>
 internal static class TextFileWriter

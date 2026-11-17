@@ -1,7 +1,7 @@
 using System.Text;
-using Notas.Editor.Search;
+using Littera.Editor.Search;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class FileSearchTests
 {

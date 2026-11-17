@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Menu lateral das configurações: título e uma entrada por página.</summary>
 internal sealed class SettingsNav : Control

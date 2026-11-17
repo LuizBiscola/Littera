@@ -1,7 +1,7 @@
 using System.Drawing.Drawing2D;
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Chave liga/desliga do protótipo (azul quando ligada).</summary>
 internal sealed class ToggleSwitch : Control

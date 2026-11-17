@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 /// <summary>Mensagens e funções do Windows usadas para desenhar a barra de título no lugar do sistema.</summary>
 internal static partial class Win32

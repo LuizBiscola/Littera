@@ -1,4 +1,4 @@
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 /// <summary>
 /// Versões de referência de um documento, por linhas: como estava ao abrir (Original) e como está no disco (Saved).

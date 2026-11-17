@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Notas.Editor.Search;
+namespace Littera.Editor.Search;
 
 /// <summary>Busca fora do editor (abas ainda não carregadas e arquivos da pasta) com as opções do painel.</summary>
 internal static partial class FileSearch

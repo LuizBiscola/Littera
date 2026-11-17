@@ -1,6 +1,6 @@
-using Notas.UI.Commands;
+using Littera.UI.Commands;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class CommandFilterTests
 {

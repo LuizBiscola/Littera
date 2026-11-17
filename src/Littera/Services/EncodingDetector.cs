@@ -1,7 +1,7 @@
 using System.Buffers;
 using System.Text.Unicode;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>
 /// Detecta o encoding: BOM primeiro; sem BOM, UTF-8 se o arquivo inteiro for UTF-8 válido, senão ANSI.

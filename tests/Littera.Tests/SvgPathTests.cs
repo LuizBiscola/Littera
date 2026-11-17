@@ -1,9 +1,9 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Reflection;
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class SvgPathTests
 {

@@ -1,6 +1,6 @@
 using System.Runtime.InteropServices;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Converte atalhos do settings.json ("Ctrl+Shift+F", "F11", "Ctrl+Plus") em teclas do WinForms.</summary>
 internal static class KeyText

@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Cores de realce por papel do token; cada linguagem mapeia seus estilos para estes papéis.</summary>
 internal static class SyntaxColors

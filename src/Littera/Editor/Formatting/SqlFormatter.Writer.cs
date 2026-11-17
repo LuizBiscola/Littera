@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Notas.Editor.Formatting;
+namespace Littera.Editor.Formatting;
 
 /// <summary>Opções efetivas de uma formatação (vindas das configurações e do documento).</summary>
 internal sealed record SqlFormatOptions(string KeywordCase, bool OneColumnPerLine, bool BreakConditions, string Indent, string NewLine);

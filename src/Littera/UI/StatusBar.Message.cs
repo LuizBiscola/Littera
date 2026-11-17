@@ -1,4 +1,4 @@
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class StatusBar
 {

@@ -1,8 +1,8 @@
 using System.Diagnostics;
-using Notas.Editor;
-using Notas.Theme;
+using Littera.Editor;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class OpenFilesPanel
 {

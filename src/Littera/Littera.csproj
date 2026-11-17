@@ -6,10 +6,10 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Notas</RootNamespace>
-    <AssemblyName>Notas</AssemblyName>
+    <RootNamespace>Littera</RootNamespace>
+    <AssemblyName>Littera</AssemblyName>
     <Version>0.1.0</Version>
-    <!-- Nome que o Windows mostra (Gerenciador de Tarefas, barra de tarefas); o exe continua Notas.exe. -->
+    <!-- Nome que o Windows mostra (Gerenciador de Tarefas, barra de tarefas); o exe é Littera.exe. -->
     <Product>Littera</Product>
     <AssemblyTitle>Littera</AssemblyTitle>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
@@ -29,16 +29,16 @@
 
   <!-- Logo do protótipo (versão "Reforçado"): ícone do exe e, como recurso, da janela (barra de tarefas, Alt+Tab). -->
   <PropertyGroup>
-    <ApplicationIcon>Assets\Notas.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\Littera.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Notas.ico" LogicalName="Notas.ico" />
+    <EmbeddedResource Include="Assets\Littera.ico" LogicalName="Littera.ico" />
     <!-- Fraunces (SIL OFL) da marca "Littera": instância peso 600 / tamanho óptico 15, só latim. -->
     <EmbeddedResource Include="Assets\Fonts\LitteraFraunces.ttf" LogicalName="LitteraFraunces.ttf" />
   </ItemGroup>
 
   <!--
-    Com Notas.dll E Scintilla.NET.dll pré-compilados (ReadyToRun) no mesmo single-file, alguns builds
+    Com Littera.dll E Scintilla.NET.dll pré-compilados (ReadyToRun) no mesmo single-file, alguns builds
     caem na inicialização com fail-fast no coreclr (0xC0000602). Tirar qualquer um dos dois do R2R
     resolve; o Scintilla.NET sai porque o nosso código é o que cresce. Investigado na Fase 0.
   -->
@@ -57,7 +57,7 @@
                       Visible="false" />
   </ItemGroup>
 
-  <Target Name="NotasDropNativeRuntimesFolder" AfterTargets="AssignTargetPaths" Condition="'$(PublishSingleFile)' == 'true'">
+  <Target Name="LitteraDropNativeRuntimesFolder" AfterTargets="AssignTargetPaths" Condition="'$(PublishSingleFile)' == 'true'">
     <ItemGroup>
       <ContentWithTargetPath Remove="@(ContentWithTargetPath)"
                              Condition="$([System.String]::Copy('%(ContentWithTargetPath.TargetPath)').StartsWith('runtimes'))" />
@@ -65,7 +65,7 @@
   </Target>
 
   <!-- Com -r win-x64 o SDK também resolve as DLLs como "native assets" e as deixaria soltas ao lado do exe. -->
-  <Target Name="NotasDropLooseNativeDlls" AfterTargets="ComputeResolvedFilesToPublishList" Condition="'$(PublishSingleFile)' == 'true'">
+  <Target Name="LitteraDropLooseNativeDlls" AfterTargets="ComputeResolvedFilesToPublishList" Condition="'$(PublishSingleFile)' == 'true'">
     <ItemGroup>
       <ResolvedFileToPublish Remove="@(ResolvedFileToPublish)"
                              Condition="'%(ResolvedFileToPublish.AssetType)' == 'native' and '%(ResolvedFileToPublish.NuGetPackageId)' == 'Scintilla5.NET'" />

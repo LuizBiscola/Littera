@@ -1,6 +1,6 @@
-namespace Notas.Settings;
+namespace Littera.Settings;
 
-/// <summary>Conteúdo de %APPDATA%\Notas\settings.json.</summary>
+/// <summary>Conteúdo de %APPDATA%\Littera\settings.json.</summary>
 internal sealed class AppSettings
 {
     public EditorSettings Editor { get; set; } = new();

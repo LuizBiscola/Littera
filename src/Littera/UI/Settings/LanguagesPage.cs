@@ -1,7 +1,7 @@
-using Notas.Settings;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Página "Linguagens": o formatador de SQL (Ctrl+Shift+F).</summary>
 internal sealed class LanguagesPage : SettingsPage

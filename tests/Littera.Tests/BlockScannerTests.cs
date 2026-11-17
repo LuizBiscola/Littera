@@ -1,6 +1,6 @@
-using Notas.Editor.Highlights;
+using Littera.Editor.Highlights;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class BlockScannerTests
 {

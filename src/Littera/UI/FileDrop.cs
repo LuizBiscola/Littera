@@ -1,4 +1,4 @@
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Soltar arquivos do Explorer em qualquer parte da janela abre cada um numa aba.</summary>
 internal static class FileDrop

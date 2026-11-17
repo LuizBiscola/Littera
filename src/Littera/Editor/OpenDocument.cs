@@ -1,8 +1,8 @@
-using Notas.Editor.Languages;
-using Notas.Services;
+using Littera.Editor.Languages;
+using Littera.Services;
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>Um arquivo aberto (ou "Sem título"). O editor só é criado quando a aba é vista pela primeira vez.</summary>
 internal sealed class OpenDocument(string? path, int untitledNumber = 0)
@@ -56,7 +56,7 @@ internal sealed class OpenDocument(string? path, int untitledNumber = 0)
     /// <summary>Aba fixada: fica na seção Fixadas, não fecha com Ctrl+W nem com o botão do meio e sempre volta ao reabrir.</summary>
     public bool Pinned { get; set; }
 
-    /// <summary>O arquivo foi apagado ou movido fora do Notas (nome riscado na aba).</summary>
+    /// <summary>O arquivo foi apagado ou movido fora do Littera (nome riscado na aba).</summary>
     public bool Missing { get; set; }
 }
 

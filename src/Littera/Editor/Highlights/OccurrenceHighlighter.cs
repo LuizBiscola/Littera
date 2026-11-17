@@ -1,7 +1,7 @@
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Highlights;
+namespace Littera.Editor.Highlights;
 
 /// <summary>"Destacar ocorrências da palavra": fundo amarelo em cada ocorrência, mais forte na do cursor.</summary>
 internal static class OccurrenceHighlighter

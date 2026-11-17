@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 internal static partial class SvgPath
 {

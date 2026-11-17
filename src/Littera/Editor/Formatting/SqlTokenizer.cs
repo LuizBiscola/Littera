@@ -1,6 +1,6 @@
-using Notas.Editor.Highlights;
+using Littera.Editor.Highlights;
 
-namespace Notas.Editor.Formatting;
+namespace Littera.Editor.Formatting;
 
 /// <summary>Quebra o SQL em tokens preservando strings, identificadores entre aspas e comentários.</summary>
 internal static class SqlTokenizer

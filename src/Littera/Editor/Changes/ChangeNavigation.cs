@@ -1,4 +1,4 @@
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 /// <summary>Trechos alterados (linhas seguidas) e a navegação entre eles, dando a volta no arquivo.</summary>
 internal static class ChangeNavigation

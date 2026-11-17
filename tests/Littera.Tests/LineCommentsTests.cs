@@ -1,6 +1,6 @@
-using Notas.Editor.Editing;
+using Littera.Editor.Editing;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class LineCommentsTests
 {

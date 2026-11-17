@@ -1,7 +1,7 @@
 using System.Text;
-using Notas.Settings;
+using Littera.Settings;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>
 /// Rascunhos das abas com alterações não salvas (inclusive "Sem título"), em &lt;pasta de dados&gt;\rascunhos.

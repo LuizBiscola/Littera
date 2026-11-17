@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>
 /// Pastas de dados: %APPDATA%\Littera (configurações, sessão, rascunhos) e %LOCALAPPDATA%\Littera (DLLs nativas,

@@ -1,4 +1,4 @@
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>
 /// O WinForms reescreve o Padding do menu a cada layout com <see cref="DefaultPadding"/>, com 2 px em cima e embaixo;

@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Controls;
+namespace Littera.UI.Controls;
 
 /// <summary>Dica da especificação: fundo escuro, texto claro e o atalho em cinza ("Fixar aba\tCtrl+Alt+P").</summary>
 internal sealed partial class DarkToolTip : ToolTip

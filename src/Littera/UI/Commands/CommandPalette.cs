@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Commands;
+namespace Littera.UI.Commands;
 
 /// <summary>Ctrl+Shift+P: todos os comandos com busca, no topo do editor (o protótipo esconde a barra de menus).</summary>
 internal sealed partial class CommandPalette : Control

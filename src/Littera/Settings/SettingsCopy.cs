@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Notas.Settings;
+namespace Littera.Settings;
 
 /// <summary>
 /// Rascunho da janela de configurações: edita-se uma cópia e, ao salvar, os valores voltam para os objetos
@@ -9,8 +9,8 @@ namespace Notas.Settings;
 internal static class SettingsCopy
 {
     public static AppSettings Clone(AppSettings settings) =>
-        JsonSerializer.Deserialize(JsonSerializer.SerializeToUtf8Bytes(settings, NotasJsonContext.Default.AppSettings),
-            NotasJsonContext.Default.AppSettings)!;
+        JsonSerializer.Deserialize(JsonSerializer.SerializeToUtf8Bytes(settings, LitteraJsonContext.Default.AppSettings),
+            LitteraJsonContext.Default.AppSettings)!;
 
     /// <summary>Copia as propriedades simples (uma seção como EditorSettings) de um objeto para outro.</summary>
     public static void Into<T>(T source, T target) where T : class

@@ -1,7 +1,7 @@
-using Notas.Theme;
-using Notas.UI.Chrome;
+using Littera.Theme;
+using Littera.UI.Chrome;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Menus suspensos no estilo do protótipo: o desenho fica com <see cref="MenuRenderer"/>.</summary>
 internal static partial class Menus

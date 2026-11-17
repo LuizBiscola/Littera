@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Retângulos arredondados com antialiasing (botões, abas, selos).</summary>
 internal static class Shapes

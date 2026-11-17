@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Fim de linha predominante no começo do texto; sem quebras, usa o padrão do Windows (CRLF).</summary>
 internal static class EolDetector

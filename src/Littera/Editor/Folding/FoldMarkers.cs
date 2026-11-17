@@ -1,9 +1,9 @@
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using Notas.Theme;
+using Littera.Theme;
 using ScintillaNET;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>Setas da coluna de dobra do protótipo: glifos da Segoe Fluent desenhados em imagem (uma por DPI).</summary>
 internal static class FoldMarkers

@@ -1,4 +1,4 @@
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 internal static partial class Win32
 {

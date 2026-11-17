@@ -1,6 +1,6 @@
-using Notas.Services;
+using Littera.Services;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Linha visível da árvore; Depth define o recuo.</summary>
 internal readonly record struct FolderRow(FolderEntry Entry, int Depth);

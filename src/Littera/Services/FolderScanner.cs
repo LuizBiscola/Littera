@@ -1,4 +1,4 @@
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Item da árvore do painel "PASTA".</summary>
 internal sealed record FolderEntry(string Path, string Name, bool IsDirectory);

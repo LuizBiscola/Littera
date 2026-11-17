@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 /// <summary>
 /// Janela sem a barra de título do Windows, mantendo o que ela fazia: bordas de redimensionar,

@@ -1,4 +1,4 @@
-namespace Notas.Editor.Changes;
+namespace Littera.Editor.Changes;
 
 /// <summary>Trecho diferente: BeforeCount linhas da versão salva viraram AfterCount linhas no editor.</summary>
 internal readonly record struct DiffHunk(int BeforeStart, int BeforeCount, int AfterStart, int AfterCount);

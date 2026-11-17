@@ -1,6 +1,6 @@
 using ScintillaNET;
 
-namespace Notas.Editor.Highlights;
+namespace Littera.Editor.Highlights;
 
 /// <summary>
 /// Cursor encostado num "(" ou ")" (também [ ] e { }): destaca o par; sem par, marca em vermelho.

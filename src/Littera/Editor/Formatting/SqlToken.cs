@@ -1,4 +1,4 @@
-namespace Notas.Editor.Formatting;
+namespace Littera.Editor.Formatting;
 
 internal enum SqlTokenKind
 {

@@ -1,7 +1,7 @@
-using Notas.Theme;
-using Notas.UI.Chrome;
+using Littera.Theme;
+using Littera.UI.Chrome;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>
 /// Menus do protótipo ("Menu da aba"): fundo branco, item em destaque azul-claro arredondado com texto azul,

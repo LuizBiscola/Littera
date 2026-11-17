@@ -1,9 +1,9 @@
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>O editor do Scintilla com um acréscimo: cursor de mão onde há algo clicável na calha (barras de alteração).</summary>
-internal sealed class NotasEditor : Scintilla
+internal sealed class LitteraEditor : Scintilla
 {
     private const int WM_SETCURSOR = 0x0020;
 

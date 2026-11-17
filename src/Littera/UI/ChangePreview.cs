@@ -1,7 +1,7 @@
-using Notas.Editor.Changes;
-using Notas.Theme;
+using Littera.Editor.Changes;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Prévia da alteração (protótipo "Alterações nas linhas"): linhas removidas e novas em relação ao arquivo salvo.</summary>
 internal sealed partial class ChangePreview : Control

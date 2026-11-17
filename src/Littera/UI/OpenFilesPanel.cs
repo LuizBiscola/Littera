@@ -1,7 +1,7 @@
-using Notas.Editor;
-using Notas.Theme;
+using Littera.Editor;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>
 /// Painel de abas do protótipo: seção Fixadas (só quando há alguma) e Abertos, com alfinete, ×,

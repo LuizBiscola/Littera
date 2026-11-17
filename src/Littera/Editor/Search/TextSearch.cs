@@ -1,6 +1,6 @@
 using ScintillaNET;
 
-namespace Notas.Editor.Search;
+namespace Littera.Editor.Search;
 
 internal sealed record SearchQuery(string Text, bool MatchCase, bool WholeWord, bool Regex)
 {

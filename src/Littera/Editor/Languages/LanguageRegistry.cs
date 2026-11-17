@@ -1,4 +1,4 @@
-namespace Notas.Editor.Languages;
+namespace Littera.Editor.Languages;
 
 /// <summary>Linguagens disponíveis e a escolha automática pela extensão do arquivo.</summary>
 internal static class LanguageRegistry

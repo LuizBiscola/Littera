@@ -1,7 +1,7 @@
-using Notas.Settings;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Página "Arquivos": rascunhos automáticos e formato de arquivos novos.</summary>
 internal sealed class FilesPage : SettingsPage

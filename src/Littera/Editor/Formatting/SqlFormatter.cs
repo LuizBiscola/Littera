@@ -1,4 +1,4 @@
-namespace Notas.Editor.Formatting;
+namespace Littera.Editor.Formatting;
 
 /// <summary>
 /// Formatador de SQL: palavras-chave no caso escolhido, cláusulas em linhas próprias, colunas do SELECT

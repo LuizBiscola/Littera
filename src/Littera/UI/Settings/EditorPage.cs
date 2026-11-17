@@ -1,9 +1,9 @@
 using System.Drawing.Text;
-using Notas.Settings;
-using Notas.Theme;
-using Notas.UI.Controls;
+using Littera.Settings;
+using Littera.Theme;
+using Littera.UI.Controls;
 
-namespace Notas.UI.Settings;
+namespace Littera.UI.Settings;
 
 /// <summary>Página "Editor" do protótipo: aparência do texto e comportamento ao digitar.</summary>
 internal sealed partial class EditorPage : SettingsPage

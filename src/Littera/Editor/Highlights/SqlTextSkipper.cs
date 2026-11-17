@@ -1,4 +1,4 @@
-namespace Notas.Editor.Highlights;
+namespace Littera.Editor.Highlights;
 
 /// <summary>Pula comentários e literais do SQL contando as quebras de linha que atravessa.</summary>
 internal static class SqlTextSkipper

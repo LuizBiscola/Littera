@@ -1,6 +1,6 @@
 using System.Drawing.Drawing2D;
 
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Ícone de traço no formato do Lucide: caixa 24×24, traço 2, pontas e cantos arredondados.</summary>
 internal sealed class LineIcon(params string[] paths)

@@ -1,6 +1,6 @@
 using ScintillaNET;
 
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>Enter mantém a indentação da linha de cima, em vez de voltar para a margem esquerda.</summary>
 internal static class AutoIndent

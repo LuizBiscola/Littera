@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Notas.Settings;
+namespace Littera.Settings;
 
 /// <summary>Serialização gerada em tempo de compilação: sem reflexão na inicialização.</summary>
 [JsonSourceGenerationOptions(
@@ -11,4 +11,4 @@ namespace Notas.Settings;
     AllowTrailingCommas = true)]
 [JsonSerializable(typeof(AppSettings))]
 [JsonSerializable(typeof(SessionState))]
-internal sealed partial class NotasJsonContext : JsonSerializerContext;
+internal sealed partial class LitteraJsonContext : JsonSerializerContext;

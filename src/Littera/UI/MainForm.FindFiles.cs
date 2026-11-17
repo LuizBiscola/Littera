@@ -1,9 +1,9 @@
-using Notas.Editor;
-using Notas.Services;
-using Notas.UI.Find;
+using Littera.Editor;
+using Littera.Services;
+using Littera.UI.Find;
 using ScintillaNET;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>Abas e pasta para a busca em vários arquivos.</summary>
 internal sealed partial class MainForm : IFindFiles

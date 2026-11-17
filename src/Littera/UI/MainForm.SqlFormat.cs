@@ -1,7 +1,7 @@
-using Notas.Editor.Formatting;
-using Notas.Services;
+using Littera.Editor.Formatting;
+using Littera.Services;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {

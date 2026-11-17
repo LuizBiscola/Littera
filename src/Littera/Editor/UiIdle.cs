@@ -1,4 +1,4 @@
-namespace Notas.Editor;
+namespace Littera.Editor;
 
 /// <summary>
 /// Espera a fila de mensagens esvaziar (pintura, teclado e mouse já processados).

@@ -1,4 +1,4 @@
-namespace Notas.Settings;
+namespace Littera.Settings;
 
 /// <summary>Arquivos e rascunhos.</summary>
 internal sealed class FilesSettings

@@ -1,4 +1,4 @@
-namespace Notas.Editor.Editing;
+namespace Littera.Editor.Editing;
 
 /// <summary>Alteração numa linha: tira Remove caracteres na coluna e põe Insert no lugar.</summary>
 internal readonly record struct LineEdit(int Line, int Column, int Remove, string Insert);

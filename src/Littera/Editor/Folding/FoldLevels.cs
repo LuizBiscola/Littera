@@ -1,4 +1,4 @@
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>Converte trechos recolhíveis no nível de dobra de cada linha, no formato do Scintilla.</summary>
 internal static class FoldLevels

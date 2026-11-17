@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>
 /// Fontes da interface em pixels lógicos (como no protótipo), escaladas pelo DPI e guardadas em cache.

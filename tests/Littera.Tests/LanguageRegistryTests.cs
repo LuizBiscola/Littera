@@ -1,6 +1,6 @@
-using Notas.Editor.Languages;
+using Littera.Editor.Languages;
 
-namespace Notas.Tests;
+namespace Littera.Tests;
 
 public class LanguageRegistryTests
 {
@@ -8,7 +8,7 @@ public class LanguageRegistryTests
     [InlineData(@"C:\x\vendas.sql", "SQL")]
     [InlineData(@"C:\x\VENDAS.SQL", "SQL")]
     [InlineData("dados.json", "JSON")]
-    [InlineData("Notas.csproj", "XML")]
+    [InlineData("Littera.csproj", "XML")]
     [InlineData("Program.cs", "C#")]
     [InlineData("app.tsx", "JavaScript")]
     [InlineData("script.py", "Python")]

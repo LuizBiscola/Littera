@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using ScintillaNET;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>
 /// Anotações de fim de linha do Scintilla 5 (o Scintilla5.NET não as expõe): texto com estilo próprio

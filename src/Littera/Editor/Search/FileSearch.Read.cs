@@ -1,6 +1,6 @@
-using Notas.Services;
+using Littera.Services;
 
-namespace Notas.Editor.Search;
+namespace Littera.Editor.Search;
 
 internal static partial class FileSearch
 {

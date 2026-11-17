@@ -1,7 +1,7 @@
-using Notas.Editor;
-using Notas.Settings;
+using Littera.Editor;
+using Littera.Settings;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 internal sealed partial class MainForm
 {
@@ -20,7 +20,7 @@ internal sealed partial class MainForm
         ApplyEditorSettings();
     }
 
-    /// <summary>settings.json salvo dentro do Notas: vale na hora (atalhos inclusive).</summary>
+    /// <summary>settings.json salvo dentro do Littera: vale na hora (atalhos inclusive).</summary>
     private void OnDocumentSaved(OpenDocument document)
     {
         document.Missing = false; // salvar recria o arquivo que tinha sumido

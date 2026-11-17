@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Glifos da fonte Segoe Fluent Icons (mesmos códigos na Segoe MDL2 Assets): sem arquivos de imagem.</summary>
 internal static class Icons

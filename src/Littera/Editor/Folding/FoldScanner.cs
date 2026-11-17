@@ -1,6 +1,6 @@
-using Notas.Editor.Highlights;
+using Littera.Editor.Highlights;
 
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>Trecho recolhível: a linha Header continua visível; Header+1 até Last somem.</summary>
 internal readonly record struct FoldRegion(int Header, int Last);

@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI;
+namespace Littera.UI;
 
 /// <summary>
 /// Alça na borda entre um painel lateral e o editor: com o mouse em cima o cursor vira ↔ e a linha fica azul;

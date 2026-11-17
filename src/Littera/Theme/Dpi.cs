@@ -1,4 +1,4 @@
-namespace Notas.Theme;
+namespace Littera.Theme;
 
 /// <summary>Converte medidas do protótipo (pixels a 96 DPI) para o DPI do monitor do controle.</summary>
 internal static class Dpi

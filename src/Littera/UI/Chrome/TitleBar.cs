@@ -1,6 +1,6 @@
-using Notas.Theme;
+using Littera.Theme;
 
-namespace Notas.UI.Chrome;
+namespace Littera.UI.Chrome;
 
 /// <summary>Barra de título do protótipo: marca, botões do painel, título centralizado, ações e botões da janela.</summary>
 internal sealed partial class TitleBar : Control

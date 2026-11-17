@@ -1,4 +1,4 @@
-namespace Notas.Editor.Folding;
+namespace Littera.Editor.Folding;
 
 /// <summary>Resumo mostrado no lugar do trecho recolhido: "8 linhas │ SELECT 4 colunas · FROM pedidos · WHERE 2 filtros".</summary>
 internal static partial class FoldSummary

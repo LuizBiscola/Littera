@@ -1,6 +1,6 @@
 using System.Threading.Channels;
 
-namespace Notas.Services;
+namespace Littera.Services;
 
 /// <summary>Arquivo aberto para leitura: encoding detectado e o texto chegando em blocos.</summary>
 internal sealed class TextFileReader
