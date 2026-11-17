@@ -35,7 +35,7 @@ internal sealed partial class MainForm
         if (SettingsStore.TryReloadSettings(out string? error) is { } fresh)
             ApplySettings(fresh);
         else
-            MessageBox.Show(this, $"O settings.json tem um erro e não foi aplicado:\n{error}", "Notas",
+            MessageBox.Show(this, $"O settings.json tem um erro e não foi aplicado:\n{error}", Product.Name,
                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
     }
 }

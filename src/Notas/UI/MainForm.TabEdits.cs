@@ -19,7 +19,7 @@ internal sealed partial class MainForm
     private void DiscardChanges(OpenDocument document)
     {
         if (!document.IsDirty || MessageBox.Show(this, $"Descartar as alterações em \"{document.Title}\"? O texto volta a ser o do arquivo salvo.",
-                "Notas", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+                Product.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
             return;
 
         DiscardDraft(document);

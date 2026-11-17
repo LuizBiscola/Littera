@@ -9,7 +9,7 @@ internal static class ErrorReport
     public static void Show(Exception error, IWin32Window? owner = null)
     {
         Log(error);
-        MessageBox.Show(owner, $"{error.Message}\n\nDetalhes em {LogPath}", "Notas — erro inesperado",
+        MessageBox.Show(owner, $"{error.Message}\n\nDetalhes em {LogPath}", $"{Product.Name} — erro inesperado",
             MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 

@@ -17,7 +17,7 @@ internal sealed class GeneralPage : SettingsPage
         yield return Section("JANELA");
         yield return Toggle("Mostrar abas abertas", "Painel à esquerda (Ctrl+B mostra e esconde a qualquer momento).",
             draft.Window.ShowOpenFiles, v => draft.Window.ShowOpenFiles = v);
-        yield return Toggle("Reabrir sessão", "Ao abrir o Notas, volta com as abas da última vez. Fixadas e abas com alterações não salvas voltam sempre.",
+        yield return Toggle("Reabrir sessão", $"Ao abrir o {Product.Name}, volta com as abas da última vez. Fixadas e abas com alterações não salvas voltam sempre.",
             draft.Window.ReopenSession, v => draft.Window.ReopenSession = v);
 
         yield return Section("DESENHO DO TEXTO");

@@ -22,7 +22,7 @@ internal sealed partial class MainForm
             return;
         if (name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
         {
-            MessageBox.Show(this, "O nome não pode ter \\ / : * ? \" < > |", "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, "O nome não pode ter \\ / : * ? \" < > |", Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
@@ -30,7 +30,7 @@ internal sealed partial class MainForm
         bool sameFile = string.Equals(target, path, StringComparison.OrdinalIgnoreCase); // só mudou maiúscula/minúscula
         if (!sameFile && (File.Exists(target) || Directory.Exists(target)))
         {
-            MessageBox.Show(this, $"Já existe \"{name}\" nesta pasta.", "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, $"Já existe \"{name}\" nesta pasta.", Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
@@ -40,7 +40,7 @@ internal sealed partial class MainForm
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            MessageBox.Show(this, $"Não foi possível renomear:\n{ex.Message}", "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, $"Não foi possível renomear:\n{ex.Message}", Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 

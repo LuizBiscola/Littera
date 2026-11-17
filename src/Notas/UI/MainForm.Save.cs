@@ -28,7 +28,7 @@ internal sealed partial class MainForm
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            MessageBox.Show(this, $"Não foi possível salvar:\n{ex.Message}", "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, $"Não foi possível salvar:\n{ex.Message}", Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return false;
         }
     }

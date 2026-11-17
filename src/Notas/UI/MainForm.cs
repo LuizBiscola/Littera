@@ -24,7 +24,7 @@ internal sealed partial class MainForm : ChromeForm
         _settings = settings;
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
-        Text = "Notas";
+        Text = Product.Name;
         Icon = AppIcon.Load();
         // Sem auto-escala do WinForms: cada controle já mede em Px() pelo DPI do monitor.
         AutoScaleMode = AutoScaleMode.None;
@@ -42,7 +42,7 @@ internal sealed partial class MainForm : ChromeForm
         _highlightTimer.Tick += (_, _) => RefreshHighlights();
         _draftTimer.Tick += (_, _) => SaveDrafts(AutosaveLimit);
         _documents = new DocumentManager(_editorHost, settings.Editor) { NewFileFormat = NewFileFormat(settings.Files) };
-        _documents.Changed += () => Text = $"{_documents.Active?.Title} — Notas";
+        _documents.Changed += () => Text = $"{_documents.Active?.Title} — {Product.Name}";
         _documents.Changed += UpdateStatus;
         _documents.ActiveChanged += BindActiveEditor;
         _documents.Saved += OnDocumentSaved;
@@ -55,7 +55,7 @@ internal sealed partial class MainForm : ChromeForm
                 return;
             }
 
-            MessageBox.Show(this, error.Message, "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, error.Message, Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             _documents.Close(document);
         };
 

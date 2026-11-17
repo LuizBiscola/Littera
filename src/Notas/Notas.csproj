@@ -9,6 +9,9 @@
     <RootNamespace>Notas</RootNamespace>
     <AssemblyName>Notas</AssemblyName>
     <Version>0.1.0</Version>
+    <!-- Nome que o Windows mostra (Gerenciador de Tarefas, barra de tarefas); o exe continua Notas.exe. -->
+    <Product>Littera</Product>
+    <AssemblyTitle>Littera</AssemblyTitle>
     <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
     <ApplicationVisualStyles>true</ApplicationVisualStyles>
     <SatelliteResourceLanguages>pt-BR</SatelliteResourceLanguages>

@@ -20,7 +20,7 @@ internal sealed partial class MainForm
             return true;
 
         _documents.Activate(document);
-        DialogResult answer = MessageBox.Show(this, $"Salvar as alterações em \"{document.Title}\"?", "Notas",
+        DialogResult answer = MessageBox.Show(this, $"Salvar as alterações em \"{document.Title}\"?", Product.Name,
             MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         return answer switch
         {

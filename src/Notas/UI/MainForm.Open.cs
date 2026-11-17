@@ -26,7 +26,7 @@ internal sealed partial class MainForm
         if (!File.Exists(path))
         {
             _settings.RecentFiles.RemoveAll(p => string.Equals(p, path, StringComparison.OrdinalIgnoreCase));
-            MessageBox.Show(this, $"Arquivo não encontrado:\n{path}", "Notas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(this, $"Arquivo não encontrado:\n{path}", Product.Name, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             return;
         }
 
