@@ -3,13 +3,13 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace Notas.Settings;
 
-/// <summary>Lê e grava settings.json e session.json em %APPDATA%\Notas.</summary>
+/// <summary>Lê e grava settings.json e session.json em %APPDATA%\Littera.</summary>
 internal static class SettingsStore
 {
-    /// <summary>NOTAS_HOME troca a pasta (medições e testes rodam sem tocar na sessão real do usuário).</summary>
-    public static string Folder { get; } = Environment.GetEnvironmentVariable("NOTAS_HOME") is { Length: > 0 } home
+    /// <summary>LITTERA_HOME troca a pasta (medições e testes rodam sem tocar na sessão real do usuário).</summary>
+    public static string Folder { get; } = Environment.GetEnvironmentVariable("LITTERA_HOME") is { Length: > 0 } home
         ? home
-        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Notas");
+        : Services.DataFolders.Roaming;
 
     public static string SettingsPath => Path.Combine(Folder, "settings.json");
 

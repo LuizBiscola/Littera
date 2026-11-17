@@ -11,7 +11,7 @@ namespace Notas.Editor;
 /// Garante que Scintilla.dll e Lexilla.dll sejam encontradas.
 /// Em build normal elas ficam em runtimes\win-x64\native ao lado do exe.
 /// No publish single-file elas vão embutidas no exe e são extraídas uma vez para
-/// %LOCALAPPDATA%\Notas\native\&lt;versão&gt;, porque o Scintilla.NET só carrega DLLs do disco.
+/// %LOCALAPPDATA%\Littera\native\&lt;versão&gt;, porque o Scintilla.NET só carrega DLLs do disco.
 /// </summary>
 internal static class NativeLibraryBootstrap
 {
@@ -36,8 +36,7 @@ internal static class NativeLibraryBootstrap
 
         // As DLLs só mudam quando o pacote Scintilla5.NET muda: a pasta é por versão dele, não do app.
         string version = typeof(ScintillaNativeLibrary).Assembly.GetName().Version?.ToString() ?? "0";
-        string nativeRoot = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notas", "native");
+        string nativeRoot = Path.Combine(Notas.Services.DataFolders.Local, "native");
         string target = Path.Combine(nativeRoot, $"{version}-{rid}");
 
         bool extracted = false;

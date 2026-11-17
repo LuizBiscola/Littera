@@ -1,10 +1,9 @@
 namespace Notas.Services;
 
-/// <summary>Erros inesperados: grava em %LOCALAPPDATA%\Notas\erros.log e avisa sem derrubar o editor.</summary>
+/// <summary>Erros inesperados: grava em %LOCALAPPDATA%\Littera\erros.log e avisa sem derrubar o editor.</summary>
 internal static class ErrorReport
 {
-    public static string LogPath { get; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notas", "erros.log");
+    public static string LogPath { get; } = Path.Combine(DataFolders.Local, "erros.log");
 
     public static void Show(Exception error, IWin32Window? owner = null)
     {
