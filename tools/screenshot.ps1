@@ -14,7 +14,7 @@ Add-Type -AssemblyName System.Drawing
 Add-Type @'
 using System;
 using System.Runtime.InteropServices;
-public static class NotasShot {
+public static class LitteraShot {
     [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
     [DllImport("user32.dll")] public static extern IntPtr SetThreadDpiAwarenessContext(IntPtr ctx);
     [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hwnd, IntPtr hdc, uint flags);
@@ -23,23 +23,23 @@ public static class NotasShot {
 }
 '@
 
-[void][NotasShot]::SetThreadDpiAwarenessContext([IntPtr]::new(-4)) # Per-monitor v2: pixels reais
+[void][LitteraShot]::SetThreadDpiAwarenessContext([IntPtr]::new(-4)) # Per-monitor v2: pixels reais
 
 $process = Get-Process -Id $ProcessId
 $hwnd = $process.MainWindowHandle
 if ($hwnd -eq [IntPtr]::Zero) { throw "Processo $ProcessId não tem janela principal." }
 
-$window = New-Object NotasShot+RECT
-[void][NotasShot]::GetWindowRect($hwnd, [ref]$window)
-$visible = New-Object NotasShot+RECT
-[void][NotasShot]::DwmGetWindowAttribute($hwnd, 9, [ref]$visible, 16) # DWMWA_EXTENDED_FRAME_BOUNDS
+$window = New-Object LitteraShot+RECT
+[void][LitteraShot]::GetWindowRect($hwnd, [ref]$window)
+$visible = New-Object LitteraShot+RECT
+[void][LitteraShot]::DwmGetWindowAttribute($hwnd, 9, [ref]$visible, 16) # DWMWA_EXTENDED_FRAME_BOUNDS
 
 $width = $window.Right - $window.Left
 $height = $window.Bottom - $window.Top
 $full = New-Object System.Drawing.Bitmap $width, $height
 $graphics = [System.Drawing.Graphics]::FromImage($full)
 $hdc = $graphics.GetHdc()
-[void][NotasShot]::PrintWindow($hwnd, $hdc, 2) # PW_RENDERFULLCONTENT
+[void][LitteraShot]::PrintWindow($hwnd, $hdc, 2) # PW_RENDERFULLCONTENT
 $graphics.ReleaseHdc($hdc)
 $graphics.Dispose()
 

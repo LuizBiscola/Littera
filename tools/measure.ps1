@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Mede o Notas: tempo de abertura, memória ociosa e (opcional) abertura de arquivo grande.
+  Mede o Littera: tempo de abertura, memória ociosa e (opcional) abertura de arquivo grande.
 
 .DESCRIPTION
   Abre o exe N vezes com LITTERA_METRICS apontando para um arquivo temporário. O app grava:
@@ -10,9 +10,9 @@
   Depois de IdleSeconds parado, lê Working Set e Private Bytes do processo.
 
 .EXAMPLE
-  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Notas.exe -File .\samples\exemplo.sql
-  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Notas.exe -File .\artifacts\bench\grande-50mb.sql -Runs 3
-  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Notas.exe -Env @{ NOTAS_TECH = 'gdi' }
+  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Littera.exe -File .\samples\exemplo.sql
+  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Littera.exe -File .\artifacts\bench\grande-50mb.sql -Runs 3
+  .\tools\measure.ps1 -Exe .\artifacts\publish\fd\Littera.exe -Env @{ LITTERA_TECH = 'gdi' }
 #>
 param(
     [Parameter(Mandatory)][string]$Exe,

@@ -1,6 +1,6 @@
 # Medições
 
-Medido com `tools\measure.ps1` (mediana de 8–10 aberturas, pasta de dados limpa via `NOTAS_HOME`).
+Medido com `tools\measure.ps1` (mediana de 8–10 aberturas, pasta de dados limpa via `NOTAS_HOME`, hoje `LITTERA_HOME`).
 "Abertura" = criação do processo até a janela pintada e ociosa. "Memória" = coluna do Gerenciador de Tarefas
 (working set privado). O **piso** é um WinForms vazio publicado do mesmo jeito, medido na mesma hora:
 a máquina tem bastante ruído (até ±150 ms entre execuções), então compare sempre com o piso.

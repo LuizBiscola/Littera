@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Publica o Notas como um único .exe (ReadyToRun) em artifacts\publish\<variante>.
+  Publica o Littera como um único .exe (ReadyToRun) em artifacts\publish\<variante>.
 
 .PARAMETER Mode
   fd  = framework-dependent: exe pequeno, precisa do .NET 10 Desktop Runtime instalado.
@@ -38,7 +38,7 @@ function Publish-Variant([string]$Name, [string[]]$Extra) {
         Variante       = $Name
         Arquivos       = $files.Count
         'Tamanho (MB)' = [math]::Round(($files | Measure-Object Length -Sum).Sum / 1MB, 1)
-        Exe            = Join-Path $out 'Notas.exe'
+        Exe            = Join-Path $out 'Littera.exe'
     }
 }
 
