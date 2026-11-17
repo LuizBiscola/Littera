@@ -99,55 +99,6 @@ Como o exe não tem assinatura digital, na primeira vez o Windows pode avisar "O
 Para levar suas preferências para outro PC, copie o `settings.json`. O app se chamava Notas: na primeira abertura
 como Littera, as pastas `%APPDATA%\Notas` e `%LOCALAPPDATA%\Notas` são renomeadas para `Littera`.
 
-## Desenvolvimento
-
-Requer Windows e o [SDK do .NET 10](https://dotnet.microsoft.com/download/dotnet/10.0). O Visual Studio é opcional.
-
-```powershell
-dotnet build Littera.slnx
-dotnet test
-dotnet run --project src\Littera -- samples\exemplo.sql
-```
-
-```text
-src/Littera/
-  Editor/      documentos, carga em blocos, linguagens, trechos recolhíveis, marcas de alteração,
-               realces, busca e formatador de SQL
-  Services/    leitura e gravação de arquivos, encoding, rascunhos, pastas de dados, métricas
-  Settings/    settings.json e session.json (System.Text.Json com geração de código)
-  Theme/       cores, fontes, ícones (Lucide desenhado em vetor), logo e nome
-  UI/          janela e barra de título próprias, painéis, menus, paleta, busca e configurações
-  Assets/      ícone do app e a fonte do nome
-tests/Littera.Tests/   testes xUnit
-tools/         medição de abertura e memória, gerador de arquivo grande, captura de tela
-docs/          medições de cada fase e imagens do README
-```
-
-Algumas decisões:
-
-- **Sem frameworks de UI.** WinForms puro, sem designer, MVVM ou injeção de dependência. Painéis, menus, abas e barra
-  de título são desenhados à mão no estilo do protótipo; a barra de título própria mantém Snap Layouts e Aero Snap.
-- **Um editor Scintilla por documento.** Trocar de aba não recarrega texto, e arquivos grandes são carregados em
-  blocos para a janela não travar.
-- **Trabalho pesado fora da thread da interface.** Trechos recolhíveis, marcas de alteração e busca em pasta são
-  calculados em segundo plano e aplicados só se o texto não mudou no meio do caminho.
-- **Exe único e rápido.** Publicação single-file com ReadyToRun; as DLLs nativas do Scintilla vão embutidas e são
-  extraídas uma vez, conferidas byte a byte a cada abertura.
-
-## Desempenho
-
-Metas: abrir em menos de ~300 ms, menos de ~50 MB de memória ociosa e abrir um arquivo de 50 MB sem travar a janela.
-
-```powershell
-.\tools\measure.ps1 -Exe .\artifacts\publish\fd\Littera.exe -File .\samples\exemplo.sql
-.\tools\make-bigfile.ps1    # gera artifacts\bench\grande-50mb.sql
-.\tools\measure.ps1 -Exe .\artifacts\publish\fd\Littera.exe -File .\artifacts\bench\grande-50mb.sql -Runs 3
-```
-
-O `measure.ps1` mede a abertura (do processo até a janela pintada e ociosa), o tempo do arquivo, o maior
-travamento da interface e a memória como o Gerenciador de Tarefas mostra. A variável `LITTERA_HOME` troca a pasta de
-dados, para medir sem tocar na sessão real. Números de cada fase em [docs/medicoes.md](docs/medicoes.md).
-
 ## Créditos
 
 - [Scintilla e Lexilla](https://www.scintilla.org): o componente de edição e os realces de sintaxe.
