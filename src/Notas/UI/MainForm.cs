@@ -25,6 +25,7 @@ internal sealed partial class MainForm : ChromeForm
         string? initialFile = args.FirstOrDefault(a => !a.StartsWith("--", StringComparison.Ordinal));
 
         Text = "Notas";
+        Icon = AppIcon.Load();
         // Sem auto-escala do WinForms: cada controle já mede em Px() pelo DPI do monitor.
         AutoScaleMode = AutoScaleMode.None;
         ClientSize = new Size(this.Px(1200), this.Px(760));

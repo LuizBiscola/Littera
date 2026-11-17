@@ -24,6 +24,14 @@
     <InternalsVisibleTo Include="Notas.Tests" />
   </ItemGroup>
 
+  <!-- Logo do protótipo (versão "Reforçado"): ícone do exe e, como recurso, da janela (barra de tarefas, Alt+Tab). -->
+  <PropertyGroup>
+    <ApplicationIcon>Assets\Notas.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Notas.ico" LogicalName="Notas.ico" />
+  </ItemGroup>
+
   <!--
     Com Notas.dll E Scintilla.NET.dll pré-compilados (ReadyToRun) no mesmo single-file, alguns builds
     caem na inicialização com fail-fast no coreclr (0xC0000602). Tirar qualquer um dos dois do R2R
