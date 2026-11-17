@@ -1,22 +1,21 @@
-using Notas.UI.Chrome;
-
 namespace Notas.UI.Controls;
 
 /// <summary>
-/// Painel com rolagem que repinta tudo na hora a cada passo. Rolando rápido, o Windows copiava para a posição nova
-/// pedaços de linhas (controles filhos) que ainda não tinham sido repintados, e sobravam restos repetidos na tela.
+/// Painel com rolagem pintado de uma vez (WS_EX_COMPOSITED): o Windows desenha o painel e todas as linhas filhas fora
+/// da tela e mostra o resultado pronto. Sem isso, rolando rápido, aparecia na tela a cópia de pixels que o WinForms faz
+/// ao rolar (ScrollWindowEx) antes de cada linha se repintar: faixas velhas repetidas e chaves fora do lugar.
 /// </summary>
 internal sealed class ScrollPanel : Panel
 {
-    protected override void OnScroll(ScrollEventArgs se)
-    {
-        base.OnScroll(se);
-        Win32.RedrawNow(Handle);
-    }
+    private const int WS_EX_COMPOSITED = 0x02000000;
 
-    protected override void OnMouseWheel(MouseEventArgs e)
+    protected override CreateParams CreateParams
     {
-        base.OnMouseWheel(e);
-        Win32.RedrawNow(Handle);
+        get
+        {
+            CreateParams cp = base.CreateParams;
+            cp.ExStyle |= WS_EX_COMPOSITED;
+            return cp;
+        }
     }
 }
