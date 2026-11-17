@@ -15,8 +15,30 @@ internal static partial class Win32
     public static void RedrawNow(IntPtr hwnd) =>
         RedrawWindow(hwnd, IntPtr.Zero, IntPtr.Zero, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN | RDW_UPDATENOW);
 
+    /// <summary>Pinta já o que está pendente na janela e nos filhos (não invalida nada a mais).</summary>
+    public static void UpdateNow(IntPtr hwnd) => RedrawWindow(hwnd, IntPtr.Zero, IntPtr.Zero, RDW_ALLCHILDREN | RDW_UPDATENOW);
+
     /// <summary>Desligado, o que está na tela fica parado enquanto os filhos são trocados; religar não repinta sozinho.</summary>
     public static void SetRedraw(IntPtr hwnd, bool on) => SendMessage(hwnd, WM_SETREDRAW, on ? 1 : 0, IntPtr.Zero);
+
+    /// <summary>
+    /// WS_EX_COMPOSITED: o Windows pinta a janela e todos os filhos fora da tela e mostra o resultado de uma vez
+    /// (sem meio-termo visível). Ligado só enquanto precisa: deixa cada repintura mais cara.
+    /// </summary>
+    public static void SetComposited(IntPtr hwnd, bool on)
+    {
+        long style = GetWindowLongPtr(hwnd, GWL_EXSTYLE).ToInt64();
+        long updated = on ? style | WS_EX_COMPOSITED : style & ~WS_EX_COMPOSITED;
+        if (updated != style)
+            SetWindowLongPtr(hwnd, GWL_EXSTYLE, new IntPtr(updated));
+    }
+
+    private const int GWL_EXSTYLE = -20;
+    private const long WS_EX_COMPOSITED = 0x02000000;
+
+    [DllImport("user32.dll", EntryPoint = "GetWindowLongPtrW")] private static extern IntPtr GetWindowLongPtr(IntPtr hwnd, int index);
+
+    [DllImport("user32.dll", EntryPoint = "SetWindowLongPtrW")] private static extern IntPtr SetWindowLongPtr(IntPtr hwnd, int index, IntPtr value);
 
     [DllImport("user32.dll")] private static extern bool RedrawWindow(IntPtr hwnd, IntPtr rect, IntPtr region, uint flags);
 
