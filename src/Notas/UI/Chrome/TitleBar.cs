@@ -20,7 +20,7 @@ internal sealed partial class TitleBar : Control
         _minimize = new(Icons.Minimize, "Minimizar", () => FindForm()!.WindowState = FormWindowState.Minimized) { IsWindowButton = true };
         _maximize = new(Icons.Maximize, "Maximizar", ToggleMaximize) { IsWindowButton = true };
         _close = new(Icons.Close, "Fechar", () => FindForm()!.Close()) { IsWindowButton = true, IsClose = true };
-        _brand = new(Icons.Logo, "Menu (Alt)", OpenMenu) { Label = "Notas" };
+        _brand = new(default, "Menu (Alt)", OpenMenu) { Label = "Notas" }; // desenhada por LogoMark
         Height = this.Px(40); // depois dos botões: mudar a altura já dispara o layout
     }
 

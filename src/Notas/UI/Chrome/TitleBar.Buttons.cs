@@ -27,7 +27,7 @@ internal sealed partial class TitleBar
         if (button.Label is not null)
         {
             var glyph = new Rectangle(button.Bounds.X + this.Px(6), button.Bounds.Y + this.Px(5), this.Px(18), this.Px(18));
-            Icons.Draw(g, button.Glyph, glyph, Palette.Text, 15, dpi);
+            LogoMark.Draw(g, glyph); // a marca é a logo colorida, não um glifo
             TextRenderer.DrawText(g, button.Label, UiFonts.Semibold(13, dpi), new Point(glyph.Right + this.Px(8), button.Bounds.Y + this.Px(6)),
                 Palette.Text, TextFormatFlags.NoPadding);
             return;
