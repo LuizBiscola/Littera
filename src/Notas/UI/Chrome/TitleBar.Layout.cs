@@ -9,8 +9,8 @@ internal sealed partial class TitleBar
         base.OnLayout(e);
         int size = this.Px(28), top = this.Px(6), gap = this.Px(2);
 
-        _brand.Bounds = new Rectangle(this.Px(6), top, this.Px(76), size);
-        int x = this.Px(88);
+        _brand.Bounds = new Rectangle(this.Px(6), top, this.Px(86), size); // logo + "Littera"
+        int x = this.Px(97);
         foreach (ChromeButton button in _left)
         {
             button.Bounds = new Rectangle(x, top, size, size);

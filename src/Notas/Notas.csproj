@@ -33,6 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\Notas.ico" LogicalName="Notas.ico" />
+    <!-- Fraunces (SIL OFL) da marca "Littera": instância peso 600 / tamanho óptico 15, só latim. -->
+    <EmbeddedResource Include="Assets\Fonts\LitteraFraunces.ttf" LogicalName="LitteraFraunces.ttf" />
   </ItemGroup>
 
   <!--

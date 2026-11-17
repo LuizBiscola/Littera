@@ -9,7 +9,7 @@ internal sealed partial class TitleBar
 
     private string _caption = "";
 
-    /// <summary>Texto centralizado: "arquivo.sql — Notas".</summary>
+    /// <summary>Texto centralizado: "arquivo.sql — Littera".</summary>
     public string Caption
     {
         get => _caption;

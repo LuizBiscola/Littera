@@ -20,14 +20,14 @@ internal sealed partial class TitleBar : Control
         _minimize = new(Icons.Minimize, "Minimizar", () => FindForm()!.WindowState = FormWindowState.Minimized) { IsWindowButton = true };
         _maximize = new(Icons.Maximize, "Maximizar", ToggleMaximize) { IsWindowButton = true };
         _close = new(Icons.Close, "Fechar", () => FindForm()!.Close()) { IsWindowButton = true, IsClose = true };
-        _brand = new(default, "Menu (Alt)", OpenMenu) { Label = "Notas" }; // desenhada por LogoMark
+        _brand = new(default, "Menu (Alt)", OpenMenu) { Label = "Littera" }; // desenhada por LogoMark e Wordmark
         Height = this.Px(40); // depois dos botões: mudar a altura já dispara o layout
     }
 
     /// <summary>Área do maximizar: o formulário responde HTMAXBUTTON aqui (Snap Layouts do Windows 11).</summary>
     public Rectangle MaximizeBounds => _maximize.Bounds;
 
-    /// <summary>Menu do app (a marca "Notas" ou Alt); o retângulo, em tela, posiciona o menu.</summary>
+    /// <summary>Menu do app (a marca "Littera" ou Alt); o retângulo, em tela, posiciona o menu.</summary>
     public event Action<Rectangle>? MenuRequested;
 
     public void OpenMenu() => MenuRequested?.Invoke(RectangleToScreen(_brand.Bounds));

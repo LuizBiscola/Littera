@@ -26,10 +26,10 @@ internal sealed partial class TitleBar
 
         if (button.Label is not null)
         {
+            // Marca do protótipo: logo 18×18 em (12, 11) e o nome a partir de x 39, com a linha de base em y 26,2.
             var glyph = new Rectangle(button.Bounds.X + this.Px(6), button.Bounds.Y + this.Px(5), this.Px(18), this.Px(18));
-            LogoMark.Draw(g, glyph); // a marca é a logo colorida, não um glifo
-            TextRenderer.DrawText(g, button.Label, UiFonts.Semibold(13, dpi), new Point(glyph.Right + this.Px(8), button.Bounds.Y + this.Px(6)),
-                Palette.Text, TextFormatFlags.NoPadding);
+            LogoMark.Draw(g, glyph);
+            Wordmark.Draw(g, button.Label, new PointF(button.Bounds.X + this.Px(33f), button.Bounds.Y + this.Px(20.2f)), dpi);
             return;
         }
 
